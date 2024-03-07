@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import connectMongoDB from "./db/connectMongoDB.js"
 
 const app = express()
 
@@ -12,5 +13,6 @@ app.use(express.json())
 
 
 app.listen(PORT, () => {
+  connectMongoDB();
   console.log("Server listening on " + PORT)
 })
