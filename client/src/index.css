@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body{
+  overflow-x: hidden;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+
+  /* font-family: "Poppins", sans-serif; */
+}
+.heading-signup{
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+
+/* method 2 -> use background-clip to support border-radius */
+.btn-gradient-2 {
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, #EA7F48, blue) border-box,
+              /* Add your desired background color here */
+              #f80000; /* Example background color */
+  
+  border-radius: 50em;
+  border: 4px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: darkblue;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
