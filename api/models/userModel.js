@@ -22,9 +22,16 @@ const userSchema = mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: ""
+    default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+  },
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  termsAndServices: {
+    type: Boolean,
+    required: true
   }
-  // createdAt this let us know  when the user was created in the database then we could use it in front-end calls or display that 
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);
