@@ -1,6 +1,7 @@
 
 import bcrypt from "bcryptjs";
 import User from '../models/userModel.js'
+import { errorHandler } from "../utils/error.js";
 
 export const isValidEmail = (email) => {
   // Regular expression pattern for email validation
