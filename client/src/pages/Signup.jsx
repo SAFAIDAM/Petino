@@ -8,75 +8,89 @@ import { isValidEmail } from "../../../api/controllers/authControllers";
 
 function Signup() {
   const [formData, setFormData] = useState({ termsAndServices: false });
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormData({
+      ...formData,
+      [id]: val,
+    });
+  };
 
-const handleChange = (e) => {
-  const { id, value, type, checked } = e.target;
-  const val = type === "checkbox" ? checked : value;
-  setFormData({
-    ...formData,
-    [id]: val,
-  });
-};
+  function handleInputErrors(formData) {
+    if (
+      !formData.fullName ||
+      !formData.username ||
+      !formData.password ||
+      !formData.email
+    ) {
+      toast.error("Please fill in all fields");
+      return false;
+    }
+    if (!formData.password || formData.password.length < 8) {
+      toast.error("Password should be at least 8 characters long");
+      return false;
+    }
+    if (!isValidEmail(formData.email)) {
+      toast.error(
+        "Invalid email format. Please enter a valid email address ( like that one in placeholder ) ."
+      );
+      return false;
+    }
+    if (!isValidEmail(formData.email)) {
+      toast.error(
+        "Invalid email format. Please enter a valid email address ( like that one in placeholder ) ."
+      );
+      return false;
+    }
 
-function handleInputErrors(formData) {
-  if (!formData.fullName || !formData.username || !formData.password || !formData.email ) {
-    toast.error('Please fill in all fields');
-    return false;
+    return true;
   }
-  if (!formData.password || formData.password.length < 8) {
-    toast.error('Password should be at least 8 characters long');
-    return false;
-  }
-  if (!isValidEmail(formData.email)) {
-    toast.error('Invalid email format. Please enter a valid email address ( like that one in placeholder ) .');
-    return false;
-  }
-  if (!isValidEmail(formData.email)) {
-    toast.error('Invalid email format. Please enter a valid email address ( like that one in placeholder ) .');
-    return false;
-  }
-  
-  return true;
-}
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  // Validate form input errors
-  if (!handleInputErrors(formData)) {
-    return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Validate form input errors
+    if (!handleInputErrors(formData)) {
+      return;
     }
     if (!formData.termsAndServices) {
       toast.error("Terms and services must be checked.");
       return;
     }
-  try {
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-    
-    if (res.status === 400 && data.error === "Username and email already exists") {
-      toast.error("User with this username and email already exists. Please try another one.");
-      return;
-    }
-    if (!res.ok) {
-      throw new Error(data.error || "Internal server error");
-    }
-   
-    console.log(data);
+    try {
+      setLoading(true)
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false)
 
-  } catch (error) {
-    // Display error message from backend using React Hot Toast
-    toast.error(error.message || "Internal server error", {
-      duration: 6000, // Duration in milliseconds
-    });
-  }
-};
+      if (
+        res.status === 400 &&
+        data.error === "Username and email already exists"
+      ) {
+        toast.error(
+          "User with this username and email already exists. Please try another one."
+        );
+        return;
+      }
+      if (!res.ok) {
+        throw new Error(data.error || "Internal server error");
+      }
 
+      console.log(data);
+    } catch (error) {
+      // Display error message from backend using React Hot Toast
+      toast.error(error.message || "Internal server error", {
+        duration: 6000, // Duration in milliseconds
+      });
+    }
+  };
 
   return (
     <div className="flex items-center justify-between h-[100vh]">
@@ -237,8 +251,12 @@ const handleSubmit = async (e) => {
             </div>
           </div>
           <div className="flex justify-center mt-4 mb-3">
-            <button type="submit" className="button-border btn-gradient-2">
-              Create your space
+            <button disabled={loading} type="submit" className="button-border btn-gradient-2">
+            {loading ? (
+              'creating...'
+              ) : (
+                "Create your space"
+              )}
             </button>
           </div>
           <div className="flex justify-center">
