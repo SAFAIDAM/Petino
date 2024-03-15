@@ -2,6 +2,9 @@
 import bcrypt from "bcryptjs";
 import User from '../models/userModel.js'
 import { errorHandler } from "../utils/error.js";
+import toast from 'react-hot-toast';
+
+
 
 export const isValidEmail = (email) => {
   // Regular expression pattern for email validation
@@ -14,8 +17,11 @@ export const signup = async (req, res, next) => {
   try {
 
     const { fullName, username, email, password, termsAndServices, verified } = req.body;
-    if (password.length < 8) {
+    if (!password || password.length < 8) {
       return res.status(400).json({ error: "Password should be at least 8 characters long" });
+    }
+    if (!termsAndServices) {
+      return res.status(401).json({ error: " terms and services must be checked" });
     }
 
     const user = await User.findOne({ username });
@@ -49,8 +55,9 @@ export const signup = async (req, res, next) => {
 
   } catch (error) {
 
-    console.log("error in signup controller", error.message)
-    res.status(500).json({ error: "internal server error" })
+    console.log("error in signup controller", error.message);
+    toast.error(error.message || "Internal server error");
+    res.status(500).json({ error: "internal server error" });
 
   }
 }

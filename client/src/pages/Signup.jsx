@@ -1,10 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
 import google from "../assets/Google Logo.svg";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { isValidEmail } from "../../../api/controllers/authControllers";
 
 function Signup() {
+  const [formData, setFormData] = useState({ termsAndServices: false });
+
+const handleChange = (e) => {
+  const { id, value, type, checked } = e.target;
+  const val = type === "checkbox" ? checked : value;
+  setFormData({
+    ...formData,
+    [id]: val,
+  });
+};
+
+function handleInputErrors(formData) {
+  if (!formData.fullName || !formData.username || !formData.password || !formData.email ) {
+    toast.error('Please fill in all fields');
+    return false;
+  }
+  if (!formData.password || formData.password.length < 8) {
+    toast.error('Password should be at least 8 characters long');
+    return false;
+  }
+  if (!isValidEmail(formData.email)) {
+    toast.error('Invalid email format. Please enter a valid email address ( like that one in placeholder ) .');
+    return false;
+  }
+  if (!isValidEmail(formData.email)) {
+    toast.error('Invalid email format. Please enter a valid email address ( like that one in placeholder ) .');
+    return false;
+  }
+  
+  return true;
+}
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // Validate form input errors
+  if (!handleInputErrors(formData)) {
+    return;
+    }
+    if (!formData.termsAndServices) {
+      toast.error("Terms and services must be checked.");
+      return;
+    }
+  try {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    
+    if (res.status === 400 && data.error === "Username and email already exists") {
+      toast.error("User with this username and email already exists. Please try another one.");
+      return;
+    }
+    if (!res.ok) {
+      throw new Error(data.error || "Internal server error");
+    }
+   
+    console.log(data);
+
+  } catch (error) {
+    // Display error message from backend using React Hot Toast
+    toast.error(error.message || "Internal server error", {
+      duration: 6000, // Duration in milliseconds
+    });
+  }
+};
+
+
   return (
     <div className="flex items-center justify-between h-[100vh]">
       <div className="ml-auto mr-auto w-[330px] md:w-[400px]">
@@ -12,7 +85,7 @@ function Signup() {
           <h1 className="heading-signup">create your own space pet</h1>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="flex flex-col gap-1 mb-2">
             <label className="mb-2 ml-3 text-xs font-medium text-[#2B2B2B]">
               What is your fullname?
@@ -23,6 +96,8 @@ function Signup() {
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="fullname"
                 required
+                id="fullName"
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -59,6 +134,8 @@ function Signup() {
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="username"
                 required
+                id="username"
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -95,6 +172,8 @@ function Signup() {
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="example@gmail.com"
                 required
+                id="email"
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -131,6 +210,8 @@ function Signup() {
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="password"
                 required
+                id="password"
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -156,7 +237,9 @@ function Signup() {
             </div>
           </div>
           <div className="flex justify-center mt-4 mb-3">
-            <button className="button-border btn-gradient-2">Create your space</button>
+            <button type="submit" className="button-border btn-gradient-2">
+              Create your space
+            </button>
           </div>
           <div className="flex justify-center">
             <img src={or} alt="" />
@@ -170,9 +253,10 @@ function Signup() {
 
           <div className="flex items-center justify-center">
             <input
-              id="link-checkbox"
+              id="termsAndServices"
               type="checkbox"
-              value=""
+              value={formData.termsAndServices}
+              onChange={handleChange}
               className="w-4 h-4 bg-[#E06C2E] border-gray-300 rounded dark:ring-offset-[#E06C2E] focus:ring-2 dark:bg-[#E06C2E] dark:border-[#E06C2E]"
             />
             <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
