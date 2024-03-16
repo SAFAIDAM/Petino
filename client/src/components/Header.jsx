@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 function Header() {
   return (
    <div className='bg-sky-200'>
-    <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+    <div className='flex items-center justify-between max-w-6xl p-3 mx-auto'>
       <Link to='/'>
       <h1 className='font-bold'>Auth</h1>
       </Link>
       
       <ul className='flex gap-4'>
         <Link to='/'><li>Home</li></Link>
-        <Link to='/about'> <li>About</li> </Link>
-        <Link to='/log-in'><li>Sign In</li></Link>        
+        <Link to='/profile'> <li>Profile</li> </Link>
+        <Link to='/login'><li>Sign In</li></Link>        
       </ul>
 
 

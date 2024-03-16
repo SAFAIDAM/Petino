@@ -1,11 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
 import google from "../assets/Google Logo.svg";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Login() {
+  const [formData, setFormData] = useState({ termsAndServices: false });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormData({
+      ...formData,
+      [id]: val,
+    });
+  };
+
+  function handleInputErrors(formData) {
+    if (!formData.password || !formData.email) {
+      toast.error("Please fill in all fields");
+      return false;
+    }
+
+    return true;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Validate form input errors
+    if (!handleInputErrors(formData)) {
+      return;
+    }
+    if (!formData.termsAndServices) {
+      toast.error("Terms and services must be checked.");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (!res.ok) {
+        throw new Error(data.error || "Internal server error");
+      }
+      // localStorage.setItem("token", data.jwt);
+      console.log(data);
+      navigate('/')
+    } catch (error) {
+      // Display error message from backend using React Hot Toast
+      toast.error(error.message || "Internal server error", {
+        duration: 6000, // Duration in milliseconds
+      });
+    }
+  };
   return (
     <div className="flex items-center justify-between h-[100vh]">
       <div className="ml-auto mr-auto w-[330px] md:w-[400px]">
@@ -13,7 +68,7 @@ function Login() {
           <h1 className="heading-signup">You are almost there </h1>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="flex flex-col gap-1 mb-2">
             <label className="mb-2 ml-3 text-xs font-medium text-[#2B2B2B]">
               Enter your mail here
@@ -21,9 +76,11 @@ function Login() {
             <div className="relative flex">
               <input
                 type="email"
+                id="email"
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="example@gmail.com"
                 required
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -57,9 +114,11 @@ function Login() {
             <div className="relative flex">
               <input
                 type="password"
+                id="password"
                 className="border border-[#898484] rounded-xl text-[#898484] text-sm  pl-2.5 pr-8 py-2.5 w-full focus:border-[#898484] focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="password"
                 required
+                onChange={handleChange}
               />
               <span className="absolute right-2.5 top-2.5">
                 <svg
@@ -97,14 +156,21 @@ function Login() {
               </label>
             </div>
 
-            <Link to={'/reset'} className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline">
+            <Link
+              to={"/reset"}
+              className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline"
+            >
               Forgot Password ?
             </Link>
           </div>
           <div className="flex justify-center ">
-            <button className="flex items-center justify-center gap-3 mb-2 btn-gradient-2">
-              let's go {" "}
-              <svg className="mt-1"
+            <button
+              type="submit"
+              className="flex items-center justify-center gap-3 mb-2 btn-gradient-2"
+            >
+              {loading ? "loging in..." : "let's go"}
+              <svg
+                className="mt-1"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width={20}
@@ -141,9 +207,10 @@ function Login() {
 
           <div className="flex items-center justify-center mb-2">
             <input
-              id="link-checkbox"
+              id="termsAndServices"
               type="checkbox"
-              value=""
+              value={formData.termsAndServices}
+              onChange={handleChange}
               className="w-4 h-4 bg-[#E06C2E] border-gray-300 rounded dark:ring-offset-[#E06C2E] focus:ring-2 dark:bg-[#E06C2E] dark:border-[#E06C2E]"
             />
             <label className="text-xs font-medium md:text-sm text-balck ms-2 ">

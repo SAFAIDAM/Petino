@@ -72,7 +72,9 @@ export const login = async (req, res) => {
     }
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
     const jwt = await new jose.SignJWT({ id: usermail._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
-    console.log(jwt)
+    res.cookie("tokenjose", jwt , {
+      httOnly: true,
+    })
     res.status(200).json({ jwt });
 
   } catch (error) {

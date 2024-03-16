@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
 import google from "../assets/Google Logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";
 
 function Signup() {
   const [formData, setFormData] = useState({ termsAndServices: false });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
@@ -84,6 +85,7 @@ function Signup() {
       }
 
       console.log(data);
+      navigate('/login')
     } catch (error) {
       // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {
