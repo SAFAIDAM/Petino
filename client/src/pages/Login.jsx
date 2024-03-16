@@ -97,7 +97,7 @@ function Login() {
               </label>
             </div>
 
-            <Link className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline">
+            <Link to={'/reset'} className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline">
               Forgot Password ?
             </Link>
           </div>

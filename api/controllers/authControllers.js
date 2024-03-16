@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs";
 import User from '../models/userModel.js'
 import { errorHandler } from "../utils/error.js";
 import toast from 'react-hot-toast';
-import jwt from "jsonwebtoken";
+import * as jose from 'jose'
+
 
 export const isValidEmail = (email) => {
   // Regular expression pattern for email validation
@@ -61,7 +62,7 @@ export const signup = async (req, res) => {
   }
 }
 
-export const login = async (req, res, next) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const usermail = await User.findOne({ email });
@@ -69,8 +70,10 @@ export const login = async (req, res, next) => {
     if (!usermail || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid email or password" })
     }
-    // const token = jwt.sign({ id: usermail._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    // res.status(200).json({ token });
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+    const jwt = await new jose.SignJWT({ id: usermail._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+    console.log(jwt)
+    res.status(200).json({ jwt });
 
   } catch (error) {
     console.log("error in login controller", error.message)
