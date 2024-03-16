@@ -4,6 +4,7 @@ import or from "../assets/or-img.svg";
 import google from "../assets/Google Logo.svg";
 import { Link } from "react-router-dom";
 
+
 function Login() {
   return (
     <div className="flex items-center justify-between h-[100vh]">

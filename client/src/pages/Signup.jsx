@@ -265,7 +265,7 @@ function Signup() {
           <div className="flex justify-center">
             <button className="flex items-center text-xs md:text-sm justify-center gap-3 text-center align-middle text-white font-medium bg-[#E06C2E] md:pl-9 md:pr-9 p-5 pt-2 pb-2 mb-3 mt-3 rounded-full">
               <img src={google} alt="" />
-              Create your space
+              Signup with google 
             </button>
           </div>
 
@@ -281,7 +281,7 @@ function Signup() {
               I accept with the{" "}
               <Link
                 href="#"
-                class="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
+                className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
               >
                 Privacy Policy
               </Link>{" "}
