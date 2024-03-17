@@ -36,10 +36,10 @@ function Login() {
     if (!handleInputErrors(formData)) {
       return;
     }
-    // if (!formData.termsAndServices && googleClicked) { // Check if Google button was clicked
-    //   toast.error("Terms and services must be checked.");
-    //   return;
-    // }
+    if (!formData.termsAndServices) { // Check if Google button was clicked
+      toast.error("Terms and services must be checked.");
+      return;
+    }
     try {
       dispatch(loginStart())
       const res = await fetch("/api/auth/login", {
@@ -160,7 +160,6 @@ function Login() {
             </div>
 
             <Link
-              to={"/reset"}
               className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline"
             >
               Forgot Password ?
@@ -209,23 +208,16 @@ function Login() {
           </div> */}
           <OAuth/>
 
-          <div className="flex items-center justify-center mb-2">
-            <input
-              id="termsAndServices"
-              type="checkbox"
-              value={formData.termsAndServices}
-              onChange={handleChange}
-              className="w-4 h-4 bg-[#E06C2E] border-gray-300 rounded dark:ring-offset-[#E06C2E] focus:ring-2 dark:bg-[#E06C2E] dark:border-[#E06C2E]"
-            />
+          <div className="flex items-center justify-center">
             <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
-              I accept with the{" "}
+            By creating an account you agree with our{" "}
               <Link
                 href="#"
-                class="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
+                className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
               >
                 Privacy Policy
-              </Link>
-              {""} &{" "}
+              </Link>{" "}
+              &{" "}
               <Link className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline">
                 Terms & Conditions
               </Link>

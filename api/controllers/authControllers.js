@@ -90,6 +90,13 @@ export const google = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (user) {
+      const existingPhoto = user.profilePicture;
+
+      user.username = req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2, // Use a function for safer username generation
+      user.profilePicture = existingPhoto;
+      user.googleId = req.body.googleId;
+      await user.save();
+
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       const jwt = await new jose.SignJWT({ id: user._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
       const expiryDate = new Date(Date.now() + 3600000);
@@ -97,15 +104,14 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
-      res.status(200).json({ user, message: "User found and JWT token generated" }); // Including user data in the JSON response
+      res.status(200).json({ user, message: "User found and JWT token generated" });
     } else {
-      const generatedPassword = Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-10);
-      const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
       const newUser = await User({
-        username: req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10000),
+
+        username: req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2,
         email: req.body.email,
-        password: hashedPassword,
-        profilePicture: req.body.photo
+        profilePicture: req.body.photo,
+        googleId: req.body.googleId
       });
       await newUser.save();
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
@@ -115,7 +121,7 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
-      res.status(200).json({ user: newUser, message: "New user created and JWT token generated" }); // Including user data in the JSON response
+      res.status(200).json({ user: newUser, message: "New user created and JWT token generated" });
     }
   } catch (error) {
     console.log("error in google controller", error.message);
@@ -123,43 +129,9 @@ export const google = async (req, res, next) => {
   }
 }
 
-
-
-
-
-// export const forgotpassword = async (req, res, next) => {
-//   // 1. GET BASED ON POSTED EMAIL
-//   const user =  await User.findOne({ email: req.body.email });
-//   //2. GENERATE A RANDOM RESET TOKEN
-//   if(!user){
-//     return res.status(404).json({ error: "we could not find the user with given email"})
-//   }
-//   const resetToken = user.createResetPasswordToken();
-//   await user.save({ validateBeforeSave: false })
-//   //3. SEND THE TOKEN BACK TO THE USER EMAIL
-//   const resetUrl = `${req.protocol}://${req.get('host')}/api/auth/resetPassword/${resetToken}`
-//   const message = `we have received a password reset request. Please use the Button below to reset your password\n\n${resetUrl}\n\nThis reset password link well be valide only for 10 min`
-//   // try{
-//   //   await sendEmail({
-//   //     email : user.email,
-//   //     subject : "Password Reset",
-//   //     message: message
-//   //    })
-//   //    res.status(200).json({ message: "we have sent you an email with further instructions" })
-//   // }catch(error){
-//   //   user.passwordResetToken = undefined
-//   //   user.passwordResetTokenExpires = undefined
-//   //   user.save({ validateBeforeSave: false
-//   //    })
-
-//   //   return next(error)
-//   // }
-
-// }
-
-// export const resetPassword = async (req, res, next) => {
-
-// }
+export const logout = (req, res) => {
+  res.clearCookie('access_token').status(200).json('Signout success!');
+};
 
 
 

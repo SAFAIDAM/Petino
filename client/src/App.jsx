@@ -4,30 +4,28 @@ import Home from "./pages/Home";
 
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Terms from "./pages/Terms"
+import Terms from "./pages/Terms";
 import { Toaster } from "react-hot-toast";
 import Signup from "./pages/Signup";
-import ResetPassword from "./pages/ResetPassword";
-import ResetPassword2 from "./pages/ResetPassword2";
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
   return (
     <BrowserRouter>
-    {/** header components */}
+      {/** header components */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route path="/signup" element={<Signup />} />
         <Route path="/Terms" element={<Terms />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/reset" element={<ResetPassword/>} />
-        <Route path="/createpassword" element={<ResetPassword2 />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<PrivateRoute/>}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
       <Toaster />
     </BrowserRouter>
-  
-  )
-  
-
+  );
 }
 
 export default App;

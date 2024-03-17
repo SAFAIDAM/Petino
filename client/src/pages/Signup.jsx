@@ -56,10 +56,6 @@ function Signup() {
     if (!handleInputErrors(formData)) {
       return;
     }
-    if (!formData.termsAndServices) {
-      toast.error("Terms and services must be checked.");
-      return;
-    }
     try {
       setLoading(true)
       const res = await fetch("/api/auth/signup", {
@@ -274,15 +270,8 @@ function Signup() {
           <OAuth/>
 
           <div className="flex items-center justify-center">
-            <input
-              id="termsAndServices"
-              type="checkbox"
-              value={formData.termsAndServices}
-              onChange={handleChange}
-              className="w-4 h-4 bg-[#E06C2E] border-gray-300 rounded dark:ring-offset-[#E06C2E] focus:ring-2 dark:bg-[#E06C2E] dark:border-[#E06C2E]"
-            />
             <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
-              I accept with the{" "}
+            By creating an account you agree with our{" "}
               <Link
                 href="#"
                 className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"

@@ -4,10 +4,12 @@ import {GoogleAuthProvider, signInWithPopup, getAuth} from 'firebase/auth'
 import { app } from '../firbase'
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 function OAuth() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleGoogleClick = async () => {
     try{
       const provider = new GoogleAuthProvider()
@@ -27,12 +29,16 @@ function OAuth() {
 
       const data = await res.json();
       console.log(data)
-      dispatch(loginSuccess(data))
-      
-    }catch(error){
-      console.log("could not login with google", error)
+      if (data.user) {
+        dispatch(loginSuccess(data));
+        navigate('/'); // Navigate to desired route after successful login
+      } else {
+        console.error('Error creating user or missing user data in response');
+      }
+    } catch (error) {
+      console.log("could not login with google", error);
     }
-  }
+  };
   return (
     <div className="flex justify-center">
             <button type='button' onClick={handleGoogleClick} className="flex items-center text-xs md:text-sm justify-center gap-3 text-center align-middle text-white font-medium bg-[#E06C2E] md:pl-9 md:pr-9 p-5 pt-2 pb-2 mb-6 mt-4 rounded-full">
