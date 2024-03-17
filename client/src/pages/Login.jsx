@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
-import google from "../assets/Google Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { loginStart, loginSuccess, loginError } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 
 function Login() {
   const [formData, setFormData] = useState({ termsAndServices: false });
@@ -201,12 +201,13 @@ function Login() {
           <div className="flex justify-center">
             <img src={or} alt="" />
           </div>
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <button className="flex items-center text-xs md:text-sm justify-center gap-3 text-center align-middle text-white font-medium bg-[#E06C2E] md:pl-9 md:pr-9 p-5 pt-2 pb-2 mb-6 mt-4 rounded-full">
               <img src={google} alt="" />
               Login with google
             </button>
-          </div>
+          </div> */}
+          <OAuth/>
 
           <div className="flex items-center justify-center mb-2">
             <input

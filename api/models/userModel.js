@@ -4,7 +4,6 @@ import crypto from "crypto";
 const userSchema = mongoose.Schema({
   fullName: {
     type: String,
-    required: true
   },
   username: {
     type: String,
@@ -31,7 +30,6 @@ const userSchema = mongoose.Schema({
   },
   termsAndServices: {
     type: Boolean,
-    required: true
   },
   passwordResetToken: String,
   passwordResetExpires: Date

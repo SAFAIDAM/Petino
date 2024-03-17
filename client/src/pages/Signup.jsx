@@ -5,6 +5,7 @@ import google from "../assets/Google Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";
+import OAuth from "../components/OAuth";
 
 function Signup() {
   const [formData, setFormData] = useState({ termsAndServices: false });
@@ -264,12 +265,13 @@ function Signup() {
           <div className="flex justify-center">
             <img src={or} alt="" />
           </div>
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <button className="flex items-center text-xs md:text-sm justify-center gap-3 text-center align-middle text-white font-medium bg-[#E06C2E] md:pl-9 md:pr-9 p-5 pt-2 pb-2 mb-3 mt-3 rounded-full">
               <img src={google} alt="" />
               Signup with google 
             </button>
-          </div>
+          </div> */}
+          <OAuth/>
 
           <div className="flex items-center justify-center">
             <input

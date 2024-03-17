@@ -1,15 +1,16 @@
 import express from 'express';
-import { forgotpassword, signup } from '../controllers/authControllers.js';
-import { login } from '../controllers/authControllers.js';
-import { resetPassword } from '../controllers/authControllers.js';
+import { signup } from '../controllers/authControllers.js';
+import { login , google} from '../controllers/authControllers.js';
 
 const router = express.Router();
 
 
-router.post('/signup',  signup)
+router.post('/signup', signup)
 router.post('/login', login)
-router.post('/forgotPassword', forgotpassword)
-router.patch('/resetPassword/:token', resetPassword)
+router.post('/google', google)
+
+// router.post('/forgotPassword', forgotpassword)
+// router.patch('/resetPassword/:token', resetPassword)
 
 
 
