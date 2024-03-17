@@ -4,6 +4,9 @@ import User from '../models/userModel.js'
 import { errorHandler } from "../utils/error.js";
 import toast from 'react-hot-toast';
 import * as jose from 'jose'
+import createResetPasswordToken from '../models/userModel.js'
+// import sendEmail from "../utils/email.js";
+
 
 
 export const isValidEmail = (email) => {
@@ -68,7 +71,7 @@ export const login = async (req, res) => {
     const usermail = await User.findOne({ email });
     const isPasswordCorrect = await bcrypt.compare(password, usermail?.password || "");
     if (!usermail || !isPasswordCorrect) {
-      return res.status(400).json({ error: "Invalid email or password" })
+      return res.status(400).json({ error: "user not found Invalid email or password" })
     }
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
     const jwt = await new jose.SignJWT({ id: usermail._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
@@ -84,3 +87,38 @@ export const login = async (req, res) => {
 }
 
 
+
+
+export const forgotpassword = async (req, res, next) => {
+  // 1. GET BASED ON POSTED EMAIL
+  const user =  await User.findOne({ email: req.body.email });
+  //2. GENERATE A RANDOM RESET TOKEN 
+  if(!user){
+    return res.status(404).json({ error: "we could not find the user with given email"})
+  }
+  const resetToken = user.createResetPasswordToken();
+  await user.save({ validateBeforeSave: false })
+  //3. SEND THE TOKEN BACK TO THE USER EMAIL
+  const resetUrl = `${req.protocol}://${req.get('host')}/api/auth/resetPassword/${resetToken}`
+  const message = `we have received a password reset request. Please use the Button below to reset your password\n\n${resetUrl}\n\nThis reset password link well be valide only for 10 min`
+  // try{
+  //   await sendEmail({
+  //     email : user.email,
+  //     subject : "Password Reset",
+  //     message: message
+  //    })
+  //    res.status(200).json({ message: "we have sent you an email with further instructions" })
+  // }catch(error){
+  //   user.passwordResetToken = undefined
+  //   user.passwordResetTokenExpires = undefined
+  //   user.save({ validateBeforeSave: false
+  //    })
+
+  //   return next(error)
+  // }
+
+}
+
+export const resetPassword = async (req, res, next) => {
+
+}

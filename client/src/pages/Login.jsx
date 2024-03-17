@@ -4,11 +4,14 @@ import or from "../assets/or-img.svg";
 import google from "../assets/Google Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { loginStart, loginSuccess, loginError } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const [formData, setFormData] = useState({ termsAndServices: false });
-  const [loading, setLoading] = useState(false);
+  const {loading, error} = useSelector((state) => state.user);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
@@ -33,12 +36,12 @@ function Login() {
     if (!handleInputErrors(formData)) {
       return;
     }
-    if (!formData.termsAndServices) {
-      toast.error("Terms and services must be checked.");
-      return;
-    }
+    // if (!formData.termsAndServices && googleClicked) { // Check if Google button was clicked
+    //   toast.error("Terms and services must be checked.");
+    //   return;
+    // }
     try {
-      setLoading(true);
+      dispatch(loginStart())
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -47,18 +50,18 @@ function Login() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      setLoading(false);
       if (!res.ok) {
         throw new Error(data.error || "Internal server error");
       }
       // localStorage.setItem("token", data.jwt);
-      console.log(data);
+      dispatch(loginSuccess(data))
       navigate('/')
     } catch (error) {
       // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {
         duration: 6000, // Duration in milliseconds
       });
+      dispatch(loginError(error))
     }
   };
   return (
@@ -168,7 +171,7 @@ function Login() {
               type="submit"
               className="flex items-center justify-center gap-3 mb-2 btn-gradient-2"
             >
-              {loading ? "loging in..." : "let's go"}
+              {loading ? "logging in..." : "let's go"}
               <svg
                 className="mt-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +204,7 @@ function Login() {
           <div className="flex justify-center">
             <button className="flex items-center text-xs md:text-sm justify-center gap-3 text-center align-middle text-white font-medium bg-[#E06C2E] md:pl-9 md:pr-9 p-5 pt-2 pb-2 mb-6 mt-4 rounded-full">
               <img src={google} alt="" />
-              Create your space
+              Login with google
             </button>
           </div>
 
