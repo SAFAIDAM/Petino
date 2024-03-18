@@ -8,7 +8,7 @@ import { isValidEmail } from "../../../api/controllers/authControllers";
 import OAuth from "../components/OAuth";
 
 function Signup() {
-  const [formData, setFormData] = useState({ termsAndServices: false });
+  const [formData, setFormData] = useState({ });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -52,7 +52,6 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate form input errors
     if (!handleInputErrors(formData)) {
       return;
     }
@@ -84,9 +83,8 @@ function Signup() {
       console.log(data);
       navigate('/login')
     } catch (error) {
-      // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {
-        duration: 6000, // Duration in milliseconds
+        duration: 6000, 
       });
     }
   };
@@ -269,17 +267,17 @@ function Signup() {
           </div> */}
           <OAuth/>
 
-          <div className="flex items-center justify-center">
-            <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
+          <div className="flex items-center justify-center text-center">
+            <label className="text-xs font-medium md:text-base text-balck ms-2 ">
             By creating an account you agree with our{" "}
-              <Link
+              <Link to='/Terms'
                 href="#"
                 className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
               >
                 Privacy Policy
               </Link>{" "}
               &{" "}
-              <Link className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline">
+              <Link to="/Terms" className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline">
                 Terms & Conditions
               </Link>
             </label>

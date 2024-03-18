@@ -36,10 +36,6 @@ function Login() {
     if (!handleInputErrors(formData)) {
       return;
     }
-    if (!formData.termsAndServices) { // Check if Google button was clicked
-      toast.error("Terms and services must be checked.");
-      return;
-    }
     try {
       dispatch(loginStart())
       const res = await fetch("/api/auth/login", {
@@ -146,8 +142,8 @@ function Login() {
               </span>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-28 ">
-            <div className="mt-4 mb-4">
+          <div className="flex items-center justify-center mt-4 mb-6 gap-28">
+            {/* <div className="mt-4 mb-4">
               <input
                 id="link-checkbox"
                 type="checkbox"
@@ -157,10 +153,10 @@ function Login() {
               <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
                 Remember me
               </label>
-            </div>
+            </div> */}
 
             <Link
-              className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline"
+              className="text-[#E06C2E] text-xs md:text-sm dark:text-[#E06C2E] hover:underline text-right"
             >
               Forgot Password ?
             </Link>
@@ -208,17 +204,17 @@ function Login() {
           </div> */}
           <OAuth/>
 
-          <div className="flex items-center justify-center">
-            <label className="text-xs font-medium md:text-sm text-balck ms-2 ">
+          <div className="flex items-center justify-center text-center">
+            <label className="text-xs font-medium md:text-base text-balck ms-2 ">
             By creating an account you agree with our{" "}
-              <Link
+              <Link to="/Terms"
                 href="#"
                 className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline"
               >
                 Privacy Policy
               </Link>{" "}
               &{" "}
-              <Link className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline">
+              <Link to="/Terms" className="text-[#E06C2E] dark:text-[#E06C2E] hover:underline">
                 Terms & Conditions
               </Link>
             </label>

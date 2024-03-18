@@ -8,7 +8,6 @@ import Cors from 'cors'
 
 const app = express()
 
-// configurating the .env variable file 
 dotenv.config()
 const PORT = process.env.PORT
 

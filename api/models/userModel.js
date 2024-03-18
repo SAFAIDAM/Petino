@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import crypto from "crypto";
 
 const userSchema = mongoose.Schema({
   fullName: {
@@ -23,30 +22,13 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
   },
-  verified: {
-    type: Boolean,
-    default: false
-  },
   termsAndServices: {
     type: Boolean,
-  },
-  passwordResetToken: String,
-  passwordResetExpires: Date
+    default: true
+  }
 }, { timestamps: true });
 
 
-
-
-userSchema.methods.createResetPasswordToken = function(){
-  const resetToken = crypto.randomBytes(32).toString("hex");
-
-  this.passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex")
-  this.passwordResetExpires = Date.now() + 3600000;
-
-  console.log(resetToken, this.passwordResetToken);
-
-  return resetToken;
-}
 
 const User = mongoose.model("User", userSchema);
 

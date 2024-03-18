@@ -3,9 +3,6 @@ import User from '../models/userModel.js'
 import { errorHandler } from "../utils/error.js";
 import toast from 'react-hot-toast';
 import * as jose from 'jose'
-import createResetPasswordToken from '../models/userModel.js'
-// import sendEmail from "../utils/email.js";
-
 
 
 export const isValidEmail = (email) => {
@@ -22,10 +19,6 @@ export const signup = async (req, res) => {
     if (!password || password.length < 8) {
       return res.status(400).json({ error: "Password should be at least 8 characters long" });
     }
-    if (!termsAndServices) {
-      return res.status(401).json({ error: " terms and services must be checked" });
-    }
-
     const user = await User.findOne({ username });
     if (user) {
       return res.status(400).json({ error: "User already exists" })
@@ -40,9 +33,8 @@ export const signup = async (req, res) => {
       return res.status(400).json({ error: "Email already exists. Please enter a new email" })
     }
 
-    // hashing the password here 
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = bcrypt.hashSync(password, salt); // Ensure password is converted to a string
+    const hashedPassword = bcrypt.hashSync(password, salt);
     const newUser = await User({
       fullName,
       username,
@@ -52,7 +44,7 @@ export const signup = async (req, res) => {
       verified
     })
 
-    await newUser.save();  // Save the new user to the database
+    await newUser.save();
     res.status(201).json({ message: "user created successfully" });
 
   } catch (error) {
@@ -67,17 +59,17 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const usermail = await User.findOne({ email });
-    const isPasswordCorrect = await bcrypt.compare(password, usermail?.password || "");
-    if (!usermail || !isPasswordCorrect) {
+    const user = await User.findOne({ email });
+    const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+    if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "user not found Invalid email or password" })
     }
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-    const jwt = await new jose.SignJWT({ id: usermail._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+    const jwt = await new jose.SignJWT({ id: user._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
     res.cookie("tokenjose", jwt, {
       httOnly: true,
     })
-    res.status(200).json({ jwt });
+    res.status(200).json({ user });
 
   } catch (error) {
     console.log("error in login controller", error.message)
@@ -93,7 +85,7 @@ export const google = async (req, res, next) => {
       const existingPhoto = user.profilePicture;
 
       user.username = req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2, // Use a function for safer username generation
-      user.profilePicture = existingPhoto;
+        user.profilePicture = existingPhoto;
       user.googleId = req.body.googleId;
       await user.save();
 
@@ -129,11 +121,8 @@ export const google = async (req, res, next) => {
   }
 }
 
-export const logout = (req, res) => {
-  res.clearCookie('access_token').status(200).json('Signout success!');
+export const Logout = async (req, res) => {
+  res.clearCookie("tokenjose").status(200).json({ message: "successfully logged out" });
 };
-
-
-
 
 
