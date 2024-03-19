@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Signup from "./pages/Signup";
 import PrivateRoute from "./components/PrivateRoute";
 import termsdata from "./termsdata";
+import ErorrPage404 from "./pages/ErorrPage404";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
         </Route>
         <Route path="/signup" element={<Signup />} />
+        <Route path="/Error" element={<ErorrPage404/>}/>
         <Route path="/Terms" element={<Terms termsdata={termsdata}/>} />
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute/>}>

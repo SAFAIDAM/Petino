@@ -1,14 +1,16 @@
 import React from "react";
 import logo from "../assets/logo-terms.png";
 import vector from "../assets/vectore.png";
+import star from "../assets/star.png";
+import Heart from "../assets/heartEmoji.png"
 
 function Terms(props) {
   const { termsdata } = props;
   const data = termsdata.map((item) => {
     return (
-      <ul className="list-disc" key={item.id}>
-        <li>
-          <span>{item.title}</span>
+      <ul className="list-disc md:text-[19px] text-sm" key={item.id}>
+        <li className="mt-3 ml-10 mr-10 md:ml-60 md:mr-60">
+          <span className="font-bold">{item.title}</span>
           {item.content}
         </li>
       </ul>
@@ -18,7 +20,7 @@ function Terms(props) {
     <div>
       <div className="flex flex-col items-center mt-6">
         <div>
-          <img className="w-[100px] md:w-[200px]" src={logo} alt="" />
+          <img className="w-[100px] md:w-[200px] mt-9" src={logo} alt="" />
         </div>
         <div className="mt-4 w-[300px] md:w-[650px] text-center">
           <h1 className="text-lg md:text-2xl">
@@ -27,15 +29,25 @@ function Terms(props) {
           </h1>
         </div>
       </div>
-      
+
       <section>
-        <div>
-          <h1 className="mt-6 text-center heading-signup">
-            Conditions: <img src={vector} alt="" />
-          </h1>
+        <div className="flex items-center justify-center gap-3 mt-auto ml-auto align-middle">
+          <h1 className="mt-9 mb-7 text-[30px] heading">Conditions:</h1>
+          <img src={vector} alt="" />
         </div>
-        <div>{data}</div>
+        <div className="mb-24">{data}</div>
+        <div>
+          <img className="md:mb-10 md:ml-36 mb-36 w-[30px]" src={star} alt="" />
+        </div>
       </section>
+      <footer>
+        <div className="flex items-center justify-center mb-10 ml-auto mr-auto align-middle ">
+        <p className="flex gap-2 ml-6 mr-6 text-xs text-center md:text-lg">Copyright @2024 All rights reserved | this project was made with love <img src={Heart} alt="" />
+       
+        </p>
+        </div>
+        
+      </footer>
     </div>
   );
 }

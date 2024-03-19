@@ -85,7 +85,7 @@ export const google = async (req, res, next) => {
       const existingPhoto = user.profilePicture;
 
       user.username = req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2, // Use a function for safer username generation
-        user.profilePicture = existingPhoto;
+      user.profilePicture = existingPhoto;
       user.googleId = req.body.googleId;
       await user.save();
 

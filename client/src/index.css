@@ -16,7 +16,21 @@ body{
   font-size: 20px;
   
 }
-
+.heading{
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 26px;
+}
+.head{
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 90px;
+}
+.head1{
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 240px;
+}
 
 /* method 2 -> use background-clip to support border-radius */
 .btn-gradient-2 {

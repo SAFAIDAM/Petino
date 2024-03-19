@@ -252,7 +252,7 @@ function Signup() {
             {loading ? (
               'creating...'
               ) : (
-                "Create your space"
+                "Create your own space"
               )}
             </button>
           </div>
