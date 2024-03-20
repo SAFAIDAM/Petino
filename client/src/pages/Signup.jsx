@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";
 import OAuth from "../components/OAuth";
 
+
 function Signup() {
   const [formData, setFormData] = useState({ });
   const [loading, setLoading] = useState(false);
@@ -87,6 +88,11 @@ function Signup() {
         duration: 6000, 
       });
     }
+  };
+  const handleClick = () => {
+    setIsAnimating(true);
+    onClick && onClick(); // Call passed onClick function if available
+    setTimeout(() => setIsAnimating(false), 1000); // Reset animation after 1s
   };
 
   return (
