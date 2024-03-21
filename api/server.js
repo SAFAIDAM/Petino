@@ -5,15 +5,30 @@ import userRoute from "./routes/userRoute.js"
 import authRoute from "./routes/authRoute.js"
 import connectMongoDB from "./db/connectMongoDB.js"
 import Cors from 'cors'
+import morgan from "morgan"
+import bodyParser from "body-parser"
+import helmet from "helmet"
+import errorMiddleware from "./middleware/errorMiddleware.js";
 
 const app = express()
 
 dotenv.config()
 const PORT = process.env.PORT
 
+
+app.use(helmet())
 app.use(express.json())
 app.use(cookieParser());
 app.use(Cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+
+//error middleware
+app.use(errorMiddleware);
+
 
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute);
