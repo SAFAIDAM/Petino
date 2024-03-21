@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar"
 import RenderPosts from "../components/RenderPosts"
 import "../components/style.css"
 
+
 const Posts = () => {
     return (
         <>
@@ -16,3 +17,5 @@ const Posts = () => {
 }
 
 export default Posts
+
+// message
