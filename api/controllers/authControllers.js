@@ -69,7 +69,7 @@ export const login = async (req, res) => {
     res.cookie("tokenjose", jwt, {
       httOnly: true,
     })
-    res.status(200).json({ user });
+    res.status(200).json({ user , jwt});
 
   } catch (error) {
     console.log("error in login controller", error.message)
