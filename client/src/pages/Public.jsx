@@ -10,6 +10,7 @@ import { SlLogout } from "react-icons/sl";
 import { IoLanguageOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
 import ArrowPutton from "../components/ArrowPutton";
+import { HiOutlineTrash } from "react-icons/hi2";
 
 function Public() {
   const { currentUser } = useSelector((state) => state.user);
@@ -65,24 +66,31 @@ function Public() {
               <div
                 className={
                   menu
-                    ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute buttom-9 right-[10px] z-5"
+                    ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-[106px] right-[50px] z-5"
                     : "hidden"
                 }
               >
-                <button className="flex items-center gap-[50px] mb-2">
-                  Profile
-                  <RiUserLine color="#898484" size={20} />
-                </button>
+                <Link to="/profile">
+                  <button className="flex items-center gap-[50px] mb-2">
+                    Profile
+                    <RiUserLine color="#898484" size={20} />
+                  </button>
+                </Link>
+
                 <button className="flex items-center gap-6 mb-2">
                   Language
                   <IoLanguageOutline color="#898484" size={20} />
                 </button>
                 <button
                   onClick={handlelogout}
-                  className="flex items-center gap-[43px]"
+                  className="flex items-center gap-[43px] mb-2"
                 >
                   Logout
                   <SlLogout onClick={handlelogout} color="#898484" size={18} />
+                </button>
+                <button className="flex items-center gap-[43px]">
+                  Delete Account
+                  <HiOutlineTrash color="#898484" size={18} />
                 </button>
               </div>
 
@@ -144,7 +152,7 @@ function Public() {
               <div className="justify-center mditems-center md:flex gap-7">
                 <img
                   className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
-                  src={img}
+                  src={currentUser.user.profilePicture}
                   alt=""
                 />
                 <div>

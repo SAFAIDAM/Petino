@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo1.svg";
 import img from "../assets/postImage.png";
-import { useDispatch } from "react-redux";
-import { signout } from "../redux/user/userSlice";
-import { getAuth, signOut } from "firebase/auth";
+import ArrowPutton from "../components/ArrowPutton";
 import { SlLogout } from "react-icons/sl";
 import { IoLanguageOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
-import ArrowPutton from "../components/ArrowPutton";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { signout } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -20,10 +21,12 @@ function Profile() {
       setIsLoading(false);
     }
     console.log(currentUser.user.profilePicture);
-  }, [currentUser]); //
+  }, [currentUser]);
+  const [menu, setMenu] = useState(false);
 
-  const dispatch = useDispatch();
-  const auth = getAuth();
+  const handleMenu = () => {
+    setMenu(!menu);
+  };
   const handlelogout = async () => {
     try {
       signOut(auth)
@@ -39,11 +42,8 @@ function Profile() {
       console.log(error);
     }
   };
-  const [menu, setMenu] = useState(false);
-
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
+  const dispatch = useDispatch();
+  const auth = getAuth();
   return (
     <>
       <div className="max-w-6xl p-3 mx-auto">
@@ -58,34 +58,7 @@ function Profile() {
             </div>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <div
-              onClick={handleMenu}
-              className="flex items-center justify-center gap-1 align-middle"
-            >
-              <div
-                className={
-                  menu
-                    ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute buttom-9 right-[10px] z-5"
-                    : "hidden"
-                }
-              >
-                <button className="flex items-center gap-[50px] mb-2">
-                  Profile
-                  <RiUserLine color="#898484" size={20} />
-                </button>
-                <button className="flex items-center gap-6 mb-2">
-                  Language
-                  <IoLanguageOutline color="#898484" size={20} />
-                </button>
-                <button
-                  onClick={handlelogout}
-                  className="flex items-center gap-[43px]"
-                >
-                  Logout
-                  <SlLogout onClick={handlelogout} color="#898484" size={18} />
-                </button>
-              </div>
-
+            <div onClick={handleMenu} className="flex items-center justify-center gap-1 align-middle">
               <p className="hidden text-xs md:block">
                 {currentUser.user.username}
               </p>
@@ -107,7 +80,36 @@ function Profile() {
                 />
               </svg>
             </div>
+            <div
+              className={
+                menu
+                  ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-[106px] right-[50px] z-5"
+                  : "hidden"
+              }
+            >
+              <Link to="/profile">
+                <button className="flex items-center gap-[50px] mb-2">
+                  Profile
+                  <RiUserLine color="#898484" size={20} />
+                </button>
+              </Link>
 
+              <button className="flex items-center gap-6 mb-2">
+                Language
+                <IoLanguageOutline color="#898484" size={20} />
+              </button>
+              <button
+                onClick={handlelogout}
+                className="flex items-center gap-[43px] mb-2"
+              >
+                Logout
+                <SlLogout onClick={handlelogout} color="#898484" size={18} />
+              </button>
+              <button className="flex items-center gap-[43px]">
+                Delete Account
+                <HiOutlineTrash color="#898484" size={18} />
+              </button>
+            </div>
             <Link to="/profile">
               {currentUser ? (
                 <>
@@ -142,16 +144,16 @@ function Profile() {
             {/** DIPLAYING USERS PRIFILE AND FUNCTIONALITIES */}
             <div className="justify-between gap-3 p-10 m-6 align-middle items-cente md:flex">
               <div className="items-center justify-center md:flex gap-7">
-              <img
+                <img
                   className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
-                  src={img}
+                  src={currentUser.user.profilePicture}
                   alt=""
                 />
                 <div>
                   <h1 className="mb-4 text-xl font-bold text-center ">
                     {currentUser.user.username}
                   </h1>
-                  
+
                   <div className="flex flex-col items-center justify-center gap-3 text-center md:flex">
                     <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition duration-300 ease-in-out delay-150 bg-[#EA7F48] hover:-translate-y-1 hover:scale-110 hover:bg-[#EA7F48]">
                       <svg
@@ -260,24 +262,24 @@ function Profile() {
               </div>
               <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
               <div>
-                <div className="flex flex-col items-center justify-center text-center items md:text-left p-9">
-                <h1 className="mb-2 text-xl font-bold heading-signup ">
-                      Categories
-                    </h1>
-                    <select className="md:w-[400px] text-sm p-4 text-start border mb-9 border-[#bcbcbc] rounded-md w-[190px]">
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                    </select>
+                <div className="flex flex-col items-center text-center md:text-left p-9">
+                  <h1 className="mb-2 text-xl font-bold heading-signup ">
+                    Categories
+                  </h1>
+                  <select className="md:w-[400px] text-sm p-4 text-start border mb-9 border-[#bcbcbc] rounded-md w-[190px]">
+                    <option value="placeholder" className="text-[#bcbcbc]">
+                      what are you working categories
+                    </option>
+                    <option value="placeholder" className="text-[#bcbcbc]">
+                      what are you working categories
+                    </option>
+                    <option value="placeholder" className="text-[#bcbcbc]">
+                      what are you working categories
+                    </option>
+                    <option value="placeholder" className="text-[#bcbcbc]">
+                      what are you working categories
+                    </option>
+                  </select>
                   <div>
                     <h1 className="mb-2 text-xl font-bold heading-signup">
                       Social links
