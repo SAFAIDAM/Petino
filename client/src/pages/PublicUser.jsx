@@ -11,7 +11,7 @@ import { IoLanguageOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
 import ArrowPutton from "../components/ArrowPutton";
 
-function Profile() {
+function PublicUser() {
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -77,12 +77,9 @@ function Profile() {
                   Language
                   <IoLanguageOutline color="#898484" size={20} />
                 </button>
-                <button
-                  onClick={handlelogout}
-                  className="flex items-center gap-[43px]"
-                >
+                <button className="flex items-center gap-[43px]">
                   Logout
-                  <SlLogout onClick={handlelogout} color="#898484" size={18} />
+                  <SlLogout color="#898484" size={18} />
                 </button>
               </div>
 
@@ -132,64 +129,29 @@ function Profile() {
             </Link>
           </div>
         </div>
-
         <h1 className="flex items-center justify-center mt-10 mb-4 text-lg font-bold heading">
-          Edit profile
+          profile page
         </h1>
-
         <div className="bg-[#ffffff] border border-[#bcbcbc] rounded-[30px] mb-24 pb-24">
           <div>
             {/** DIPLAYING USERS PRIFILE AND FUNCTIONALITIES */}
             <div className="justify-between gap-3 p-10 m-6 align-middle items-cente md:flex">
               <div className="items-center justify-center md:flex gap-7">
-              <img
+                <img
                   className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
                   src={img}
                   alt=""
                 />
                 <div>
-                  <h1 className="mb-4 text-xl font-bold text-center ">
+                  <h1 className="mt-2 text-2xl font-bold text-center md:text-start md:mt-9">
                     {currentUser.user.username}
                   </h1>
-                  
-                  <div className="flex flex-col items-center justify-center gap-3 text-center md:flex">
-                    <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition duration-300 ease-in-out delay-150 bg-[#EA7F48] hover:-translate-y-1 hover:scale-110 hover:bg-[#EA7F48]">
-                      <svg
-                        width="21"
-                        height="20"
-                        viewBox="0 0 21 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M11 13V1M11 13C10.1598 13 8.58984 10.6068 8 10M11 13C11.8402 13 13.4102 10.6068 14 10"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M20 15C20 18.3093 19.3849 19 16.4375 19H4.5625C1.61512 19 1 18.3093 1 15"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      Upload image
-                    </button>
-                  </div>
+                  <a>
+                    <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md md:text-start text-center w-[190px] truncate hover:underline hover:text-[#EA7F48]">
+                      example@gmail.com{" "}
+                    </p>
+                  </a>
                 </div>
-              </div>
-              <div className="flex flex-col items-center justify-center md:gap-3 md:flex">
-                <Link to="/public">
-                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
-                    See public view
-                  </button>
-                </Link>
-                <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
-                  Go to own posts
-                </button>
               </div>
             </div>
             <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
@@ -202,82 +164,49 @@ function Profile() {
                     <h1 className="mb-2 text-xl font-bold heading-signup">
                       Bio
                     </h1>
-                    <p className="text-[10px] text-[#ED9C63] mb-2">
-                      At least 32 word
+                    <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
+                      Hi there! I'm a dedicated animal advocate working to make
+                      the world better for furry friends. When not saving
+                      animals, I enjoy nature
                     </p>
-                    <textarea
-                      className="md:w-[400px] text-sm p-4 text-center border border-[#bcbcbc] rounded-md w-[190px]"
-                      rows="4"
-                      cols="30"
-                      placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature "
-                    ></textarea>
                   </div>
                   {/** Experiences container */}
                   <div>
                     <h1 className="mb-2 text-xl font-bold heading-signup">
                       Experiences
                     </h1>
-                    <p className="text-[10px] mb-2 text-[#ED9C63]">
-                      At least 32 word
+                    <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
+                      Hi there! I'm a dedicated animal advocate working to make
+                      the world better for furry friends. When not saving
+                      animals, I enjoy nature
                     </p>
-                    <textarea
-                      className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                      rows="4"
-                      cols="30"
-                      placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature walks with my pets or cozying up with a book
-                      and tea. Join me in !"
-                    ></textarea>
-                  </div>
-                  <div>
-                    <h1 className="mb-2 text-xl font-bold heading-signup">
-                      username
-                    </h1>
-                    <input
-                      className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                      placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature walks with my pets or cozying up with a book
-                      and tea. Join me in !"
-                    />
-                  </div>
-                  <div>
-                    <h1 className="mb-2 text-xl font-bold heading-signup">
-                      Email recovery
-                    </h1>
-                    <input
-                      className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                      placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature walks with my pets or cozying up with a book
-                      and tea. Join me in !"
-                    />
                   </div>
                 </div>
               </div>
               <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
               <div>
-                <div className="flex flex-col items-center justify-center text-center items md:text-left p-9">
-                <h1 className="mb-2 text-xl font-bold heading-signup ">
-                      Categories
-                    </h1>
-                    <select className="md:w-[400px] text-sm p-4 text-start border mb-9 border-[#bcbcbc] rounded-md w-[190px]">
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                    </select>
+                <div className="flex flex-col justify-center gap-4 text-center md:text-left p-9">
+                  <div>
+                    <div>
+                      <h1 className="mb-2 text-xl font-bold heading-signup ">
+                        Categories
+                      </h1>
+                      <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                        <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
+                          category
+                        </p>
+                        <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
+                          category
+                        </p>
+                        <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
+                          cate
+                        </p>
+                        <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
+                          cat
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                   <div>
                     <h1 className="mb-2 text-xl font-bold heading-signup">
                       Social links
@@ -310,12 +239,14 @@ function Profile() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <input
-                        className="md:w-[380px] mb-1 text-sm p-2 rounded-md border border-[#bcbcbc] text-center w-[190px]"
-                        rows="4"
-                        cols="50"
-                        placeholder="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                      />
+                      <a
+                        target="_blank"
+                        href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                      >
+                        <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
+                          https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                        </p>
+                      </a>
                     </div>
                     <div className="flex items-center justify-center gap-3">
                       <svg
@@ -340,12 +271,14 @@ function Profile() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <input
-                        className="md:w-[380px] mb-1 text-sm border border-[#bcbcbc] p-2 rounded-md text-center w-[190px]"
-                        rows="4"
-                        cols="50"
-                        placeholder="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                      />
+                      <a
+                        target="_blank"
+                        href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                      >
+                        <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
+                          https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                        </p>
+                      </a>
                     </div>
                     <div className="flex items-center justify-center gap-3">
                       <svg
@@ -369,22 +302,19 @@ function Profile() {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <input
-                        className="md:w-[380px] mb-1 border border-[#bcbcbc] text-sm p-2 rounded-md text-center w-[190px]"
-                        rows="4"
-                        cols="50"
-                        placeholder="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                      />
+                      <a
+                        target="_blank"
+                        href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                      >
+                        <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
+                          https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                        </p>
+                      </a>
                     </div>
                     <div></div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2] ">
-                Save changes
-              </button>
             </div>
           </div>
         </div>
@@ -393,4 +323,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default PublicUser;
