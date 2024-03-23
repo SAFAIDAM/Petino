@@ -34,7 +34,7 @@ body {
 
 /* method 2 -> use background-clip to support border-radius */
 .btn-gradient-2 {
-  background: linear-gradient(white, white) padding-box,
+  background: linear-gradient(#8FA1F7, #8FA1F7) padding-box,
     linear-gradient(to right, #ea7f48, blue) border-box,
     /* Add your desired background color here */ #f80000; /* Example background color */
 
@@ -45,7 +45,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 1em;
-  color: darkblue;
+  color: white;
   padding: 0.5rem 1rem;
   cursor: pointer;
 }

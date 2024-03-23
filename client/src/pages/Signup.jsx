@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";
 import OAuth from "../components/OAuth";
+import { ClipLoader } from "react-spinners";
+
 
 
 function Signup() {
@@ -256,7 +258,7 @@ function Signup() {
           <div className="flex justify-center mt-4 mb-3">
             <button disabled={loading} type="submit" className="button-border btn-gradient-2">
             {loading ? (
-              'creating...'
+              <ClipLoader color="#ffff" size={15} />
               ) : (
                 "Create your own space"
               )}

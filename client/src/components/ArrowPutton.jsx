@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+
 
 function ArrowPutton() {
+  let navigate = useNavigate();
   return (
-    <Link to="/">
-      <button className="font-bold bg-[#FAD0B7] hidden md:block rounded-full p-4">
+    <Link >
+      <button onClick={() => navigate(-1)} className="font-bold bg-[#FAD0B7] hidden md:block rounded-full p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
