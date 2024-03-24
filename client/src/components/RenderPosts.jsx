@@ -31,7 +31,9 @@ const RenderPosts = () => {
 
     
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mx-8 gap-[50px] max-w-[1200px] lg:mx-8 xl:mx-auto xl:px-8 mb-[130px]">
+        <div className="flex justify-center">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mx-8 gap-[50px] w-11/12 lg:mx-8 xl:mx-auto xl:px-8 mb-[130px]">
             {posts.map(post => (
                 <div className="custom-shadow rounded-[25px] w-[320px] md:w-full mx-auto" key={post._id}>
 
@@ -51,7 +53,7 @@ const RenderPosts = () => {
 
                     {/* Image */}
                     <div className="mx-4 mt-3 mb-3">
-                        <img className="h-[135px] w-full rounded-[15px]" src={postImage} alt="post image" />
+                        <img className="h-auto w-full rounded-[15px]" src={postImage} alt="post image" />
                     </div>
 
                     {/* Like && Comment */}
@@ -89,6 +91,7 @@ const RenderPosts = () => {
                     </div>
                 </div>
             ))}
+        </div>
         </div>
     )
 }

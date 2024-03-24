@@ -2,6 +2,7 @@ import { FaArrowLeft } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { HiOutlineUpload } from "react-icons/hi";
 import Footer from "../components/Footer.jsx"
+import Circle from "./Circle.jsx";
 
 
 
@@ -11,11 +12,9 @@ const CreateP = () => {
     return (
         <>
             {/* Arrow And Title */}
-            <div className="flex items-center mt-[30px] gap-5 mx-8 max-w-[1200px] lg:mx-auto lg:px-8">
+            <div className="flex items-center mt-[30px] gap-5 mx-8 max-w-11/12 lg:mx-auto lg:px-8">
                 <Link to='/posts'>
-                    <div className="cursor-pointer shadow-[0_4px_4px_0_#dbdbdb] w-[45px] h-[45px] flex justify-center items-center rounded-full bg-[#FAD0B7] md:w-[50px] md:h-[50px]">
-                        <FaArrowLeft color="#E06C2E" size={22} />
-                    </div>
+                    <Circle />
                 </Link>
                 <h1 className="text-[22px] md:text-[25px] font-[400]">Create your own post</h1>
             </div>

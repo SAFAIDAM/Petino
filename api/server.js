@@ -9,6 +9,7 @@ import morgan from "morgan"
 import bodyParser from "body-parser"
 import helmet from "helmet"
 import errorMiddleware from "./middleware/errorMiddleware.js";
+import postRoute from "./routes/postRoute.js"
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use(errorMiddleware);
 
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute);
+app.use("/api/posts", postRoute)
 
 
 app.use((err, req, res, next) => {

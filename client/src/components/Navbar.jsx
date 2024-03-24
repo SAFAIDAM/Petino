@@ -24,7 +24,7 @@ function Navbar() {
     }
 
     return (
-        <div className="flex items-center justify-between mt-11 max-w-[1200px] mx-auto mb-6">
+        <div className="flex items-center justify-between mt-11 w-11/12 mx-auto mb-6">
             {/* Logo */}
             <div className="pl-8">
                 <img src={logo} alt="Petinoo Logo" />
@@ -32,8 +32,8 @@ function Navbar() {
 
             {/* Navbar */}
             <nav className="hidden bg-white md:block border border-[#A6A6A6] rounded-[50px] h-[67px]">
-                <ul className="flex items-center justify-around h-[100%] text-[20px] text-[#6E6E6E] px-6 gap-[18px] lg:px-20 lg:gap-16">
-                    <li className="flex items-center gap-2">
+                <ul className="flex items-center justify-around h-[100%] text-[20px] text-[#6E6E6E] px-6 gap-[18px] lg:px-20 lg:gap-16 ">
+                    <li className="  flex items-center gap-2 ">
                         <img src={postsIcon} alt="icon" />
                         <span>Posts</span>
                     </li>
@@ -63,7 +63,7 @@ function Navbar() {
                 </div>
 
                 {/* logout and Profile and Lang */}
-                <div className={menu ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-10 left-2 z-5" : "hidden"}>
+                <div className={menu ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-10 left-2 z-50" : "hidden"}>
                     <button className="flex items-center gap-[50px] mb-2">
                         Profile
                         <RiUserLine color="#898484" size={20} />
@@ -81,22 +81,22 @@ function Navbar() {
 
 
             {/* Mobile & tablet Screen */}
-            <div className="fixed z-10 bottom-0 border border-[#A6A6A6] w-full h-[90px] rounded-t-[35px] md:hidden bg-white">
+            <div className="fixed z-10 bottom-0 border border-[#A6A6A6] w-11/12 py-2 rounded-t-[35px] md:hidden bg-white">
                 <ul className="flex items-center justify-around h-[100%] text-[18px] text-[#6E6E6E]">
-                    <li className="flex items-center gap-2">
-                        <img src={postsIcon} alt="icon" />
+                    <li className="flex flex-col  gap-2">
+                        <img className="w-8" src={postsIcon} alt="icon" />
                         <span>Posts</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                        <img src={servicesIcon} alt="icon" />
+                    <li className="flex items-center gap-2 flex-col">
+                        <img className="w-8" src={servicesIcon} alt="icon" />
                         <span>Services</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                        <img src={rescueIcon} alt="icon" />
+                    <li className="flex items-center gap-2 flex-col">
+                        <img className="w-8" src={rescueIcon} alt="icon" />
                         <span>Rescue</span>
                     </li>
-                    <li className="hidden sm:flex items-center gap-2">
-                        <img src={settingsIcons} alt="icon" />
+                    <li className="flex  items-center gap-2 flex-col">
+                        <img className="w-8" src={settingsIcons} alt="icon" />
                         <span>Settings</span>
                     </li>
                 </ul>
