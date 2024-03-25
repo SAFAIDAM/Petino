@@ -91,11 +91,11 @@ function Signup() {
       });
     }
   };
-  const handleClick = () => {
-    setIsAnimating(true);
-    onClick && onClick(); // Call passed onClick function if available
-    setTimeout(() => setIsAnimating(false), 1000); // Reset animation after 1s
-  };
+  // const handleClick = () => {
+  //   setIsAnimating(true);
+  //   onClick && onClick(); // Call passed onClick function if available
+  //   setTimeout(() => setIsAnimating(false), 1000); // Reset animation after 1s
+  // };
 
   return (
     <div className="flex items-center justify-between h-[100vh]">

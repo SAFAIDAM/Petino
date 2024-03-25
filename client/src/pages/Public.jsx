@@ -17,10 +17,9 @@ function Public() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (currentUser && currentUser.user.profilePicture) {
+    if (currentUser && currentUser.profilePicture) {
       setIsLoading(false);
     }
-    console.log(currentUser.user.profilePicture);
   }, [currentUser]); //
 
   const dispatch = useDispatch();
@@ -95,7 +94,7 @@ function Public() {
               </div>
 
               <p className="hidden text-xs md:block">
-                {currentUser.user.username}
+                {currentUser.username}
               </p>
 
               <svg
@@ -127,7 +126,7 @@ function Public() {
                     />
                   ) : (
                     <img
-                      src={currentUser.user.profilePicture}
+                      src={currentUser.profilePicture}
                       alt=""
                       className="object-cover rounded-full h-[60px] w-[60px]"
                       onError={() => setIsLoading(true)} // Handle broken image case
@@ -158,16 +157,16 @@ function Public() {
               <div className="justify-center mditems-center md:flex gap-7">
                 <img
                   className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
-                  src={currentUser.user.profilePicture}
+                  src={currentUser.profilePicture}
                   alt=""
                 />
                 <div>
                   <h1 className="text-2xl font-bold text-center md:text-start md:mt-9 ">
-                    {currentUser.user.username}
+                    {currentUser.username}
                   </h1>
                   <a
                     target="_blank"
-                    onClick={(e) => {window.location.href =`mailto:${currentUser.user.email}`;}} 
+                    onClick={(e) => {window.location.href =`mailto:${currentUser.email}`;}} 
                   >
                     <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md text-center md:text-start  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                     Write me an E-Mail{" "}

@@ -11,6 +11,7 @@ import { ClipLoader } from "react-spinners";
 function Login() {
   const [formData, setFormData] = useState({ termsAndServices: false });
   const {loading, error} = useSelector((state) => state.user);
+  console.log(loading)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleChange = (e) => {
@@ -51,7 +52,7 @@ function Login() {
         throw new Error(data.error || "Internal server error");
       }
       // localStorage.setItem("token", data.jwt);
-      dispatch(loginSuccess(data))
+      dispatch(loginSuccess(data.user))
       navigate('/')
     } catch (error) {
       // Display error message from backend using React Hot Toast

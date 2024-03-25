@@ -17,10 +17,10 @@ function PublicUser() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (currentUser && currentUser.user.profilePicture) {
+    if (currentUser && currentUser.profilePicture) {
       setIsLoading(false);
     }
-    console.log(currentUser.user.profilePicture);
+    console.log(currentUser.profilePicture);
   }, [currentUser]); //
 
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ function PublicUser() {
               </div>
 
               <p className="hidden text-xs md:block">
-                {currentUser.user.username}
+                {currentUser.username}
               </p>
 
               <svg
@@ -124,7 +124,7 @@ function PublicUser() {
                     />
                   ) : (
                     <img
-                      src={currentUser.user.profilePicture}
+                      src={currentUser.profilePicture}
                       alt=""
                       className="object-cover rounded-full h-[60px] w-[60px]"
                       onError={() => setIsLoading(true)} // Handle broken image case
@@ -152,16 +152,16 @@ function PublicUser() {
               <div className="items-center justify-center md:flex gap-7">
                 <img
                   className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
-                  src={currentUser.user.profilePicture}
+                  src={currentUser.profilePicture}
                   alt=""
                 />
                 <div>
                   <h1 className="mt-2 text-2xl font-bold text-center md:text-start md:mt-9">
-                    {currentUser.user.username}
+                    {currentUser.username}
                   </h1>
                   <a
                     target="_blank"
-                    onClick={(e) => {window.location.href =`mailto:${currentUser.user.email}`;}} 
+                    onClick={(e) => {window.location.href =`mailto:${currentUser.email}`;}} 
                   >
                     <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md text-center md:text-start  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                     Write me an E-Mail{" "}
@@ -201,7 +201,7 @@ function PublicUser() {
               </div>
               <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
               <div>
-                <div className="flex flex-col justify-center gap-4 text-center md:text-left p-9">
+                <div className="flex flex-col justify-center gap-6 text-center md:text-left p-9">
                   <div>
                     <div>
                       <h1 className="mb-2 text-xl font-bold heading-signup ">
