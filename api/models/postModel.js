@@ -2,10 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const postSchema = new mongoose.Schema(
     {
-        userId: { type: Schema.Types.ObjectId, ref: "Users" },
+        userId: { type: Schema.Types.ObjectId, ref: "User" },
         description: { type: String, required: true },
         image: { type: String },
-        hashtags: [{ type: String }], // Added hashtags field
+        hashtags: [{ type: String, required: true }],
         likes: [{ type: String }],
         comments: [{ type: Schema.Types.ObjectId, ref: "Comments" }],
     },
