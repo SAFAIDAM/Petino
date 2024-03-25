@@ -85,10 +85,6 @@ function PublicUser() {
                   Logout
                   <SlLogout color="#898484" size={18} />
                 </button>
-                <button className="flex items-center gap-[43px]">
-                  Delete 
-                  <HiOutlineTrash color="#898484" size={18} />
-                </button>
               </div>
 
               <p className="hidden text-xs md:block">

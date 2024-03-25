@@ -181,10 +181,6 @@ function Profile() {
                 Logout
                 <SlLogout onClick={handlelogout} color="#898484" size={18} />
               </button>
-              <button className="flex items-center gap-[43px]">
-                Delete
-                <HiOutlineTrash color="#898484" size={18} />
-              </button>
             </div>
             <Link to="/profile">
               {currentUser ? (
@@ -221,19 +217,19 @@ function Profile() {
             <ClipLoader color="#D34A01" size={50} />
           </div>
         ) : (
-        <div className="bg-[#ffffff] border border-[#bcbcbc] rounded-[30px] mb-24 pb-24">
-          <div>
-            {/** DIPLAYING USERS PRIFILE AND FUNCTIONALITIES */}
-            <div className="justify-between gap-3 p-10 m-6 align-middle items-cente md:flex">
-              <div className="items-center justify-center md:flex gap-7">
-                <input
-                  type="file"
-                  ref={fileRef}
-                  hidden
-                  accept="image/*"
-                  onChange={(e) => setImage(e.target.files[0])} // Set the image state when a file is selected
-                />
-                {/* rules_version = '2';
+          <div className="bg-[#ffffff] border border-[#bcbcbc] rounded-[30px] mb-24 pb-24">
+            <div>
+              {/** DIPLAYING USERS PRIFILE AND FUNCTIONALITIES */}
+              <div className="justify-between gap-3 p-10 m-6 align-middle items-cente md:flex">
+                <div className="items-center justify-center md:flex gap-7">
+                  <input
+                    type="file"
+                    ref={fileRef}
+                    hidden
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])} // Set the image state when a file is selected
+                  />
+                  {/* rules_version = '2';
 
                   FIREBASE Storasge RULES
 
@@ -250,140 +246,156 @@ service firebase.storage {
     }
   }
 } */}
-                <img
-                  className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
-                  src={
-                    formData.profilePicture || currentUser.profilePicture
-                  }
-                  alt=""
-                  onClick={() => fileRef.current.click()}
-                />
-                <p className="self-center text-sm">
-                  {ImageError ? (
-                    <span className="text-red-500">{ImageError}</span>
-                  ) : imagePercent > 0 && imagePercent < 100 ? (
-                    <span className="text-slate-700">{`Uploading: ${imagePercent} %`}</span>
-                  ) : imagePercent === 100 ? (
-                    <span className="text-center text-green-70">
-                      Image uploaded successfully
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                </p>
-                <div>
-                  <h1 className="mb-4 text-xl font-bold text-center ">
-                    {currentUser.username}
-                  </h1>
+                  <img
+                    className="rounded-full ml-9 md:ml-0 w-[130px] h-[130px] object-cover"
+                    src={formData.profilePicture || currentUser.profilePicture}
+                    alt=""
+                    onClick={() => fileRef.current.click()}
+                  />
+                  <p className="self-center text-sm">
+                    {ImageError ? (
+                      <span className="text-red-500">{ImageError}</span>
+                    ) : imagePercent > 0 && imagePercent < 100 ? (
+                      <span className="text-slate-700">{`Uploading: ${imagePercent} %`}</span>
+                    ) : imagePercent === 100 ? (
+                      <span className="text-center text-green-70">
+                        Image uploaded successfully
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </p>
+                  <div>
+                    <h1 className="mb-4 text-xl font-bold text-center ">
+                      {currentUser.username}
+                    </h1>
 
-                  <div className="flex flex-col items-center justify-center gap-3 text-center md:flex">
-                    <button onClick={() => fileRef.current.click()} className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition duration-300 ease-in-out delay-150 bg-[#EA7F48] ">
-                      <svg
-                        width="21"
-                        height="20"
-                        viewBox="0 0 21 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <div className="flex flex-col items-center justify-center gap-3 text-center md:flex">
+                      <button
+                        onClick={() => fileRef.current.click()}
+                        className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition duration-300 ease-in-out delay-150 bg-[#EA7F48] "
                       >
-                        <path
-                          d="M11 13V1M11 13C10.1598 13 8.58984 10.6068 8 10M11 13C11.8402 13 13.4102 10.6068 14 10"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M20 15C20 18.3093 19.3849 19 16.4375 19H4.5625C1.61512 19 1 18.3093 1 15"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      Upload image
+                        <svg
+                          width="21"
+                          height="20"
+                          viewBox="0 0 21 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11 13V1M11 13C10.1598 13 8.58984 10.6068 8 10M11 13C11.8402 13 13.4102 10.6068 14 10"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M20 15C20 18.3093 19.3849 19 16.4375 19H4.5625C1.61512 19 1 18.3093 1 15"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        Upload image
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center md:gap-3 md:flex">
+                  <Link to="/public">
+                    <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 gap-2 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
+                      See public view
                     </button>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-center md:gap-3 md:flex">
-                <Link to="/public">
-                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
-                    See public view
+                  </Link>
+                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 gap-2 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
+                    Go to own posts
                   </button>
-                </Link>
-                <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
-                  Go to own posts
-                </button>
+                </div>
               </div>
-            </div>
-            <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-            <form onSubmit={handleSubmit} action="">
-              <div className="items-center justify-center md:flex">
-                <div>
-                  <div className="flex-col justify-center text-center md:gap-4 md:flex md:text-left p-9">
-                    {/** Bio container */}
-                    <div>
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
-                        Bio
-                      </h1>
-                      <p className="text-[10px] text-[#ED9C63] mb-2">
-                        At least 32 word
-                      </p>
-                      <textarea
-                        className="md:w-[400px] text-sm p-4 text-center border border-[#bcbcbc] rounded-md w-[190px]"
-                        rows="4"
-                        cols="30"
-                        placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature "
-                        onChange={handleChange}
-                      ></textarea>
-                    </div>
-                    {/** Experiences container */}
-                    <div>
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
-                        Experiences
-                      </h1>
-                      <p className="text-[10px] mb-2 text-[#ED9C63]">
-                        At least 32 word
-                      </p>
-                      <textarea
-                        className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                        rows="4"
-                        cols="30"
-                        placeholder=" Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving animals,
-                      I enjoy nature walks with my pets or cozying up with a book
-                      and tea. Join me in !"
-                        onChange={handleChange}
-                      ></textarea>
-                    </div>
-                    <div>
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
-                        username
-                      </h1>
-                      <input
-                        className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                        placeholder=" Hi"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
-                        Email
-                      </h1>
-                      <input
-                        className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                        placeholder=" Hi there! I'"
-                        onChange={handleChange}
-                      />
+              <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+              <form onSubmit={handleSubmit} action="">
+                <div className="items-center justify-center md:flex">
+                  <div>
+                    <div className="flex-col justify-center text-center md:gap-4 md:flex md:text-left p-9">
+                      {/** Bio container */}
+                      <div>
+                        <h1 className="mb-2 text-xl font-bold heading-signup">
+                          Bio
+                        </h1>
+                        <p className="text-[10px] text-[#ED9C63] mb-1">
+                          At least 32 word
+                        </p>
+                        <p className="text-[10px] text-[#989897] mb-1">
+                        Tell us more about yourself (e.g., hobbies, interests)
+                        </p>
+                        <textarea
+                          defaultValue={currentUser.bio}
+                          id='bio'
+                          className="md:w-[400px] text-sm p-4 text-center border border-[#bcbcbc] rounded-md w-[190px]"
+                          rows="4"
+                          cols="30"
+                          placeholder="Tell us more about you try to create a bio for you"
+                          onChange={handleChange}
+                        ></textarea>
+                      </div>
+                      {/** Experiences container */}
+                      <div>
+                        <h1 className="mb-1 text-xl font-bold heading-signup">
+                          Experiences
+                        </h1>
+                        <p className="text-[10px] mb-2 text-[#ED9C63]">
+                          At least 32 word
+                        </p>
+                        <p className="text-[10px] text-[#989897] mb-1">
+                          Add here your professional experiences and education
+                        </p>
+                        <textarea
+                          defaultValue={currentUser.experience}
+                          id='experience'
+                          className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
+                          rows="4"
+                          cols="30"
+                          placeholder="Add here more about your past experiences"
+                          onChange={handleChange}
+                        ></textarea>
+                      </div>
+                      <div>
+                        <h1 className="mb-2 text-xl font-bold heading-signup">
+                          username
+                        </h1>
+                        <p className="text-[10px] text-[#989897] mb-1">
+                          update here you username
+                        </p>
+                        <input
+                          defaultValue={currentUser.username}
+                          id='username'
+                          className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
+                          placeholder=""
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div>
+                        <h1 className="mb-2 text-xl font-bold heading-signup">
+                          Email
+                        </h1>
+                        <p className="text-[10px] text-[#989897] mb-1">
+                          update here you email
+                        </p>
+                        <input
+                          defaultValue={currentUser.email}
+                          id='email'
+                          className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
+                          placeholder=" Hi there! I'"
+                          onChange={handleChange}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-                <div>
-                  <div className="flex flex-col items-center text-center md:text-left p-9">
-                    {/* <h1 className="mb-2 text-xl font-bold heading-signup ">
+                  <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+                  <div>
+                    <div className="flex flex-col items-center text-center md:text-left p-9">
+                      {/* <h1 className="mb-2 text-xl font-bold heading-signup ">
                       Categories
                     </h1>
                     <select className="md:w-[400px] text-sm p-4 text-start border mb-9 border-[#bcbcbc] rounded-md w-[190px]">
@@ -400,124 +412,127 @@ service firebase.storage {
                         what are you working categories
                       </option>
                     </select> */}
-                    <div className="md:mb-36">
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
-                        Social links
-                      </h1>
-                      <div className="flex items-center justify-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width={20}
-                          height={20}
-                          color={"#000000"}
-                          fill={"none"}
-                        >
-                          <path
-                            d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
+                      <div className="md:mb-36">
+                        <h1 className="text-xl font-bold heading-signup">
+                          Social links
+                        </h1>
+                        <p className="text-[10px] text-[#989897] mb-1">
+                          Add here your social media links that you use
+                        </p>
+                        <div className="flex items-center justify-center gap-3">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width={20}
+                            height={20}
+                            color={"#000000"}
+                            fill={"none"}
+                          >
+                            <path
+                              d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M16.5 12C16.5 14.4853 14.4853 16.5 12 16.5C9.51472 16.5 7.5 14.4853 7.5 12C7.5 9.51472 9.51472 7.5 12 7.5C14.4853 7.5 16.5 9.51472 16.5 12Z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                            />
+                            <path
+                              d="M17.5078 6.5L17.4988 6.5"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          <input
+                           defaultValue={currentUser.instagramLink}
+                          id="instagramLink"
+                            className="md:w-[380px] mb-1 text-sm p-2 rounded-md border border-[#bcbcbc] text-center w-[190px]"
+                            placeholder="https://www.examplehereyourlink.com"
+                            onChange={handleChange}
                           />
-                          <path
-                            d="M16.5 12C16.5 14.4853 14.4853 16.5 12 16.5C9.51472 16.5 7.5 14.4853 7.5 12C7.5 9.51472 9.51472 7.5 12 7.5C14.4853 7.5 16.5 9.51472 16.5 12Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
+                        </div>
+                        <div className="flex items-center justify-center gap-3">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width={20}
+                            height={20}
+                            color={"#000000"}
+                            fill={"none"}
+                          >
+                            <path
+                              d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M16.9265 8.02637H13.9816C12.9378 8.02637 12.0894 8.86847 12.0817 9.91229L11.9964 21.4268M10.082 14.0017H14.8847"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          <input
+                          defaultValue={currentUser.facebookLink}
+                            className="md:w-[380px] mb-1 text-sm border border-[#bcbcbc] p-2 rounded-md text-center w-[190px]"
+                            id="facebookLink"
+                            placeholder="https://www.examplehereyourlink.com"
+                            onChange={handleChange}
                           />
-                          <path
-                            d="M17.5078 6.5L17.4988 6.5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                        </div>
+                        <div className="flex items-center justify-center gap-3">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width={20}
+                            height={20}
+                            color={"#000000"}
+                            fill={"none"}
+                          >
+                            <path
+                              d="M9.5 14.5L14.5 9.5"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M16.8463 14.6095L19.4558 12C21.5147 9.94113 21.5147 6.60303 19.4558 4.54416C17.397 2.48528 14.0589 2.48528 12 4.54416L9.39045 7.1537M14.6095 16.8463L12 19.4558C9.94113 21.5147 6.60303 21.5147 4.54416 19.4558C2.48528 17.397 2.48528 14.0589 4.54416 12L7.1537 9.39045"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <input
+                           defaultValue={currentUser.optionalLink}
+                            className="md:w-[380px] mb-1 border border-[#bcbcbc] text-sm p-2 rounded-md text-center w-[190px]"
+                            id="optionalLink"
+                            placeholder="https://www.examplehereyourlink.com"
+                            onChange={handleChange}
                           />
-                        </svg>
-                        <input
-                          className="md:w-[380px] mb-1 text-sm p-2 rounded-md border border-[#bcbcbc] text-center w-[190px]"
-                          rows="4"
-                          cols="50"
-                          placeholder="add a social media link"
-                          onChange={handleChange}
-                        />
+                        </div>
+                        <div></div>
                       </div>
-                      <div className="flex items-center justify-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width={20}
-                          height={20}
-                          color={"#000000"}
-                          fill={"none"}
-                        >
-                          <path
-                            d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M16.9265 8.02637H13.9816C12.9378 8.02637 12.0894 8.86847 12.0817 9.91229L11.9964 21.4268M10.082 14.0017H14.8847"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <input
-                          className="md:w-[380px] mb-1 text-sm border border-[#bcbcbc] p-2 rounded-md text-center w-[190px]"
-                          rows="4"
-                          cols="50"
-                          placeholder="add a social media link"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="flex items-center justify-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width={20}
-                          height={20}
-                          color={"#000000"}
-                          fill={"none"}
-                        >
-                          <path
-                            d="M9.5 14.5L14.5 9.5"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                          <path
-                            d="M16.8463 14.6095L19.4558 12C21.5147 9.94113 21.5147 6.60303 19.4558 4.54416C17.397 2.48528 14.0589 2.48528 12 4.54416L9.39045 7.1537M14.6095 16.8463L12 19.4558C9.94113 21.5147 6.60303 21.5147 4.54416 19.4558C2.48528 17.397 2.48528 14.0589 4.54416 12L7.1537 9.39045"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        <input
-                          className="md:w-[380px] mb-1 border border-[#bcbcbc] text-sm p-2 rounded-md text-center w-[190px]"
-                          rows="4"
-                          cols="50"
-                          placeholder="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div></div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-center">
-                <button
-                  type="submit"
-                  className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2] "
-                >
-                  Save changes
-                </button>
-              </div>
-            </form>
+                <div className="flex items-center justify-center">
+                  <button
+                    type="submit"
+                    className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2] "
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-         )}
+        )}
       </div>
       <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
       <footer className="flex items-center justify-center p-3">

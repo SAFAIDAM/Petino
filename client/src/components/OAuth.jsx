@@ -28,9 +28,9 @@ function OAuth() {
       })
 
       const data = await res.json();
-      console.log(data)
+      console.log(data.user)
       if (data.user) {
-        dispatch(loginSuccess(data));
+        dispatch(loginSuccess(data.user));
         navigate('/'); // Navigate to desired route after successful login
       } else {
         console.error('Error creating user or missing user data in response');

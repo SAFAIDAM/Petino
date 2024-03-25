@@ -18,6 +18,33 @@ const userSchema = mongoose.Schema({
     type: String,
     minlength: 6
   },
+  bio:
+  {
+    type: String,
+    maxLength: 400,
+  
+  },
+  experience:
+  {
+    type: String,
+    maxLength: 400,
+
+  },
+  instagramLink:
+  {
+    type: String,
+
+  },
+  facebookLink:
+  {
+    type: String,
+
+  },
+  optionalLink:
+  {
+    type: String,
+
+  },
   profilePicture: {
     type: String,
     default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"

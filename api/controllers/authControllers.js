@@ -15,7 +15,7 @@ export const isValidEmail = (email) => {
 export const signup = async (req, res) => {
   try {
 
-    const { fullName, username, email, password, termsAndServices, verified } = req.body;
+    const { fullName, username, email, password, termsAndServices} = req.body;
     if (!password || password.length < 8) {
       return res.status(400).json({ error: "Password should be at least 8 characters long" });
     }
@@ -40,8 +40,7 @@ export const signup = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      termsAndServices,
-      verified
+      termsAndServices
     })
 
     await newUser.save();
@@ -113,7 +112,10 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
+      console.log(newUser)
       res.status(200).json({ user: newUser, message: "New user created and JWT token generated" });
+      console.log(newUser)
+
     }
   } catch (error) {
     console.log("error in google controller", error.message);
