@@ -1,8 +1,23 @@
 import User from "../models/userModel.js";
 
 export const test = async (req, res) => {
-  res.send({ message: "API working" });
-};
+  User.find({})
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => res.json(err))
+}
+
+export const user = async (req, res) => {
+  User.findById(req.params.id)
+    .then(data => {
+      res.json(data)
+      console.log(data)
+    })
+
+    .catch(err => res.json(err))
+
+}
 
 export const updateUser = async (req, res, next) => {
   const userId = req.params.id;

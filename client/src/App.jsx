@@ -12,8 +12,6 @@ import Public from "./pages/Public";
 import Profile from "./pages/Profile";
 import PublicUser from "./pages/PublicUser";
 
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +31,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/publicuser" element={<PublicUser/>} />
+          <Route path="/publicuser/:id" element={<PublicUser />} />
         </Route>
       </Routes>
       <Toaster />
