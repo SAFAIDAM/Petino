@@ -201,7 +201,7 @@ function Profile() {
                   )}
                 </>
               ) : (
-                <Link>
+                <Link to='/login'>
                   <li>Login</li>
                 </Link>
               )}
