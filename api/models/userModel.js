@@ -47,7 +47,7 @@ const userSchema = mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+    default: "https://cute-cat-avatars.fly.dev/api/v1/cat"
   },
   termsAndServices: {
     type: Boolean,

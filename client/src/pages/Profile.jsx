@@ -6,7 +6,6 @@ import ArrowPutton from "../components/ArrowPutton";
 import { SlLogout } from "react-icons/sl";
 import { IoLanguageOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
-import { HiOutlineTrash } from "react-icons/hi2";
 import { signout } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
@@ -111,14 +110,18 @@ function Profile() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data));
+        toast.error("user couldn't be updated");
         return;
+      }else{
+        dispatch(updateUserSuccess(data));
+        toast.success("User updated successfully");
       }
-      dispatch(updateUserSuccess(data));
     } catch (error) {
       console.log(error);
       dispatch(updateUserFailure(error));
     }
   };
+
   return (
     <>
       <div className="max-w-6xl p-3 mx-auto">
@@ -198,10 +201,15 @@ function Profile() {
                       className="object-cover rounded-full h-[60px] w-[60px]"
                       onError={() => setIsLoading(true)} // Handle broken image case
                     />
+                    // ||
+                    // <button
+                    //   className="rounded-full heading-signup h-[60px] w-[60px] bg-[#FAD0B7] text-[#E06C2E]"
+                    //   onClick={() => setIsLoading(true)} 
+                    // >{username}</button>
                   )}
                 </>
               ) : (
-                <Link to='/login'>
+                <Link to="/login">
                   <li>Login</li>
                 </Link>
               )}
@@ -252,23 +260,15 @@ service firebase.storage {
                     alt=""
                     onClick={() => fileRef.current.click()}
                   />
-                  <p className="self-center text-sm">
-                    {ImageError ? (
-                      <span className="text-red-500">{ImageError}</span>
-                    ) : imagePercent > 0 && imagePercent < 100 ? (
-                      <span className="text-slate-700">{`Uploading: ${imagePercent} %`}</span>
-                    ) : imagePercent === 100 ? (
-                      <span className="text-center text-green-70">
-                        Image uploaded successfully
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </p>
+                  
                   <div>
-                    <h1 className="mb-4 text-xl font-bold text-center ">
+                    <h1 className="mb-1 text-xl font-bold text-center ">
                       {currentUser.username}
                     </h1>
+                    <p className="text-xs text-center text-[#989897] mb-3">
+                      upload your own picture here <br /> (the image chould be
+                      less then 2MB)
+                    </p>
 
                     <div className="flex flex-col items-center justify-center gap-3 text-center md:flex">
                       <button
@@ -300,6 +300,19 @@ service firebase.storage {
                         Upload image
                       </button>
                     </div>
+                    <p className="self-center mt-4 mb-3 text-sm text-center">
+                    {ImageError ? (
+                      <span className="text-red-500">{ImageError}</span>
+                    ) : imagePercent > 0 && imagePercent < 100 ? (
+                      <span className="text-[#EA7F48]">{`Uploading: ${imagePercent} %`}</span>
+                    ) : imagePercent === 100 ? (
+                      <span className="text-center text-[#85D466]">
+                        Image uploaded successfully
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </p>
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center md:gap-3 md:flex">
@@ -313,7 +326,7 @@ service firebase.storage {
                   </button>
                 </div>
               </div>
-              <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+              <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
               <form onSubmit={handleSubmit} action="">
                 <div className="items-center justify-center md:flex">
                   <div>
@@ -327,11 +340,11 @@ service firebase.storage {
                           At least 32 word
                         </p>
                         <p className="text-[10px] text-[#989897] mb-1">
-                        Tell us more about yourself (e.g., hobbies, interests)
+                          Tell us more about yourself (e.g., hobbies, interests)
                         </p>
                         <textarea
                           defaultValue={currentUser.bio}
-                          id='bio'
+                          id="bio"
                           className="md:w-[400px] text-sm p-4 text-center border border-[#bcbcbc] rounded-md w-[190px]"
                           rows="4"
                           cols="30"
@@ -352,7 +365,7 @@ service firebase.storage {
                         </p>
                         <textarea
                           defaultValue={currentUser.experience}
-                          id='experience'
+                          id="experience"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
                           rows="4"
                           cols="30"
@@ -369,7 +382,7 @@ service firebase.storage {
                         </p>
                         <input
                           defaultValue={currentUser.username}
-                          id='username'
+                          id="username"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
                           placeholder=""
                           onChange={handleChange}
@@ -384,7 +397,7 @@ service firebase.storage {
                         </p>
                         <input
                           defaultValue={currentUser.email}
-                          id='email'
+                          id="email"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
                           placeholder=" Hi there! I'"
                           onChange={handleChange}
@@ -392,26 +405,9 @@ service firebase.storage {
                       </div>
                     </div>
                   </div>
-                  <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+                  <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                   <div>
                     <div className="flex flex-col items-center text-center md:text-left p-9">
-                      {/* <h1 className="mb-2 text-xl font-bold heading-signup ">
-                      Categories
-                    </h1>
-                    <select className="md:w-[400px] text-sm p-4 text-start border mb-9 border-[#bcbcbc] rounded-md w-[190px]">
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                      <option value="placeholder" className="text-[#bcbcbc]">
-                        what are you working categories
-                      </option>
-                    </select> */}
                       <div className="md:mb-36">
                         <h1 className="text-xl font-bold heading-signup">
                           Social links
@@ -448,8 +444,8 @@ service firebase.storage {
                             />
                           </svg>
                           <input
-                           defaultValue={currentUser.instagramLink}
-                          id="instagramLink"
+                            defaultValue={currentUser.instagramLink}
+                            id="instagramLink"
                             className="md:w-[380px] mb-1 text-sm p-2 rounded-md border border-[#bcbcbc] text-center w-[190px]"
                             placeholder="https://www.examplehereyourlink.com"
                             onChange={handleChange}
@@ -479,7 +475,7 @@ service firebase.storage {
                             />
                           </svg>
                           <input
-                          defaultValue={currentUser.facebookLink}
+                            defaultValue={currentUser.facebookLink}
                             className="md:w-[380px] mb-1 text-sm border border-[#bcbcbc] p-2 rounded-md text-center w-[190px]"
                             id="facebookLink"
                             placeholder="https://www.examplehereyourlink.com"
@@ -509,7 +505,7 @@ service firebase.storage {
                             />
                           </svg>
                           <input
-                           defaultValue={currentUser.optionalLink}
+                            defaultValue={currentUser.optionalLink}
                             className="md:w-[380px] mb-1 border border-[#bcbcbc] text-sm p-2 rounded-md text-center w-[190px]"
                             id="optionalLink"
                             placeholder="https://www.examplehereyourlink.com"
@@ -534,7 +530,7 @@ service firebase.storage {
           </div>
         )}
       </div>
-      <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+      <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
       <footer className="flex items-center justify-center p-3">
         <div className="justify-start mt-4 text-center md:flex gap-36 mb-7 ">
           <p>

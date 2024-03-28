@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
-import google from "../assets/Google Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";

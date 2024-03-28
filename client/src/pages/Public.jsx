@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo1.svg";
-import { useDispatch } from "react-redux";
-import { signout } from "../redux/user/userSlice";
-import { getAuth, signOut } from "firebase/auth";
-import { SlLogout } from "react-icons/sl";
-import { IoLanguageOutline } from "react-icons/io5";
-import { RiUserLine } from "react-icons/ri";
-import ArrowPutton from "../components/ArrowPutton";
-import { HiOutlineTrash } from "react-icons/hi2";
 import { ClipLoader } from "react-spinners";
+import Menu from "../components/Menu";
 
 function Public() {
   const { currentUser } = useSelector((state) => state.user);
@@ -22,117 +14,13 @@ function Public() {
     }
   }, [currentUser]); //
 
-  const dispatch = useDispatch();
-  const auth = getAuth();
-  const handlelogout = async () => {
-    try {
-      signOut(auth)
-        .then(() => {
-          console.log("user logged out successfully");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      await fetch("/api/auth/logout");
-      dispatch(signout());
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const [menu, setMenu] = useState(false);
-
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
   return (
     <>
       <div className="max-w-6xl p-3 mx-auto">
         {/* div that wrraps the all page*/}
         {/* menu container */}
 
-        <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
-          <div className="flex items-center justify-center gap-2">
-            <ArrowPutton />
-            <div>
-              <img className="md:hidden black" src={logo} alt="" />
-            </div>
-          </div>
-          <div className="flex items-center justify-center gap-1">
-            <div
-              onClick={handleMenu}
-              className="flex items-center justify-center gap-1 align-middle"
-            >
-              <div
-                className={
-                  menu
-                    ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-[106px] md:right-[150px] right-[50px] z-5"
-                    : "hidden"
-                }
-              >
-                <Link to="/profile">
-                  <button className="flex items-center gap-[50px] mb-2">
-                    Profile
-                    <RiUserLine color="#898484" size={20} />
-                  </button>
-                </Link>
-
-                <button className="flex items-center gap-6 mb-2">
-                  Language
-                  <IoLanguageOutline color="#898484" size={20} />
-                </button>
-                <button
-                  onClick={handlelogout}
-                  className="flex items-center gap-[43px] mb-2"
-                >
-                  Logout
-                  <SlLogout onClick={handlelogout} color="#898484" size={18} />
-                </button>
-              </div>
-
-              <p className="hidden text-xs md:block">{currentUser.username}</p>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width={17}
-                height={20}
-                color={"#000000"}
-                fill={"none"}
-              >
-                <path
-                  d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-
-            <Link to="/profile">
-              {currentUser ? (
-                <>
-                  {isLoading ? (
-                    <img
-                      src="path/to/placeholder.png" // Replace with your placeholder image
-                      alt="Loading..."
-                      className="object-cover rounded-full h-7 w-7"
-                    />
-                  ) : (
-                    <img
-                      src={currentUser.profilePicture}
-                      alt=""
-                      className="object-cover rounded-full h-[60px] w-[60px]"
-                      onError={() => setIsLoading(true)} // Handle broken image case
-                    />
-                  )}
-                </>
-              ) : (
-                <li>Login</li>
-              )}
-            </Link>
-          </div>
-        </div>
+      <Menu/>
 
         <h1 className="flex items-center justify-center mt-10 mb-4 text-lg font-bold heading">
           Public profile view
@@ -156,13 +44,14 @@ function Public() {
                     <h1 className="text-2xl font-bold text-center md:text-start md:mt-9 ">
                       {currentUser.username}
                     </h1>
+                  
                     <a
                       target="_blank"
                       onClick={(e) => {
                         window.location.href = `mailto:${currentUser.email}`;
                       }}
                     >
-                      <p className="md:w-[380px] ml-0 ml-2 mb-1 text-xs p-2 rounded-md text-center md:text-start  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
+                      <p className="md:w-[380px] ml-0 md:ml-2 mb-1 text-xs p-2 rounded-md text-center md:text-start  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                         Write me an E-Mail{" "}
                       </p>
                     </a>
@@ -180,7 +69,7 @@ function Public() {
                   </button>
                 </div>
               </div>
-              <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+              <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
 
               <div className="items-center justify-center md:flex">
                 <div>
@@ -191,9 +80,7 @@ function Public() {
                         Bio
                       </h1>
                       <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
-                        {currentUser.bio || `Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving
-                      animals, I enjoy natur `}
+                        {currentUser.bio || `No bio provided`}
                       </p>
                     </div>
                     {/** Experiences container */}
@@ -202,14 +89,12 @@ function Public() {
                         Experiences
                       </h1>
                       <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
-                      {currentUser.experience || `Hi there! I'm a dedicated animal advocate working to make
-                      the world better for furry friends. When not saving
-                      animals, I enjoy natur `}
+                      {currentUser.experience || `No experience provided`}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+                <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                 <div>
                   <div className="flex flex-col justify-center gap-4 text-center md:text-left p-9">
                     <div>
@@ -267,7 +152,7 @@ function Public() {
                         </svg>
                         <a
                           target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                          href={currentUser.instagramLink}
                         >
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                           {currentUser.instagramLink || "https://www.examplehereyourlink.com"}
@@ -299,7 +184,7 @@ function Public() {
                         </svg>
                         <a
                           target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                          href={currentUser.facebookLink}
                         >
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                           {currentUser.facebookLink || "https://www.examplehereyourlink.com"}
@@ -330,7 +215,7 @@ function Public() {
                         </svg>
                         <a
                           target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
+                          href={currentUser.optionalLink}
                         >
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                           {currentUser.optionalLink || "https://www.examplehereyourlink.com"}
@@ -346,7 +231,7 @@ function Public() {
           </div>
         )}
       </div>
-      <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+      <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
       <footer className="flex items-center justify-center p-3">
         <div className="justify-start mt-4 text-center md:flex gap-36 mb-7 ">
           <p>

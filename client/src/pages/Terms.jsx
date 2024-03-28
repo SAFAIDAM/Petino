@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/logo-terms.png";
+import logo from "../assets/terms-logo.png";
 import vector from "../assets/vectore.png";
 import star from "../assets/star.png";
 import Heart from "../assets/heartEmoji.png";

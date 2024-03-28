@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router";
-import axios from "axios"
+import axios from "axios";
 import Menu from "../components/Menu";
+import nocontent from "../assets/empty-space.png";
 
 function PublicUser() {
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
   const [user, setUser] = useState({});
+  const [isUserFetched, setIsUserFetched] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,7 +22,7 @@ function PublicUser() {
       .get(`http://localhost:8000/api/user/${params.id}`)
       .then((result) => {
         setUser(result.data);
-        console.log(user)
+        setIsUserFetched(true);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
@@ -32,7 +34,7 @@ function PublicUser() {
         {/* div that wrraps the all page*/}
         {/* menu container */}
         {/**  here */}
-        <Menu/>
+        <Menu />
         <h1 className="flex items-center justify-center mt-10 mb-4 text-lg font-bold heading">
           profile page
         </h1>
@@ -68,9 +70,9 @@ function PublicUser() {
                   </div>
                 </div>
               </div>
-              <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-
-              <div className="items-center justify-center md:flex">
+              <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+              {isUserFetched ? (
+                <div className="items-center justify-center md:flex">
                 <div>
                   <div className="flex-col justify-center text-center md:gap-4 md:flex md:text-left p-9">
                     {/** Bio container */}
@@ -79,21 +81,21 @@ function PublicUser() {
                         Bio
                       </h1>
                       <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
-                       {user.bio}
+                        {user.bio || "No bio available"}
                       </p>
                     </div>
                     {/** Experiences container */}
                     <div>
                       <h1 className="mb-2 text-xl font-bold heading-signup">
-                   
+                        Experience
                       </h1>
                       <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
-                        {user. experience || "erertet"}
+                        {user.experience || "No experience available"}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+                <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                 <div>
                   <div className="flex flex-col justify-center gap-6 text-center md:text-left p-9">
                     <div>
@@ -149,12 +151,10 @@ function PublicUser() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                        >
+                        <a target="_blank" href={user.instagramLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                            https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                            {user.instagramLink ||
+                              "https://exampleyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -181,12 +181,10 @@ function PublicUser() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                        >
+                        <a target="_blank" href={user.facebookLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                            https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                            {user.facebookLink ||
+                              "https://exampleyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -212,12 +210,10 @@ function PublicUser() {
                             strokeLinecap="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href="https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59"
-                        >
+                        <a target="_blank" href={user.optionalLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                            https://www.behance.net/gallery/176941329/Edit-Profile-UI?tracking_source=search_projects|profile+ui+&l=59{" "}
+                            {user.optionalLink ||
+                              "https://exampleyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -226,11 +222,19 @@ function PublicUser() {
                   </div>
                 </div>
               </div>
+              ) : (
+                <img
+                className="flex items-center justify-center mt-7 ml-auto mr-auto md:w-[300px] w-[200px] text-center"
+                src={nocontent}
+                alt=""
+              />
+              )}
             </div>
           </div>
         )}
       </div>
-      <div class="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+      <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+      {""}
       <footer className="flex items-center justify-center p-3">
         <div className="justify-start mt-4 text-center md:flex gap-36 mb-7 ">
           <p>
@@ -329,7 +333,6 @@ function PublicUser() {
         </div>
       </footer>
     </>
-  
   );
 }
 
