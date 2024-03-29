@@ -18,7 +18,6 @@ import {
 function Menu() {
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
-  const [formData, setFormData] = useState({});
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
   const auth = getAuth();
@@ -48,33 +47,6 @@ function Menu() {
     }
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(updateUserStart());
-
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(updateUserFailure(data));
-        return;
-      }
-      dispatch(updateUserSuccess(data));
-    } catch (error) {
-      console.log(error);
-      dispatch(updateUserFailure(error));
-    }
-  };
   return (
   <>
   <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
