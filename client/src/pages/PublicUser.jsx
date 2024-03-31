@@ -11,6 +11,13 @@ function PublicUser() {
   const params = useParams();
   const [user, setUser] = useState({});
   const [isUserFetched, setIsUserFetched] = useState(false);
+  const handlemail = () => {
+    const email = user.email; 
+    const subject = `hey ${user.username}`; 
+    const body = ''; 
+    const gmailUrl = `https:mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(gmailUrl)
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -59,9 +66,7 @@ function PublicUser() {
                     </h1>
                     <a
                       target="_blank"
-                      onClick={(e) => {
-                        window.location.href = `mailto:${user.email}`;
-                      }}
+                      onClick={handlemail}
                     >
                       <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md text-center md:text-start  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
                         Write me an E-Mail{" "}
@@ -235,7 +240,6 @@ function PublicUser() {
         )}
       </div>
       <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-      {""}
       <footer className="flex items-center justify-center p-3">
         <div className="justify-start mt-4 text-center md:flex gap-36 mb-7 ">
           <p>

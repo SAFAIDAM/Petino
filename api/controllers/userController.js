@@ -47,3 +47,7 @@ export const updateUser = async (req, res, next) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const AdminController = async (req, res) => {
+  return res.json({message: "haddd awdi l'admin albakor o lbakor"})
+}

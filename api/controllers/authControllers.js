@@ -15,7 +15,7 @@ export const isValidEmail = (email) => {
 export const signup = async (req, res) => {
   try {
 
-    const { fullName, username, email, password, termsAndServices} = req.body;
+    const { fullName, username, email, password, termsAndServices } = req.body;
     if (!password || password.length < 8) {
       return res.status(400).json({ error: "Password should be at least 8 characters long" });
     }
@@ -64,11 +64,16 @@ export const login = async (req, res) => {
       return res.status(400).json({ error: "user not found Invalid email or password" })
     }
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-    const jwt = await new jose.SignJWT({ id: user._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+
+    const jwt = await new jose.SignJWT({
+      id: user._id,
+      role: user.role
+    }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+    
     res.cookie("tokenjose", jwt, {
       httOnly: true,
     })
-    res.status(200).json({ user , jwt});
+    res.status(200).json({ user, jwt });
 
   } catch (error) {
     console.log("error in login controller", error.message)
@@ -84,7 +89,7 @@ export const google = async (req, res, next) => {
       const existingPhoto = user.profilePicture;
 
       user.username = req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2, // Use a function for safer username generation
-      user.profilePicture = existingPhoto;
+        user.profilePicture = existingPhoto;
       user.googleId = req.body.googleId;
       await user.save();
 
@@ -95,6 +100,7 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
+
       res.status(200).json({ user, message: "User found and JWT token generated" });
     } else {
       const newUser = await User({

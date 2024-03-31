@@ -9,12 +9,6 @@ import { RiUserLine } from "react-icons/ri";
 import { signout } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
-import {
-  updateUserStart,
-  updateUserFailure,
-  updateUserSuccess,
-} from "../redux/user/userSlice";
-
 function Menu() {
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
