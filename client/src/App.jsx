@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
@@ -11,8 +11,12 @@ import ErorrPage404 from "./pages/ErorrPage404";
 import Public from "./pages/Public";
 import Profile from "./pages/Profile";
 import PublicUser from "./pages/PublicUser";
+import Admin from "./pages/Admin";
 
+import ProtectAdmin from "./components/ProutectAdmin";
 function App() {
+  
+
   return (
     <BrowserRouter>
       {/** header components */}
@@ -32,6 +36,9 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/publicuser/:id" element={<PublicUser />} />
+        </Route>
+        <Route element={ <ProtectAdmin />}>
+          <Route exact path="/admin" element={<Admin />} />
         </Route>
       </Routes>
       <Toaster />

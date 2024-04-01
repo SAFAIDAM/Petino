@@ -69,7 +69,7 @@ export const login = async (req, res) => {
       id: user._id,
       role: user.role
     }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
-    
+
     res.cookie("tokenjose", jwt, {
       httOnly: true,
     })

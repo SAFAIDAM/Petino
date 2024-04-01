@@ -53,7 +53,10 @@ function Login() {
       // localStorage.setItem("token", data.jwt);
       dispatch(loginSuccess(data.user))
       console.log(data.user)
-      navigate('/')
+      if (data.user.role === "admin") {
+        navigate('/admin')
+      }else{
+      navigate('/')}
     } catch (error) {
       // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {
