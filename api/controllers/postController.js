@@ -4,30 +4,40 @@ import Comments from "../models/commentModel.js";
 export const createPost = async (req, res, next) => {
     try {
         const { userId } = req.body.user;
-        const { description, image, hashtags } = req.body; // Extract hashtags from the request body
-    
+        const { description, image, hashtags } = req.body;
+
+        console.log('req.body', req.body)
+
         if (!description) {
-            next("You must provide a description");
-            return;
-        } else if (!hashtags || hashtags.length === 0) {
-            next("You must provide tags");
+            return res.status(400).json({ message: "You must provide a description" });
         }
-    
+
+        if (!image) {
+            return res.status(400).json({ message: "You must provide an image" });
+        }
+
+        if (!hashtags || hashtags.length === 0) {
+            return res.status(400).json({ message: "You must provide tags" });
+        }
+
+        // Continue with your logic to create the post
         const post = await Posts.create({
             userId,
             description,
             image,
-            hashtags, // Include hashtags in the post creation
+            hashtags,
         });
-    
+
+        console.log('post', post)
+
         res.status(200).json({
             success: true,
             message: "Post created successfully",
             data: post,
         });
     } catch (error) {
-        console.log(error);
-        res.status(404).json({ message: error.message });
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
@@ -293,15 +303,14 @@ export const replyPostComment = async (req, res, next) => {
 export const deletePost = async (req, res, next) => {
     try {
         const { id } = req.params;
-    
-        await Posts.findByIdAndDelete(id);
-    
-        res.status(200).json({
-            success: true,
-            message: "Deleted successfully",
-        });
+        // Make sure id is a valid MongoDB ObjectId
+        const deletedPost = await Posts.findByIdAndDelete(id);
+        if (!deletedPost) {
+            return res.status(404).json({ success: false, message: "Post not found" });
+        }
+        return res.status(200).json({ success: true, message: "Deleted successfully" });
     } catch (error) {
-        console.log(error);
-        res.status(404).json({ message: error.message });
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 };

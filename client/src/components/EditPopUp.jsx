@@ -4,7 +4,7 @@ const EditPopUp = ({ onEdit }) => {
   return (
     <>
     <div className="fixed inset-0 flex justify-center items-center">
-      <div className="absolute z-50 bg-[#ebebeb] opacity-10 inset-0"></div>
+      <div onClick={onEdit} className="absolute z-300 bg-[#ebebeb] opacity-10 inset-0"></div>
       <div className="relative z-50 rounded-[10px]">
         <form className="flex flex-col w-[340px] sm:w-[80%] md:w-[680px] mb-[80px] bg-white mx-auto mt-6 py-6 px-8 rounded-[20px]">
           <div>

@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/create-post', userAuth, createPost);
 
 // get posts
-router.get("/", userAuth, getPosts);
+router.get("/all", userAuth, getPosts);
 router.get("/:id", userAuth, getPost);
 
 router.get("/get-user-post/:id", userAuth, getUserPost);
@@ -22,6 +22,9 @@ router.post("/like/:id", userAuth, likePost);
 router.post("/like-comment/:id/:rid?", userAuth, likePostComment); // like-cmt/idOfComment Or like-cmt//idOfComment/idOfReply (if reply exist)
 router.post("/comment/:id", userAuth, commentPost); // post a comment 
 router.post("/reply-comment/:id", userAuth, replyPostComment);
+
+// update post
+
 
 //delete post
 router.delete("/:id", userAuth, deletePost);
