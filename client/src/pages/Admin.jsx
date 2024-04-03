@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import { Admin, Resource } from "react-admin";
+import PostList from "../components/PostList";
+import DataProvider from "./DataProvider";
 
-function Admin() {
+function AdminId() {
   return (
-    <div>Admin waaaaaaaaaaaaaaaaaaaaaaaaaa adminnnn ana </div>
-  )
+    <Admin dataProvider={DataProvider}>
+      <Resource name="users" list={PostList} />
+    </Admin>
+  );
 }
 
-export default Admin
+export default AdminId;

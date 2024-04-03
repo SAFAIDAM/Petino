@@ -56,7 +56,7 @@ function Login() {
       if (data.user.role === "admin") {
         navigate('/admin')
       }else{
-      navigate('/')}
+      navigate('/home')}
     } catch (error) {
       // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {

@@ -1,12 +1,17 @@
 import User from "../models/userModel.js";
 
 export const test = async (req, res) => {
-  User.find({})
-    .then(data => {
-      res.send(data)
-    })
-    .catch(err => res.json(err))
-}
+  try {
+    const users = await User.find({});
+    const totalUsers = await User.countDocuments();
+
+    res.setHeader('Content-Range', `users 0-${users.length - 1}/${totalUsers}`);
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 export const user = async (req, res) => {
   User.findById(req.params.id)
@@ -18,6 +23,7 @@ export const user = async (req, res) => {
     .catch(err => res.json(err))
 
 }
+
 
 export const updateUser = async (req, res, next) => {
   const userId = req.params.id;

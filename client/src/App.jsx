@@ -11,8 +11,7 @@ import ErorrPage404 from "./pages/ErorrPage404";
 import Public from "./pages/Public";
 import Profile from "./pages/Profile";
 import PublicUser from "./pages/PublicUser";
-import Admin from "./pages/Admin";
-
+import AdminId from "./pages/Admin";
 import ProtectAdmin from "./components/ProutectAdmin";
 function App() {
   
@@ -22,7 +21,7 @@ function App() {
       {/** header components */}
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErorrPage404 />} />
@@ -37,13 +36,26 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/publicuser/:id" element={<PublicUser />} />
         </Route>
-        <Route element={ <ProtectAdmin />}>
-          <Route exact path="/admin" element={<Admin />} />
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/admin/*" element={<AdminId />} />
         </Route>
+        
       </Routes>
       <Toaster />
+      
     </BrowserRouter>
   );
 }
+
+
+
+// function AdminLayout() {
+//   return (
+//     <Admin dataProvider={restProvider("http://localhost:8000")}>
+//       <Resource name="user" list={PostList} />
+//     </Admin>
+//   );
+// }
+
 
 export default App;

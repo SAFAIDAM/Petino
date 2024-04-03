@@ -4,7 +4,7 @@ import { protectRoute } from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
-router.get("/",  test)
+router.get("/users", test)
 router.get("/:id", user)
 router.post("/update/:id", protectRoute, updateUser)
 
