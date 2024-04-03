@@ -3,21 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon api/server.js",
-    "start": "node backend/server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
+    "firebase": "^10.10.0",
+    "firebase-admin": "^12.0.0",
     "mongoose": "^8.2.1",
-    "nodemon": "^3.1.0"
+    "multer": "^1.4.5-lts.1",
+    "next": "^14.1.4",
+    "nodemon": "^3.1.0",
+    "raw-body": "^2.5.2",
+    "react-router-dom": "^6.22.3",
+    "uuid": "^9.0.1"
   }
 }

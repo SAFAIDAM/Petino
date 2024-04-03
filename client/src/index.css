@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    overflow-x: hidden;
+    font-family: "Lato", sans-serif;
+    box-sizing: border-box;
+  
+    /* font-family: "Poppins", sans-serif; */
+  }
+
+  .heading-signup{
+    font-family: "Gluten", cursive;
+    font-weight: 700;
+    font-size: 40px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: -1;
+    backdrop-filter: blur(5px); 
+}
+
+  .popup{
+    font-family: "Gluten", cursive;
+    font-size: 15px;
+    border-radius: 30px;
+    z-index: 10000;
+  }
