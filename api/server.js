@@ -17,19 +17,8 @@ app.use(cookieParser());
 app.use(Cors())
 
 app.use("/api/auth", authRoute)
-app.use("/api/user", userRoute);
+app.use("/api", userRoute);
 app.use("/api/admin", adminRoute);
-
-app.get('/api/user/', (req, res) => {
-  // Your logic to fetch users...
-  // Assuming users is an array of user objects
-
-  // Set Content-Range header
-  res.setHeader('Content-Range', `users 0-${users.length - 1}/${users.length}`);
-
-  // Send the users as JSON response
-  res.json(users);
-});
 
 
 app.use((err, req, res, next) => {
@@ -41,6 +30,7 @@ app.use((err, req, res, next) => {
     statusCode,
   });
 });
+
 
 
 app.listen(PORT, () => {

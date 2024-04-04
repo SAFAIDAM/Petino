@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
+import DataProvider from "./pages/DataProvider";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
 import { Toaster } from "react-hot-toast";
@@ -37,7 +38,10 @@ function App() {
           <Route path="/publicuser/:id" element={<PublicUser />} />
         </Route>
         <Route element={<ProtectAdmin />}>
-          <Route exact path="/admin/*" element={<AdminId />} />
+          <Route exact dataProvider={DataProvider} path="/admin/*" element={<AdminId />} />
+        </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/users/*" element={<AdminId />} />
         </Route>
         
       </Routes>

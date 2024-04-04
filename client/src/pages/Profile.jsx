@@ -17,12 +17,14 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+
 import { app } from "../firbase";
 import {
   updateUserStart,
   updateUserFailure,
   updateUserSuccess,
 } from "../redux/user/userSlice";
+import { current } from "@reduxjs/toolkit";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -183,7 +185,20 @@ function Profile() {
               >
                 Logout
                 <SlLogout onClick={handlelogout} color="#898484" size={18} />
+              </button>          
+              {currentUser.role === 'admin' ? (
+                <Link to='/admin/users'>
+              <button
+                className="flex items-center gap-[43px] mb-2"
+              >
+                Admin
+                <SlLogout onClick={handlelogout} color="#898484" size={18} />
               </button>
+              </Link>
+              ) : (
+                " "
+              )}
+              
             </div>
             <Link to="/profile">
               {currentUser ? (

@@ -11,6 +11,29 @@ export const test = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+export const username = async (req, res) => {
+  try {
+    // Check if username query parameter is provided
+    const { username } = req.query;
+    let query = {};
+
+    // If username is provided, add it to the query
+    if (username) {
+      query = { username: { $regex: new RegExp(username, 'i') } }; // Case-insensitive regex search for username
+    }
+
+    // Fetch users based on the query
+    const users = await User.find(query);
+    const totalUsers = await User.countDocuments(query); // Count documents based on the same query
+
+    // Set Content-Range header to specify the range of returned users
+    res.setHeader('Content-Range', `users 0-${users.length - 1}/${totalUsers}`);
+    res.json(users);
+  } catch (err) {
+    // Handle errors
+    res.status(500).json({ error: err.message });
+  }
+};
 
 
 export const user = async (req, res) => {

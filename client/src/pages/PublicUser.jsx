@@ -26,7 +26,7 @@ function PublicUser() {
 
   const userFetch = () => {
     axios
-      .get(`http://localhost:8000/api/user/${params.id}`)
+      .get(`http://localhost:8000/api/${params.id}`)
       .then((result) => {
         setUser(result.data);
         setIsUserFetched(true);
