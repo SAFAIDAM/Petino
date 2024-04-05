@@ -24,7 +24,6 @@ import {
   updateUserFailure,
   updateUserSuccess,
 } from "../redux/user/userSlice";
-import { current } from "@reduxjs/toolkit";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -114,7 +113,7 @@ function Profile() {
         dispatch(updateUserFailure(data));
         toast.error("user couldn't be updated");
         return;
-      }else{
+      } else {
         dispatch(updateUserSuccess(data));
         toast.success("User updated successfully");
       }
@@ -140,10 +139,10 @@ function Profile() {
           <div className="flex items-center justify-center gap-1">
             <div
               onClick={handleMenu}
-              className="flex items-center justify-center gap-1 align-middle"
+              className="flex items-center justify-center gap-5 align-middle"
             >
               <p className="hidden text-xs md:block">{currentUser.username}</p>
-
+             
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -185,16 +184,18 @@ function Profile() {
               >
                 Logout
                 <SlLogout onClick={handlelogout} color="#898484" size={18} />
-              </button>          
-              {currentUser.role === 'admin' ? (
-                <Link to='/admin/users'>
-              <button
-                className="flex items-center gap-[43px] mb-2"
-              >
-                Admin
-                <SlLogout onClick={handlelogout} color="#898484" size={18} />
               </button>
-              </Link>
+              {currentUser.role === "admin" ? (
+                <Link to="/admin">
+                  <button className="flex items-center gap-[43px] mb-2">
+                    Admin
+                    <SlLogout
+                      onClick={handlelogout}
+                      color="#898484"
+                      size={18}
+                    />
+                  </button>
+                </Link>
               ) : (
                 " "
               )}
@@ -219,7 +220,7 @@ function Profile() {
                     // ||
                     // <button
                     //   className="rounded-full heading-signup h-[60px] w-[60px] bg-[#FAD0B7] text-[#E06C2E]"
-                    //   onClick={() => setIsLoading(true)} 
+                    //   onClick={() => setIsLoading(true)}
                     // >{username}</button>
                   )}
                 </>
@@ -275,7 +276,7 @@ service firebase.storage {
                     alt=""
                     onClick={() => fileRef.current.click()}
                   />
-                  
+
                   <div>
                     <h1 className="mb-1 text-xl font-bold text-center ">
                       {currentUser.username}
@@ -316,18 +317,18 @@ service firebase.storage {
                       </button>
                     </div>
                     <p className="self-center mt-4 mb-3 text-sm text-center">
-                    {ImageError ? (
-                      <span className="text-red-500">{ImageError}</span>
-                    ) : imagePercent > 0 && imagePercent < 100 ? (
-                      <span className="text-[#EA7F48]">{`Uploading: ${imagePercent} %`}</span>
-                    ) : imagePercent === 100 ? (
-                      <span className="text-center text-[#85D466]">
-                        Image uploaded successfully
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </p>
+                      {ImageError ? (
+                        <span className="text-red-500">{ImageError}</span>
+                      ) : imagePercent > 0 && imagePercent < 100 ? (
+                        <span className="text-[#EA7F48]">{`Uploading: ${imagePercent} %`}</span>
+                      ) : imagePercent === 100 ? (
+                        <span className="text-center text-[#85D466]">
+                          Image uploaded successfully
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center md:gap-3 md:flex">

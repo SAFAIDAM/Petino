@@ -11,6 +11,7 @@ export const test = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 export const username = async (req, res) => {
   try {
     // Check if username query parameter is provided
@@ -68,7 +69,7 @@ export const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-
+ 
     console.log(updatedUser);
     res.status(200).json(updatedUser);
   } catch (error) {

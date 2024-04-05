@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^2.2.2",
     "axios": "^1.6.8",
     "firebase": "^10.9.0",
+    "flowbite": "^2.3.0",
+    "flowbite-react": "^0.8.0",
     "framer-motion": "^11.0.15",
     "json-server": "^1.0.0-alpha.23",
     "ra-data-simple-rest": "^4.16.12",

@@ -14,6 +14,10 @@ import Profile from "./pages/Profile";
 import PublicUser from "./pages/PublicUser";
 import AdminId from "./pages/Admin";
 import ProtectAdmin from "./components/ProutectAdmin";
+import CreateRecord from "./components/CreateRecord";
+import AdminBlog from "./pages/AdminBlog";
+import AdminRecords from "./pages/AdminRecords";
+import EditeRecord from "./components/EditeRecord";
 function App() {
   
 
@@ -38,10 +42,19 @@ function App() {
           <Route path="/publicuser/:id" element={<PublicUser />} />
         </Route>
         <Route element={<ProtectAdmin />}>
-          <Route exact dataProvider={DataProvider} path="/admin/*" element={<AdminId />} />
+          <Route exact path="/admin" element={<AdminId />} />
         </Route>
         <Route element={<ProtectAdmin />}>
-          <Route exact path="/users/*" element={<AdminId />} />
+          <Route exact path="/admin/blogs" element={<AdminBlog />} />
+        </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/admin/create" element={<CreateRecord />} />
+        </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/admin/records" element={<AdminRecords />} />
+        </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/admin/update" element={<EditeRecord />} />
         </Route>
         
       </Routes>
