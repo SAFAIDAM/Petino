@@ -1,15 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo1.svg";
 import ArrowPutton from "../components/ArrowPutton";
-import { SlLogout } from "react-icons/sl";
-import { IoLanguageOutline } from "react-icons/io5";
-import { RiUserLine } from "react-icons/ri";
-import { signout } from "../redux/user/userSlice";
-import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { getAuth, signOut } from "firebase/auth";
 import { ClipLoader } from "react-spinners";
 import AdminHeader from "./AdminHeader";
 
@@ -17,7 +10,6 @@ import AdminHeader from "./AdminHeader";
 function CreateRecord() {
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
-  const [menu, setMenu] = useState(false);
   const [formData, setFormData] = useState({
     usernameAdopter: "",
     emailAdopter: "",
@@ -25,9 +17,6 @@ function CreateRecord() {
     AdoptingDate: ""
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const auth = getAuth();
-  
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
@@ -43,24 +32,6 @@ function CreateRecord() {
     }
   }, [currentUser]);
 
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
-  const handlelogout = async () => {
-    try {
-      signOut(auth)
-        .then(() => {
-          console.log("user logged out successfully");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      await fetch("/api/auth/logout");
-      dispatch(signout());
-    } catch (error) {
-      console.log(error);
-    }
-  };
   function handleInputErrors(formData) {
     if (
       !formData.usernameAdopter ||
@@ -94,7 +65,7 @@ function CreateRecord() {
       } else {
         toast.success(data.message);
       }
-      navigate('/profile')
+      navigate('/admin/records')
     } catch (error) {
       console.log(error);
       toast.error("user couldn't be created");
@@ -112,7 +83,7 @@ function CreateRecord() {
           <div className="flex items-center justify-center gap-2">
             <ArrowPutton />
             <div>
-              <img className="md:hidden black" src={logo} alt="" />
+              
             </div>
           </div>
         </div>
@@ -216,9 +187,6 @@ function CreateRecord() {
                           onChange={handleChange}
                         />
                       </div>
-                      
-                      
-                        
                       </div>
                       
                     </div>
@@ -229,7 +197,7 @@ function CreateRecord() {
                     type="submit"
                     className="flex md:mb-0 mb-2 justify-center items-center gap-2 pl-7 pr-7 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2] "
                   >
-                    Save changes
+                    Create Record
                   </button>
                 </div>
               </form>

@@ -8,8 +8,6 @@ function AdminHeader() {
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-
   return (
     <nav className="border-gray-200 dark:bg-gray-900 dark:border-gray-700">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">

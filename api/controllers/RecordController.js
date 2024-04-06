@@ -2,25 +2,38 @@ import Record from "../models/AdminRecordmodel.js";
 
 export const createRecord = async (req, res, next) => {
   try {
-      const { usernameAdopter, emailAdopter, PetName, PetAge, AdoptingDate } = req.body;
+    const { usernameAdopter, emailAdopter, PetName, PetAge, AdoptingDate } = req.body;
 
-      const NewRecord = await Record.create({
-        usernameAdopter,
-        emailAdopter,
-        PetName,
-        PetAge,
-        AdoptingDate
-      });
-      console.log('Record', NewRecord)
-      res.status(200).json({
-          success: true,
-          message: "Record created successfully",
-          data: NewRecord,
-      });
+    const NewRecord = await Record.create({
+      usernameAdopter,
+      emailAdopter,
+      PetName,
+      PetAge,
+      AdoptingDate
+    });
+    console.log('Record', NewRecord)
+    res.status(200).json({
+      success: true,
+      message: "Record created successfully",
+      data: NewRecord,
+    });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal Server Error" });
-  } 
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+export const getRecordById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const record = await Record.findById(id); // Assuming you're using Mongoose for MongoDB
+    if (!record) {
+      return res.status(404).json({ success: false, error: 'Record not found' });
+    }
+    res.status(200).json({ success: true, record });
+  } catch (error) {
+    console.error('Error fetching record:', error);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
 };
 
 export const getRecord = async (req, res) => {
@@ -35,7 +48,7 @@ export const getRecord = async (req, res) => {
 
 export const updateRecord = async (req, res, next) => {
   try {
-    const { id } = req.params ; 
+    const { id } = req.params;
     const { usernameAdopter, emailAdopter, PetName, PetAge, AdoptingDate } = req.body;
     const updatedFields = {};
     if (usernameAdopter) updatedFields.usernameAdopter = usernameAdopter;
@@ -58,7 +71,7 @@ export const updateRecord = async (req, res, next) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
-  } 
+  }
 };
 
 export const deleteRecord = async (req, res, next) => {
@@ -79,5 +92,5 @@ export const deleteRecord = async (req, res, next) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
-  } 
+  }
 };

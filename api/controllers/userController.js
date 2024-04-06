@@ -48,7 +48,6 @@ export const user = async (req, res) => {
 
 }
 
-
 export const updateUser = async (req, res, next) => {
   const userId = req.params.id;
   console.log(userId === req.user._id.toString());

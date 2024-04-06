@@ -99,6 +99,20 @@ function Menu() {
                 Logout
                 <SlLogout onClick={handlelogout} color="#898484" size={18} />
               </button>
+              {currentUser.role === "admin" ? (
+                <Link to="/admin">
+                  <button className="flex items-center gap-[43px] mb-2">
+                    Admin
+                    <SlLogout
+                      onClick={handlelogout}
+                      color="#898484"
+                      size={18}
+                    />
+                  </button>
+                </Link>
+              ) : (
+                " "
+              )}
             </div>
             <Link to="/profile">
               {currentUser ? (
