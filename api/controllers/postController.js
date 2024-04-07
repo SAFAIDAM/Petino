@@ -4,16 +4,10 @@ import Comments from "../models/commentModel.js";
 export const createPost = async (req, res, next) => {
     try {
         const { userId } = req.body.user;
-        const { description, image, hashtags } = req.body;
-
-        console.log('req.body', req.body)
+        const { description, hashtags } = req.body;
 
         if (!description) {
             return res.status(400).json({ message: "You must provide a description" });
-        }
-
-        if (!image) {
-            return res.status(400).json({ message: "You must provide an image" });
         }
 
         if (!hashtags || hashtags.length === 0) {
@@ -24,11 +18,10 @@ export const createPost = async (req, res, next) => {
         const post = await Posts.create({
             userId,
             description,
-            image,
             hashtags,
         });
 
-        console.log('post', post)
+        console.log(post)
 
         res.status(200).json({
             success: true,
@@ -40,6 +33,7 @@ export const createPost = async (req, res, next) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 
 
 // search by description and hashtags
@@ -122,6 +116,33 @@ export const getUserPost = async (req, res, next) => {
 };
 
 
+// export const getComments = async (req, res, next) => {
+//     try {
+//         const { postId } = req.params;
+    
+//         const postComments = await Comments.find({ postId })
+//             .populate({
+//                 path: "userId",
+//                 select: "fullName username profilePicture",
+//             })
+//             .populate({
+//                 path: "replies.userId",
+//                 select: "fullName username profilePicture", 
+//             })
+//             .sort({ createdAt: -1 });
+    
+//         res.status(200).json({
+//             success: true,
+//             message: "Comments retrieved successfully",
+//             data: postComments,
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//     }
+// };
+
+
 export const getComments = async (req, res, next) => {
     try {
         const { postId } = req.params;
@@ -131,10 +152,7 @@ export const getComments = async (req, res, next) => {
                 path: "userId",
                 select: "fullName username profilePicture",
             })
-            .populate({
-                path: "replies.userId",
-                select: "fullName username profilePicture", 
-            })
+            // No need to populate replies since it's removed from the schema
             .sort({ createdAt: -1 });
     
         res.status(200).json({
@@ -147,7 +165,6 @@ export const getComments = async (req, res, next) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
-
 
 export const likePost = async (req, res, next) => {
     try {
@@ -242,17 +259,46 @@ export const likePostComment = async (req, res, next) => {
     }
 };
 
+// export const commentPost = async (req, res, next) => {
+//     try {
+//         const { comment, from } = req.body;
+//         const { userId } = req.body.user;
+//         const { id } = req.params;
+    
+//         if (comment === null) {
+//             return res.status(404).json({ message: "Comment is required." });
+//         }
+    
+//         const newComment = new Comments({ comment, from, userId, postId: id });
+    
+//         await newComment.save();
+    
+//         const post = await Posts.findById(id);
+    
+//         post.comments.push(newComment._id);
+    
+//         const updatedPost = await Posts.findByIdAndUpdate(id, post, {
+//             new: true,
+//         });
+    
+//         res.status(201).json(newComment);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(404).json({ message: error.message });
+//     }
+// };
+
 export const commentPost = async (req, res, next) => {
     try {
-        const { comment, from } = req.body;
+        const { comment } = req.body;
         const { userId } = req.body.user;
         const { id } = req.params;
     
-        if (comment === null) {
-            return res.status(404).json({ message: "Comment is required." });
+        if (!comment) {
+            return res.status(400).json({ message: "Comment is required." });
         }
     
-        const newComment = new Comments({ comment, from, userId, postId: id });
+        const newComment = new Comments({ comment, userId, postId: id });
     
         await newComment.save();
     
@@ -260,16 +306,15 @@ export const commentPost = async (req, res, next) => {
     
         post.comments.push(newComment._id);
     
-        const updatedPost = await Posts.findByIdAndUpdate(id, post, {
-            new: true,
-        });
+        await post.save(); // Save the updated post
     
         res.status(201).json(newComment);
     } catch (error) {
         console.log(error);
-        res.status(404).json({ message: error.message });
+        res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 export const replyPostComment = async (req, res, next) => {
     const { userId } = req.body.user;
@@ -312,5 +357,39 @@ export const deletePost = async (req, res, next) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
+
+
+export const updatePost = async (req, res, next) => {
+    try {
+        const postId = req.params.id; // Extract post id from request params
+        const { userId } = req.body.user;
+        const { description, hashtags } = req.body;
+
+        // Check if the post exists
+        const post = await Posts.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        // Check if the user is authorized to update the post
+        if (post.userId.toString() !== userId) {
+            return res.status(403).json({ message: "You are not authorized to update this post" });
+        }
+
+        // Update the post
+        post.description = description;
+        post.hashtags = hashtags;
+        await post.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Post updated successfully",
+            data: post,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
