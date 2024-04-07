@@ -24,7 +24,7 @@ const RenderPosts = () => {
     const postData = useMemo(() => posts[0]?.data || [], [posts]);
     const [likedPosts, setLikedPosts] = useState([]);
     const [showComments, setShowComments] = useState(Array(postData.length).fill(false));
-    const [commentText, setCommentText] = useState('');
+    const [commentTexts, setCommentTexts] = useState({});
     const [comments, setComments] = useState({})
 
     const handleShowComments = (index) => {
@@ -106,19 +106,34 @@ const RenderPosts = () => {
         fetchAllPosts();
     }, []);
 
+    // const handlePostComment = async (postId) => {
+    //     try {
+    //         const response = await axios.post(`/api/posts/comment/${postId}`, { comment: commentText });
+    //         setComments(prevComments => ({
+    //             ...prevComments,
+    //             [postId]: [...(prevComments[postId] || []), response.data]
+    //         }));
+    //         setCommentText('');
+    //     } catch (error) {
+    //         console.error('Error posting comment:', error);
+    //     }
+    // };
+    
     const handlePostComment = async (postId) => {
         try {
-            const response = await axios.post(`/api/posts/comment/${postId}`, { comment: commentText });
+            const response = await axios.post(`/api/posts/comment/${postId}`, { comment: commentTexts[postId] });
             setComments(prevComments => ({
                 ...prevComments,
                 [postId]: [...(prevComments[postId] || []), response.data]
             }));
-            setCommentText('');
+            setCommentTexts(prevCommentTexts => ({
+                ...prevCommentTexts,
+                [postId]: '' // Clear the commentText after posting
+            }));
         } catch (error) {
             console.error('Error posting comment:', error);
         }
     };
-    
 
 
     // pop up for delete
@@ -211,7 +226,8 @@ const RenderPosts = () => {
                         <div className="flex justify-between items-center bg-[#8fa1f7] p-2 sticky top-0 z-10">
                             <div className="flex justify-between items-center gap-1">
                                 <img className="w-[40px] h-[40px] rounded-full" src={currentUser.user.profilePicture} alt="user picture" />
-                                <input type="text" value={commentText} onChange={(e) => setCommentText(e.target.value)} className="bg-[#f5f5f5] focus:outline-0 pl-2" />
+                                {/* <input type="text" value={commentText} onChange={(e) => setCommentText(e.target.value)} className="bg-[#f5f5f5] focus:outline-0 pl-2" /> */}
+                                <input type="text" value={commentTexts[post._id] || ''} onChange={(e) => setCommentTexts(prevCommentTexts => ({ ...prevCommentTexts, [post._id]: e.target.value }))} className="bg-[#f5f5f5] focus:outline-0 pl-2" />
                             </div>
                             <button onClick={() => handlePostComment(post._id)} className="px-[12px] py-[3px] border border-white text-[#fff]">Post</button>
                         </div>
@@ -220,7 +236,8 @@ const RenderPosts = () => {
 
                         {/* Display submitted comments for the current post */}
                         <div>
-                            {comments[post._id] && comments[post._id].map(comment => (
+                            {/* {comments[post._id] && comments[post._id].map(comment => ( */}
+                            {comments[post._id] && comments[post._id].slice().reverse().map(comment => (
                                 <div key={comment._id}>
                                     {/* {console.log(comments[post._id])} */}
                                     <div className="flex items-center justify-between mt-2 ml-2 mb-2">
