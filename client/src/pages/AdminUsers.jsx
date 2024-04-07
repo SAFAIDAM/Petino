@@ -67,7 +67,7 @@ function AdminUsers() {
           <div className="flex items-center justify-center gap">
           
           <div>
-            <h1 className="mt-8 heading-signup">Users Space</h1>
+            <h1 className="mt-8 heading-signup">Users Table</h1>
           </div>
           </div>
           
