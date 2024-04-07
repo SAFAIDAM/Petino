@@ -9,6 +9,7 @@ import { RiUserLine } from "react-icons/ri";
 import { signout } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
+import { MdOutlineSecurity } from "react-icons/md";
 function Menu() {
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +48,9 @@ function Menu() {
           <div className="flex items-center justify-center gap-2">
             <ArrowPutton />
             <div>
+              <Link to='/home'>
               <img className="md:hidden black" src={logo} alt="" />
+              </Link>
             </div>
           </div>
           <div className="flex items-center justify-center gap-1">
@@ -103,11 +106,7 @@ function Menu() {
                 <Link to="/admin">
                   <button className="flex items-center gap-[43px] mb-2">
                     Admin
-                    <SlLogout
-                      onClick={handlelogout}
-                      color="#898484"
-                      size={18}
-                    />
+                    <MdOutlineSecurity  color="#898484" size={20}/>
                   </button>
                 </Link>
               ) : (

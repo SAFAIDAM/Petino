@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
-import DataProvider from "./pages/DataProvider";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
 import { Toaster } from "react-hot-toast";

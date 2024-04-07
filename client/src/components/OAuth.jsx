@@ -28,7 +28,6 @@ function OAuth() {
       })
 
       const data = await res.json();
-      console.log(data.user) 
       if (data.user) {
         dispatch(loginSuccess(data.user));
         navigate('/home'); // Navigate to desired route after successful login

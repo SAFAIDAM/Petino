@@ -49,7 +49,7 @@ function UpdateRecord() {
     try {
       signOut(auth)
         .then(() => {
-          console.log("user logged out successfully");
+        
         })
         .catch((error) => {
           console.log(error);

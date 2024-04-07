@@ -82,7 +82,6 @@ function Signup() {
         throw new Error(data.error || "Internal server error");
       }
 
-      console.log(data);
       navigate('/login')
     } catch (error) {
       toast.error(error.message || "Internal server error", {

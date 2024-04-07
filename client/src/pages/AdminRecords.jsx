@@ -8,7 +8,8 @@ import { ClipLoader } from "react-spinners";
 
 function AdminRecords() {
   const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     axios
@@ -22,9 +23,7 @@ function AdminRecords() {
         setLoading(false); // Set loading to false in case of error
       });
   }, []);
-
   useEffect(() => {
-    console.log("Records:", records);
   }, [records]);
 
   const formatDate = (dateString) => {
@@ -56,20 +55,59 @@ function AdminRecords() {
         toast.error("Failed to delete record");
       });
   };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  const filteredRecords = records.filter((record) =>
+    record.usernameAdopter.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     <div className="">
       <AdminHeader />
       <div className="ml-auto mr-auto">
-        <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
-          <div className="flex items-center justify-center ml-40 gap-11">
+        <div className="items-center justify-between max-w-6xl p-3 text-center md:flex mt-11">
+          <div className="items-center justify-center md:ml-40 md:flex gap-11">
             <ArrowPutton />
           </div>
+          <div className="relative flex items-center justify-center rounded-full md:mr-80">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute text-gray-500 transform -translate-y-1/2 left-[70px] md:left-3 top-1/2"
+              viewBox="0 0 24 24"
+              width={20}
+              height={20}
+              color={"#000000"}
+              fill={"none"}
+            >
+              <path
+                d="M17.5 17.5L22 22"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search by username"
+              className="py-2 pl-10 pr-4 border rounded-full"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
           <div>
-            <h1 className="heading-signup">View Records</h1>
+            <h1 className="mt-8 heading-signup">View Records</h1>
           </div>
           <Link to="/admin/create">
-            <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 gap-2 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
+            <button className="flex mr-auto ml-auto mt-8 md:mb-0 mb-2 justify-center items-center min-w-36 gap-2 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
               Create record
             </button>
           </Link>
@@ -114,9 +152,9 @@ function AdminRecords() {
                 </tr>
               </thead>
               <tbody>
-                {records.map((record) => (
+                {filteredRecords.map((record) => (
                   <tr
-                    key={record.id}
+                    key={record._id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <th
@@ -125,11 +163,13 @@ function AdminRecords() {
                     >
                       {record.usernameAdopter}
                     </th>
-                    <a target="_blank" onClick={handlemail}>
-                      <td className="px-6 py-4 truncate hover:underline hover:text-[#EA7F48]">
+                    <td className="px-6 py-4 truncate ">
+                    <button className="hover:underline hover:text-[#EA7F48]" onClick={handlemail}>
+                      
                         {record.emailAdopter}
-                      </td>
-                    </a>
+                      
+                    </button>
+                    </td>
                     <td className="px-6 py-4">{record.PetName}</td>
                     <td className="px-6 py-4">{record.PetAge}</td>
                     <td className="px-6 py-4">{record.AdoptingDate}</td>
@@ -163,7 +203,7 @@ function AdminRecords() {
       </div>
       <div className="md:flex justify-center h-[2px] bg-[#bcbcbc] md:mt-36 mt-10"></div>
       <footer className="flex items-center justify-center p-3">
-        <div className="justify-start mt-4 text-center md:flex gap-36 mb-7 ">
+        <div className="justify-start mt-4 text-center md:flex gap-36">
           <p>
             Copyright @2024 All rights reserved | this project was made with
             love Copyright @2024 All rights reserved | this project was made

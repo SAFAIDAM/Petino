@@ -52,7 +52,7 @@ function CreateRecord() {
     }
     try {
       
-      const res = await fetch("/api/admin/create", {
+      const res = await fetch("/api/admin/createRecord", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +112,7 @@ function CreateRecord() {
                         <input
                           id="usernameAdopter"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                          placeholder=""
+                          placeholder="Adopter username"
                           onChange={handleChange}
                         />
                       </div>
@@ -126,7 +126,7 @@ function CreateRecord() {
                         <input
                           id="emailAdopter"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                          placeholder=" Hi there! I'"
+                          placeholder="Adopter email"
                           onChange={handleChange}
                         />
                       </div>
@@ -149,7 +149,7 @@ function CreateRecord() {
 
                           id="PetName"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                          placeholder=" Hi there! I'"
+                          placeholder="Pet Name"
                           onChange={handleChange}
                         />
                       </div>
@@ -166,7 +166,7 @@ function CreateRecord() {
                         <input
                           id="PetAge"
                           className="md:w-[400px] text-sm p-4 text-center rounded-md w-[190px] border border-[#bcbcbc]"
-                          placeholder=" Hi there! I'"
+                          placeholder="Pet Age"
                           onChange={handleChange}
                         />
                       </div>

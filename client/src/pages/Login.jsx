@@ -52,7 +52,6 @@ function Login() {
       }
       // localStorage.setItem("token", data.jwt);
       dispatch(loginSuccess(data.user))
-      console.log(data.user)
       if (data.user.role === "admin") {
         navigate('/admin')
       }else{

@@ -14,7 +14,6 @@ function AdminUsers() {
       .then((result) => setUsers(result.data))   
       .catch((err) => console.log(err));
   }, []);
-  console.log(users)
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
@@ -29,13 +28,13 @@ function AdminUsers() {
     <div className="">
       <AdminHeader />
       <div className="ml-auto mr-auto">
-        <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
-          <div className="flex items-center justify-center gap-6 ml-40">
+        <div className="justify-between max-w-6xl p-3 tems-center md:flex mt-11">
+          <div className="items-center justify-center gap-6 md:flex md:ml-40">
             <ArrowPutton />
             <div className="relative flex items-center justify-center rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute text-gray-500 transform -translate-y-1/2 left-3 top-1/2"
+              className="absolute text-gray-500 transform -translate-y-1/2 left-[70px] md:left-3 top-1/2"
               viewBox="0 0 24 24"
               width={20}
               height={20}
@@ -68,7 +67,7 @@ function AdminUsers() {
           <div className="flex items-center justify-center gap">
           
           <div>
-            <h1 className="heading-signup">Users Space</h1>
+            <h1 className="mt-8 heading-signup">Users Space</h1>
           </div>
           </div>
           
@@ -116,12 +115,12 @@ function AdminUsers() {
             <tbody>
               {filteredUsers.map((user) => (
                 <tr
-                  key={user.id} // Assuming each user has a unique id
+                  key={user._id} // Assuming each user has a unique id
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <img
-                      className="w-20 h-20 rounded-full"
+                      className="w-10 h-10 rounded-full md:w-20 md:h-20"
                       src={user.profilePicture}
                       alt=""
                     />

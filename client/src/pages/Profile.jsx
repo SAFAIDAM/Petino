@@ -9,6 +9,7 @@ import { RiUserLine } from "react-icons/ri";
 import { signout } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
+import { MdOutlineSecurity } from "react-icons/md";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import {
@@ -80,7 +81,7 @@ function Profile() {
     try {
       signOut(auth)
         .then(() => {
-          console.log("user logged out successfully");
+        
         })
         .catch((error) => {
           console.log(error);
@@ -133,16 +134,18 @@ function Profile() {
           <div className="flex items-center justify-center gap-2">
             <ArrowPutton />
             <div>
+            <Link to='/home'>
               <img className="md:hidden black" src={logo} alt="" />
+              </Link>
             </div>
           </div>
           <div className="flex items-center justify-center gap-1">
             <div
               onClick={handleMenu}
-              className="flex items-center justify-center gap-5 align-middle"
+              className="flex items-center justify-center gap-1 align-middle"
             >
               <p className="hidden text-xs md:block">{currentUser.username}</p>
-             
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -189,17 +192,12 @@ function Profile() {
                 <Link to="/admin">
                   <button className="flex items-center gap-[43px] mb-2">
                     Admin
-                    <SlLogout
-                      onClick={handlelogout}
-                      color="#898484"
-                      size={18}
-                    />
+                    <MdOutlineSecurity color="#898484" size={20} />
                   </button>
                 </Link>
               ) : (
                 " "
               )}
-              
             </div>
             <Link to="/profile">
               {currentUser ? (
