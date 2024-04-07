@@ -52,7 +52,7 @@ const userSchema = mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: "https://cute-cat-avatars.fly.dev/api/v1/cat"
+    default: "https://i.pinimg.com/564x/ce/a6/e4/cea6e4ee204372b16113f3b9487f1d46.jpg"
   },
   termsAndServices: {
     type: Boolean,

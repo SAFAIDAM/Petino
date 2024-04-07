@@ -6,7 +6,6 @@ import * as jose from 'jose'
 
 
 export const isValidEmail = (email) => {
-  // Regular expression pattern for email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return emailRegex.test(email);
@@ -49,7 +48,7 @@ export const signup = async (req, res) => {
   } catch (error) {
 
     console.log("error in signup controller", error.message);
-    toast.error(error.message || "Internal server error");
+    toast.error(error.message || "Internal server error error in signup controller");
     res.status(500).json({ error: "internal server error" });
 
   }

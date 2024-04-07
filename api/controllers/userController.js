@@ -14,24 +14,24 @@ export const test = async (req, res) => {
 
 export const username = async (req, res) => {
   try {
-    // Check if username query parameter is provided
+   
     const { username } = req.query;
     let query = {};
 
-    // If username is provided, add it to the query
+  
     if (username) {
-      query = { username: { $regex: new RegExp(username, 'i') } }; // Case-insensitive regex search for username
+      query = { username: { $regex: new RegExp(username, 'i') } }; 
     }
 
-    // Fetch users based on the query
-    const users = await User.find(query);
-    const totalUsers = await User.countDocuments(query); // Count documents based on the same query
 
-    // Set Content-Range header to specify the range of returned users
+    const users = await User.find(query);
+    const totalUsers = await User.countDocuments(query); 
+
+  
     res.setHeader('Content-Range', `users 0-${users.length - 1}/${totalUsers}`);
     res.json(users);
   } catch (err) {
-    // Handle errors
+
     res.status(500).json({ error: err.message });
   }
 };
@@ -41,7 +41,6 @@ export const user = async (req, res) => {
   User.findById(req.params.id)
     .then(data => {
       res.json(data)
-      console.log(data)
     })
 
     .catch(err => res.json(err))
@@ -69,7 +68,6 @@ export const updateUser = async (req, res, next) => {
       { new: true }
     );
  
-    console.log(updatedUser);
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error("Error in updateUser middleware:", error.message);

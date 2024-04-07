@@ -7,7 +7,7 @@ import { createRecord, deleteRecord, getRecord, getRecordById, updateRecord } fr
 const router = express.Router();
 router.get("/records", protectRoute, isAdmin, getRecord)
 router.get("/record/:id", protectRoute, isAdmin, getRecordById)
-router.post("/create", protectRoute, isAdmin, createRecord)
+router.post("/createRecord", protectRoute, isAdmin, createRecord)
 router.post("/updateRecord/:id", protectRoute, isAdmin, updateRecord)
 router.delete("/remove/:id", protectRoute, isAdmin, deleteRecord)
 

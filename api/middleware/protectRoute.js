@@ -16,8 +16,6 @@ export const protectRoute = async (req, res, next) => {
       return res.status(401).json({ error: "Unauthorized -Invalid Token" });
     }
     const user = await User.findById(decoded.payload.id)
-
-    console.log(user)
     if (!user) {
       return res.status(401).json({ error: "User not found" });
     }
@@ -30,7 +28,6 @@ export const protectRoute = async (req, res, next) => {
     res.status(500).json({ error: "Internal server error " })
   }
 }
-
 
 export const isAdmin = async (req, res, next) => {
 

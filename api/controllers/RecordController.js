@@ -11,7 +11,6 @@ export const createRecord = async (req, res, next) => {
       PetAge,
       AdoptingDate
     });
-    console.log('Record', NewRecord)
     res.status(200).json({
       success: true,
       message: "Record created successfully",
