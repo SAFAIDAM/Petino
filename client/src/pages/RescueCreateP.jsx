@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef} from "react";
 import axios from "axios";
 import "../App.css";
 import downloadW from "../assets/downloadW.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import firebase from './firebase.js';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-
-
-
+import {app} from "../firebase.js"
+import { imageDb } from "../firebase.js"
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+  listAll,
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 
 
@@ -21,72 +27,74 @@ const RescueCreateP = () => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState('');
 
+  const [imagePercent, setImagePercent] = useState(0);
+  const [ImageError, setImageError] = useState(false);
+  const [formData, setFormData] = useState({
+    Name: "",
+    Age: "",
+    Pet_personality: "",
+    imageURL: ""
+  });
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/post/create", {Name, Age, Pet_personality, imageURL});
+      // Wait for imageURL to be set before submitting the form
+      await handleimageUpload(image);
+      // Now imageURL should be set correctly
+      await axios.post("http://localhost:8000/api/rescuepost/create", {
+        Name,
+        Age,
+        Pet_personality,
+        imageURL: imageURL // Accessing the correct property
+      });
       toast.success("Post created successfully");
       navigate("/rescue");
-      } catch (error) {
-        console.log(error);
-        toast.error("Error creating the Post");
-      }     
-  };
-
-
- 
-  
-    
- 
-    const handleChange = e => {
-     const file = e.target.files[0];
-     if (file) {
-      setImage(file);
-      handleUpload(file);
+    } catch (error) {
+      console.log(error);
+      toast.error("Error creating the Post");
     }
-    };
-
-    
-    const handleUpload = (imageFile) => {
-      // const storage = firebase.storage();
-      // const storageRef = firebase.storage().ref(`images/${imageFile.name}`);
-      // const uploadTask = storageRef.put(imageFile);
-      // const fileName = new Date().getTime() + image.name; 
-      const storageRef = ref(storage,`images/${imageFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+  };
   
+    useEffect(() => {
+      if (image) {
+        handleimageUpload(image);
+      }
+    }, [image]);
+  
+ 
+
+    const fileRef = useRef(null);
+
+    const handleimageUpload = async (image) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + image.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+    
       uploadTask.on(
-        'state_changed',
-        snapshot => {
-          // Handle progress
-          const progress = (snapshot.bytesTranferred / snapshot.totalBytes) * 100;
+        "state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setImagePercent(Math.round(progress));
           console.log(`Upload is ${progress}% done`);
         },
-        error => {
-          // Handle error
-          console.error(error);
+        (error) => {
+          setImageError(error.message);
+          toast.error("Error uploading image (file size must be less than 2 MB)");
+          console.error("Error uploading image:", error.message);
         },
         () => {
-          // Handle successful upload
-
-          getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-            setImageURL(downloadURL);  // Update state with the image URL
-            console.log('File available at ', downloadURL);
-          }).catch(error => {
-            console.error(error);
-          })
-          // uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          //   setUrl(downloadURL);
-          //   // Now you can save the downloadURL to your database
-          
-          //   console.log('File available at ', downloadURL);
-          // });
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            // Update the state correctly
+            setImageURL(downloadURL);
+          });
         }
       );
-    };
-
+    }
+    
     // const isValidURL = (string) => {
     //   try {
     //     new URL(string);
@@ -95,6 +103,24 @@ const RescueCreateP = () => {
     //     return false;
     //   }
     // } ;
+
+    const handleClick = () =>{
+      const imgRef = ref(imageDb,`rescueFiles/${v4()}`)
+      uploadBytes(imgRef, image)
+    }
+
+    useEffect(() => {
+      listAll(ref(imageDb,'rescueFiles')).then(images =>{
+        console.log(images)
+        images.items.forEach(val=>{
+          getDownloadURL(val).then(url=>{
+            setImageURL(data=>[...data,url])
+          })
+        })
+      })
+    }, []);
+
+    console.log(imageURL, "imageURL" )
 
   return (
     <>
@@ -147,13 +173,13 @@ const RescueCreateP = () => {
               
               <div className="flex  ">
                 
-                <button className="flex gap-5 px-3 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white mr-4" type="button" onClick={handleUpload}> 
+                <button className="flex gap-5 px-3 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white mr-4" type="button" onClick={() => fileRef.current.click()}> 
                   <img src={downloadW} alt="telecharger" className="flex " />
                   Upload Image
                 </button>
-                {imageURL && <img src={imageURL} alt="uploaded" />}
+                
                   
-
+                  <img src={imageURL} alt="" />
 
 
                 <button
@@ -163,7 +189,13 @@ const RescueCreateP = () => {
                   Create post
                 </button>
               </div>
-              <input type="file" onChange={handleChange} className="mt-4"/>
+              <input
+                    type="file"
+                    ref={fileRef}
+                    hidden
+                    accept="rescueImage/*"
+                    onChange={(e) => setImage(e.target.files[0])} // Set the image state when a file is selected
+                  />
             </div>
           </div>
         </form>

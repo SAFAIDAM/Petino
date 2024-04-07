@@ -2,7 +2,7 @@ import  mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 
-const postSchema =  new mongoose.Schema({
+const rescuepostSchema =  new mongoose.Schema({
     Name: {
         type: String,
         required: true
@@ -32,8 +32,8 @@ const postSchema =  new mongoose.Schema({
 
 
 
-const Post = mongoose.model("Post", postSchema);
+const Rescuepost = mongoose.model("Post", rescuepostSchema);
 
 
 
-export default Post;
+export default Rescuepost;

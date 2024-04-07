@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      ' cursive ' : ["Gluten"]
+    },
     extend: {},
     screens: {
       'sm': '450px',

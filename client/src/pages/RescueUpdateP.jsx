@@ -37,7 +37,7 @@ const RescueUpdateP = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/post/get/${id}`
+          `http://localhost:8000/api/rescuepost/get/${id}`
         );
         if (response.data.post) {
           const postData = response.data.post;
@@ -88,7 +88,7 @@ const RescueUpdateP = () => {
   };
 
   const handleUpload = () => {
-    const storageRef = firebase.storage().ref(`images/${image.name}`);
+    const storageRef = firebase.storage().ref(`rescueImages/${image.name}`);
     const uploadTask = storageRef.put(image);
 
     uploadTask.on(
@@ -113,7 +113,7 @@ const RescueUpdateP = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/post/update/${id}`, {
+      await axios.put(`http://localhost:8000/api/rescuepost/update/${id}`, {
         Name,
         Age,
         Pet_personality,

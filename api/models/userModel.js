@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
+  role: {
+    type: String,
+    enum: ["admin", "user"], 
+    default: "user" 
+  },
   fullName: {
     type: String,
-    required: true
   },
   username: {
     type: String,
@@ -17,23 +21,49 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 6
+  },
+  bio:
+  {
+    type: String,
+    maxLength: 400,
+  
+  },
+  experience:
+  {
+    type: String,
+    maxLength: 400,
+
+  },
+  instagramLink:
+  {
+    type: String,
+
+  },
+  facebookLink:
+  {
+    type: String,
+
+  },
+  optionalLink:
+  {
+    type: String,
+
   },
   profilePicture: {
     type: String,
-    default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
-  },
-  verified: {
-    type: Boolean,
-    default: false
+    default: "https://cute-cat-avatars.fly.dev/api/v1/cat"
   },
   termsAndServices: {
     type: Boolean,
-    required: true
+    default: true
   }
 }, { timestamps: true });
 
+
+
 const User = mongoose.model("User", userSchema);
+
+
 
 export default User;

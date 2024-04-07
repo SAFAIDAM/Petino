@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import Achievement from "../components/Achievement.jsx";
 import Donation from "../components/Donation.jsx";
-import Post from "../components/Post.jsx";
+import PostSection from "../components/PostSection.jsx";
 import Adoptable from "../components/Adoptable.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -16,10 +16,10 @@ const Rescue = () => {
   return (
     <>  
       
-        <Achievement></Achievement>     
-        <Post></Post>   
-        <Adoptable></Adoptable>         
-        <Donation></Donation>
+        <Achievement />     
+        <PostSection />   
+        <Adoptable />         
+        <Donation />
         <ToastContainer />
     </>
   );

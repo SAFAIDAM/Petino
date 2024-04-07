@@ -2,21 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+  background-color: #fbf9f7;
+
+  /* font-family: "Poppins", sans-serif; */
+}
+.heading-signup {
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.heading {
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 26px;
+}
+.head {
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 90px;
+}
+.head1 {
+  font-family: "Gluten", cursive;
+  font-weight: 700;
+  font-size: 240px;
+}
+
+/* method 2 -> use background-clip to support border-radius */
+.btn-gradient-2 {
+  background: linear-gradient(#8FA1F7, #8FA1F7) padding-box,
+    linear-gradient(to right, #ea7f48, blue) border-box,
+    /* Add your desired background color here */ #f80000; /* Example background color */
+
+  border-radius: 50em;
+  border: 4px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+
+
+
 body{
     overflow-x: hidden;
     font-family: "Lato", sans-serif;
     box-sizing: border-box;
   
     /* font-family: "Poppins", sans-serif; */
-  }
+}
 
-  .heading-signup{
+.heading-signup{
     font-family: "Gluten", cursive;
     font-weight: 700;
     font-size: 40px;
-  }
+}
 
-  .overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,9 +78,9 @@ body{
     backdrop-filter: blur(5px); 
 }
 
-  .popup{
+.popup{
     font-family: "Gluten", cursive;
     font-size: 15px;
     border-radius: 30px;
     z-index: 10000;
-  }
+}

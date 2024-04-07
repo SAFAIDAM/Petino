@@ -3,7 +3,7 @@ import "../App.css";
 
 
 
-const Post = () => {
+const PostSection = () => {
   
  
 
@@ -28,4 +28,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostSection;
