@@ -5,6 +5,19 @@ import downloadW from "../assets/downloadW.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import "firebase/storage";
+import {app} from "../firebase.js"
+import { imageDb } from "../firebase.js"
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
+import { v4 } from "uuid";
+
+
+
+
 
 const RescueUpdateP = () => {
   const { id } = useParams();
@@ -18,6 +31,8 @@ const RescueUpdateP = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [url, setUrl] = useState("");
 
+
+  
   // useEffect(() =>{
   //   const fetchData = async () => {
   //     try {
@@ -87,37 +102,34 @@ const RescueUpdateP = () => {
     }
   };
 
-  const handleUpload = () => {
-    const storageRef = firebase.storage().ref(`rescueImages/${image.name}`);
-    const uploadTask = storageRef.put(image);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-      },
-      (error) => {
-        console.error(error);
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          setUrl(downloadURL);
-          console.log("File available at ", downloadURL);
-        });
-      }
-    );
+  const handleUpload = async() => {
+    // const storageRef = firebase.storage().ref(`rescueImages/${image.name}`);
+    // const uploadTask = storageRef.put(image);
+    try{
+      const storageRef = ref(imageDb, `rescueImages/${image.name}`);
+      await uploadBytes(storageRef, image);
+      const downloadURL = await getDownloadURL(storageRef);
+      setUrl(downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+      
   };
-
+  
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      let updateImageURL = url
+      if (image) {
+        updateImageURL =  await handleUpload();
+      }
       await axios.put(`http://localhost:8000/api/rescuepost/update/${id}`, {
         Name,
         Age,
         Pet_personality,
-        imageURL: url,
+        imageURL: updateImageURL ,
       });
       navigate("/rescue");
       toast.success("Post updated  successfully!");
@@ -195,7 +207,7 @@ const RescueUpdateP = () => {
               )}
 
               {url && !selectedImage && (
-                <img src={url} alt="uploaded" class="w-40 h-35 mt-4" />
+                <img src={url} alt="uploaded" className="w-40 h-35 mt-4" />
               )}
 
               <button

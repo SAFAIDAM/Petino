@@ -179,7 +179,7 @@ const RescueCreateP = () => {
                 </button>
                 
                   
-                  <img src={imageURL} alt="" />
+                  
 
 
                 <button

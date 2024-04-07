@@ -33,6 +33,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const imageDb = getStorage(app)
+const app = initializeApp(firebaseConfig);
+const imageDb = getStorage(app);
+
+export {app, imageDb}  ;
 
