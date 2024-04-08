@@ -6,18 +6,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "firebase/storage";
-import {app} from "../firebase.js"
-import { imageDb } from "../firebase.js"
+import { app } from "../firebase.js";
+import { imageDb } from "../firebase.js";
 import {
   getDownloadURL,
   ref,
   uploadBytes,
 } from "firebase/storage";
 import { v4 } from "uuid";
-
-
-
-
 
 const RescueUpdateP = () => {
   const { id } = useParams();
@@ -30,23 +26,6 @@ const RescueUpdateP = () => {
   const [image, setImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [url, setUrl] = useState("");
-
-
-  
-  // useEffect(() =>{
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8000/api/post/get/" + id);
-  //       console.log(response);
-  //       setName(response.data.Name)
-  //       setAge(response.data.Age)
-  //       setPet_personality(response.data.Pet_personality)
-  //     } catch (error) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   fetchData();
-  // }, [])
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -69,32 +48,6 @@ const RescueUpdateP = () => {
     fetchPost();
   }, [id]);
 
-  // useEffect(() => {
-  //   if (location.state) {
-  //     const { Name, Age, Pet_personality } = location.state;
-  //     setName(Name);
-  //     setAge(Age);
-  //     setPet_personality(Pet_personality);
-  //   }
-  // }, [location.state]);
-
-  // useEffect(() => {
-  //   if (location && location.search) {
-  //     const searchParams = new URLSearchParams(location.search);
-  //     const postIdFromURL = searchParams.get('postId');
-  //     console.log("postIdFromURL:", postIdFromURL);
-  //     setPostIdFromState(postIdFromURL);
-  //     const postName = searchParams.get('Name');
-  //     const postAge = searchParams.get('Age');
-  //     const postPet_personality = searchParams.get('Pet_personality');
-
-  //     setName(postName);
-  //     setAge(postAge);
-  //     setPet_personality(postPet_personality);
-  //   }
-
-  // }, [location]);
-
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -102,10 +55,8 @@ const RescueUpdateP = () => {
     }
   };
 
-  const handleUpload = async() => {
-    // const storageRef = firebase.storage().ref(`rescueImages/${image.name}`);
-    // const uploadTask = storageRef.put(image);
-    try{
+  const handleUpload = async () => {
+    try {
       const storageRef = ref(imageDb, `rescueImages/${image.name}`);
       await uploadBytes(storageRef, image);
       const downloadURL = await getDownloadURL(storageRef);
@@ -115,24 +66,25 @@ const RescueUpdateP = () => {
       console.error("Error uploading image:", error);
       return null;
     }
-      
   };
-  
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      let updateImageURL = url
+      let updateImageURL = url;
       if (image) {
-        updateImageURL =  await handleUpload();
+        updateImageURL = await handleUpload();
       }
       await axios.put(`http://localhost:8000/api/rescuepost/update/${id}`, {
         Name,
         Age,
         Pet_personality,
-        imageURL: updateImageURL ,
+        imageURL: updateImageURL,
       });
-      navigate("/rescue");
-      toast.success("Post updated  successfully!");
+      toast.success("Post updated successfully!");
+      setTimeout(() => {
+        navigate("/rescue");
+      }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Error updating the Post");
@@ -141,10 +93,10 @@ const RescueUpdateP = () => {
 
   return (
     <>
-      <div className="shadow rounded-lg w-full sm:w-[450px] md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
+      <div className="shadow rounded-lg w-full md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
         <ToastContainer />
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
-          Update Post
+          Edit Post
         </h2>
         <form onSubmit={handleUpdate}>
           <div className="mb-6">
@@ -182,43 +134,26 @@ const RescueUpdateP = () => {
               value={Pet_personality}
             />
           </div>
-          <div className="flex justify-between gap-10 items-center">
-            <div className="mb-6">
-              <h3 className="font-semibold text-xl text-[#6e6e6e] mb-2">
-                Add Images
-              </h3>
-
-              {/* <div className="flex  "> */}
-
-              {/* <button className="flex gap-5 px-3 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white mr-4" onClick={handleUpload}>
-                <img src={downloadW} alt="telecharger" className="flex " />
-                Upload Image
-              </button>
-               */}
-
-              <label className="flex gap-5 px-4 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white mr-4 cursor-pointer " style={{ width:'250px', paddingRight:'15px' }}>
+          <div className="flex justify-between items-center">
+            <div>
+              <label className="flex gap-5 px-4 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white cursor-pointer ">
                 <img src={downloadW} alt="telecharger" className="flex " />
                 Upload Image
                 <input type="file" onChange={handleChange} className="hidden" />
               </label>
-               
               {selectedImage && (
                 <img src={selectedImage} alt="selected" className="w-32 h-32 mt-4" />
               )}
-
               {url && !selectedImage && (
                 <img src={url} alt="uploaded" className="w-40 h-35 mt-4" />
               )}
-
-              <button
-                type="submit"
-                className=" bottom-4 right-4 md:right-2 lg:right-16 xl:right-20 2xl:right-24 rounded-full border-2 border-[#8fa1f7] w-[132px] h-[41px] bg-[#8fa1f7] text-white hover:bg-blue-200 ml-[790px]  "
-              >
-                Save changes
-              </button>
-
-              {/* </div> */}
             </div>
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 mb-40"
+            >
+              Save changes
+            </button>
           </div>
         </form>
       </div>

@@ -109,7 +109,7 @@ const Adoptable = () => {
         {posts.map((post, index)=> (
          
       
-            <div key={index} className="grid-1 shadow rounded-lg  w-[390px]  md: h-[550px]   lg:h-[650px]  bg-white ">
+            <div key={index} className="grid-1 shadow rounded-lg  w-[390px]  md: h-[550px]   lg:h-[550px]  bg-white ">
               
               {post.imageURL && (
                 <img
@@ -172,4 +172,4 @@ const Adoptable = () => {
   );
 };
 
-export default Adoptable;
+export default Adoptable; 
