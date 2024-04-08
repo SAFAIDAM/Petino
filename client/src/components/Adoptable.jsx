@@ -1,14 +1,13 @@
 import  React ,{ useState, useEffect } from "react";
-import {useParams, Link}  from "react-router-dom";
+import { Link}  from "react-router-dom";
 import "../App.css";
-import adoptableone from "../assets/adoptableone.svg";
 import editBtn from "../assets/editBtn.svg";
 import deleteBtn from "../assets/deleteBtn.svg";
 import  axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
-import petino from "../assets/petino.jpg";
+
 
 
 
@@ -33,9 +32,7 @@ const Adoptable = () => {
   }, []);
 
   const handleDelete = async (postId) => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this post?"
-    // );
+   
     const confirmDelete = await Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able to recover this post!',
@@ -51,18 +48,7 @@ const Adoptable = () => {
     });
 
 
-    // if (confirmDelete){
-    //   try {
-    //     await axios.delete(
-    //       `http://localhost:8000/api/rescuepost/delete/${postId}`
-    //     );
-    //     setPosts(posts.filter(post => post._id !== postId));
-    //     toast.success("Post deleted successfully !");
-    //   } catch (error) {
-    //     console.error('Error deleting post: ' , error);
-    //     toast.error("Failed to delete post .");
-    //   }
-    // }
+  
     if (confirmDelete.isConfirmed) {
       try {
         await axios.delete(
@@ -76,26 +62,15 @@ const Adoptable = () => {
       }
     }
 
-    if (result.isConfirmed) {
-      try {
-        await axios.delete(
-          `http://localhost:8000/api/rescuepost/delete/${postId}`
-        );
-        setPosts(posts.filter((post) => post._id !== postId));
-        toast.success("Post deleted successfully !");
-      } catch (error) {
-        console.error("Error deleting post: ", error);
-        toast.error("Failed to delete post .");
-      }
-    }
+    
   }; 
 
   const handleAdopt = (post) => {
-    const email = 'petinooplatform@gmail.com'; // Replace with the email address to send the adoption request to
-    const subject = `Adopting ${post.Name}`; // Subject of the email
-    const body = ''; // You can pre-fill the body of the email if needed
+    const email = 'petinooplatform@gmail.com'; 
+    const subject = `Adopting ${post.Name}`; 
+    const body = ''; 
   
-    // Construct the Gmail compose URL with email address, subject, and body
+
     const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     window.open(gmailUrl)

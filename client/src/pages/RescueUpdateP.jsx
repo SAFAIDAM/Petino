@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../App.css";
 import downloadW from "../assets/downloadW.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,11 +13,10 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
-import { v4 } from "uuid";
+
 
 const RescueUpdateP = () => {
   const { id } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [Name, setName] = useState("");

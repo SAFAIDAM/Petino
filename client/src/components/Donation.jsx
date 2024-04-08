@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import donnation from "../assets/donnation.svg";
 import Popup from "reactjs-popup";
-import logo from "../assets/logo.svg";
 import petinoo from "../assets/petinoo.svg";
 
 const Donation = () => {
