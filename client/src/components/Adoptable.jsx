@@ -7,6 +7,8 @@ import deleteBtn from "../assets/deleteBtn.svg";
 import  axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import petino from "../assets/petino.jpg";
 
 
 
@@ -31,10 +33,37 @@ const Adoptable = () => {
   }, []);
 
   const handleDelete = async (postId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-    if (confirmDelete){
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this post?"
+    // );
+    const confirmDelete = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this post!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#8FA1F7',
+      cancelButtonColor: '#E06C2E',
+      confirmButtonText: 'Yes, delete it!',
+      customClass: {
+        confirmButton: 'swal-confirm-button',
+        cancelButton: 'swal-cancel-button'
+      }
+    });
+
+
+    // if (confirmDelete){
+    //   try {
+    //     await axios.delete(
+    //       `http://localhost:8000/api/rescuepost/delete/${postId}`
+    //     );
+    //     setPosts(posts.filter(post => post._id !== postId));
+    //     toast.success("Post deleted successfully !");
+    //   } catch (error) {
+    //     console.error('Error deleting post: ' , error);
+    //     toast.error("Failed to delete post .");
+    //   }
+    // }
+    if (confirmDelete.isConfirmed) {
       try {
         await axios.delete(
           `http://localhost:8000/api/rescuepost/delete/${postId}`
@@ -42,7 +71,20 @@ const Adoptable = () => {
         setPosts(posts.filter(post => post._id !== postId));
         toast.success("Post deleted successfully !");
       } catch (error) {
-        console.error('Error deleting post: ' , error);
+        console.error('Error deleting post: ', error);
+        toast.error("Failed to delete post .");
+      }
+    }
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(
+          `http://localhost:8000/api/rescuepost/delete/${postId}`
+        );
+        setPosts(posts.filter((post) => post._id !== postId));
+        toast.success("Post deleted successfully !");
+      } catch (error) {
+        console.error("Error deleting post: ", error);
         toast.error("Failed to delete post .");
       }
     }
