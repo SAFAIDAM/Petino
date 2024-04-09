@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
@@ -55,6 +55,7 @@ function App() {
         <Route element={<ProtectAdmin />}>
           <Route exact path="/admin/update/:id" element={<EditeRecord />} />
         </Route>
+        
       </Routes>
       <Toaster />
       

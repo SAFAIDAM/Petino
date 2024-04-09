@@ -7,7 +7,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("api/users")
+      .get("api/user/users")
       .then((result) => setUsers(result.data))
       .catch((err) => console.log(err));
       

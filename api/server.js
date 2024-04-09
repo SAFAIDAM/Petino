@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import userRoute from "./routes/userRoute.js"
 import authRoute from "./routes/authRoute.js"
 import adminRoute from "./routes/adminRoute.js"
+import rescuepostRoute from "./routes/rescuepostRoute.js"
 import connectMongoDB from "./db/connectMongoDB.js"
 import Cors from 'cors'
 
@@ -17,8 +18,9 @@ app.use(cookieParser());
 app.use(Cors())
 
 app.use("/api/auth", authRoute)
-app.use("/api", userRoute);
+app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/rescuepost", rescuepostRoute);
 
 
 app.use((err, req, res, next) => {
