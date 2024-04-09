@@ -11,9 +11,7 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytes,
   uploadBytesResumable,
-  listAll,
 } from "firebase/storage";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";

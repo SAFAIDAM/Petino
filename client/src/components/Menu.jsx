@@ -44,7 +44,7 @@ function Menu() {
 
   return (
   <>
-  <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
+    <div className="flex items-center justify-between max-w-6xl p-3 mt-11">
           <div className="flex items-center justify-center gap-2">
             <ArrowPutton />
             <div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminHeader from "../components/AdminHeader";
 import ArrowPutton from "../components/ArrowPutton";
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 function AdminUsers() {

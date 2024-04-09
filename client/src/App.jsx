@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
@@ -23,6 +23,8 @@ import RescueUpdateP from "./pages/RescueUpdateP";
 import "react-toastify/dist/ReactToastify.css";
 // import { ToastContainer } from "react-toastify";
 // import { toast } from "react-toastify";
+import Posts from "./pages/Posts";
+import CreatePost from "./pages/CreatePost"
 
 function App() {
   
@@ -36,14 +38,22 @@ function App() {
           <Route path="/home" element={<Home />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
+          
         <Route path="*" element={<ErorrPage404 />} />
+
           <Route path="/Terms" element={<Terms termsdata={termsdata} />} />
           <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/public" element={<Public />} />
         </Route>
         <Route element={<PrivateRoute />}>
-            <Route path="/profile" element={<Profile />} /> 
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/Blog" element={<Posts />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/createPost" element={<CreatePost />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/publicuser/:id" element={<PublicUser />} />
@@ -87,16 +97,6 @@ function App() {
     </BrowserRouter>
   );
 }
-
-
-
-// function AdminLayout() {
-//   return (
-//     <Admin dataProvider={restProvider("http://localhost:8000")}>
-//       <Resource name="user" list={PostList} />
-//     </Admin>
-//   );
-// }
 
 
 export default App;

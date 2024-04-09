@@ -14,6 +14,7 @@ const firebaseConfig = {
   appId: "1:461383576128:web:56c12a3b42259207830da5"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const imageDb = getStorage(app);
