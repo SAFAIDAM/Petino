@@ -4,11 +4,11 @@
 
 const Footer = () => {
     return (
-        <footer className="hidden md:block bg-white h-[90px] border border-t-[#CCCCCC]">
-            <div className="flex justify-between items-center md:px-8 max-w-[1200px] mx-auto mt-5">
+        <footer className="hidden md:block bg-white mt-[120px] h-[90px] border border-t-[#CCCCCC]">
+            <div className="flex justify-between items-center h-[50%] md:px-8 max-w-[1200px] mx-auto mt-5">
                 <p className="md:w-[450px] lg:w-auto">Copyright @{new Date().getFullYear()} All rights reserver | this project was made with ❤️ <a href="/" className="text-[#E06C2E] underline underline-offset-2">Terms & services</a></p>
                 <div className="flex items-center">
-                    <a href="https://twitter.com/" target="_blank">
+                    <a href="https://instagram.com/" target="_blank">
                         {/* twiiter */}
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} height={25} color={"#9B460A"} fill={"none"}>
                             <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -16,7 +16,7 @@ const Footer = () => {
                             <path d="M17.5078 6.5L17.4988 6.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </a>
-                    <a href="https://www.instagram.com" target="_blank">
+                    <a href="https://www.twitter.com" target="_blank">
                         {/* instagram icon */}
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} height={25} color={"#9B460A"} fill={"none"}>
                             <path d="M3 21L10.5484 13.4516M21 3L13.4516 10.5484M13.4516 10.5484L8 3H3L10.5484 13.4516M13.4516 10.5484L21 21H16L10.5484 13.4516" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

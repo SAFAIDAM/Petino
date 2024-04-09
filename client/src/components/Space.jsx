@@ -15,25 +15,26 @@ const Space = () => {
         setFilteredPost(!filteredPost)
     }
 
+
     return (
         <>
-            <div className="md:flex justify-between items-center md:mx-8 w-11/12 lg:mx-auto lg:px-8 mb-6">
+            <div className="md:flex justify-between items-center md:mx-8 max-w-[1200px] lg:mx-auto lg:px-8 mb-10">
                 {/* input and Left arrow */}
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center md:gap-4">
                     {/* arrow  */}
-                    <Link to="/">
+                    <Link to="/Blog">
                         <Circle />
                     </Link>
                     {/* input and search */}
-                    <div className="w-[300px] h-[42px]  flex items-center gap-2 border border-[#2B2B2B] rounded-[30px] pl-4">
+                    <div className="w-[300px] h-[42px] flex items-center gap-2 border border-[#2B2B2B] rounded-[30px] pl-4">
                         <span className="">
                             <CiSearch size={25} />
                         </span>
-                        <input className="focus:outline-0 bg-transparent pr-10" type="text" placeholder="Search" />
+                        <input className="focus:outline-none border-0 bg-transparent pr-10" type="text" placeholder="Search..." />
                     </div>
                 </div>
 
-                <br className="md:hidden" />
+                <br className="md:hidden bg-[#000]" />
 
                 {/* Create Btn */}
                 <div className="flex justify-center">
@@ -46,7 +47,7 @@ const Space = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-between  md:w-11/12 mx-auto md:mx-8 w-11/12 lg:mx-auto lg:px-8 mb-6">
+            <div className="flex items-center justify-between w-[300px]  md:w-auto mx-auto md:mx-8  max-w-[1200px] lg:mx-auto lg:px-8 mb-6">
                 <h1 className="text-[20px] font-semibold text-[#6E6E6E] ">Active Posts</h1>
                 <div onClick={handleFilteredPost} className="relative">
                     <button className="flex items-center py-2 px-4 rounded-[30px] border text-[#E06C2E] border-[#E06C2E]">

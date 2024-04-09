@@ -1,30 +1,44 @@
-// import * as jose from 'jose';
-// import User from "../models/userModel";
+import * as jose from 'jose';
+import User from '../models/userModel.js';
 
-// const protectRoute = async (req, res, next) => {
-//   try {
-//     const token = req.cookies.jwt;
-//     if (!token) {
-//       return res.status(401).json({ error: "Unauthorized - no token provided" });
-//     }
+export const protectRoute = async (req, res, next) => {
+  try {
+    const token = req.cookies.tokenjose;
+    if (!token) {
+      return res.status(401).json({ error: "Unauthorized - no token provided" });
+    }
+    console.log(token);
 
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     if (!decoded) {
-//       return res.status(401).json({ error: "Unauthorized -Invalid Token" });
-//     }
-//     const user = await User.findById(decoded.userId).select("-password");
+    const encodedKey = new TextEncoder().encode(process.env.JWT_SECRET);
+    const decoded = await jose.jwtVerify(token, encodedKey);
+    console.log(decoded);
+    if (!decoded) {
+      return res.status(401).json({ error: "Unauthorized -Invalid Token" });
+    }
+    const user = await User.findById(decoded.payload.id)
+    if (!user) {
+      return res.status(401).json({ error: "User not found" });
+    }
+    req.user = user;
+    req.role = decoded.payload.role
+    next();
 
-//     if (!user) {
-//       return res.status(401).json({ error: "User not found" });
-//     }
-//     req.user = user;
-//     next();
+  } catch (error) {
+    console.error(" error in protectRoute middleware: ", error.message)
+    res.status(500).json({ error: "Internal server error " })
+  }
+}
 
+export const isAdmin = async (req, res, next) => {
 
-//   } catch (error) {
-//     console.error(" error in protectRoute middleware: ", error.message)
-//     res.status(500).json({ error: "Internal server error " })
-//   }
-// }
+  try {
+    if (req.role !== "admin"){
+      return res.status(401).json({ error: "Forbidden - Admin access required" });
+    }
+    next();
 
-// export default protectRoute;
+  } catch (error) {
+    console.error("error in isAdmin middleware:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}

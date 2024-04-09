@@ -2,7 +2,7 @@
 
 const Circle = () => {
     return (
-        <div className="hidden cursor-pointer shadow-[0_4px_4px_0_#dbdbdb] w-[50px] h-[50px] md:flex justify-center items-center rounded-full bg-[#FAD0B7]">
+        <div className="hidden cursor-pointer w-[50px] h-[50px] md:flex justify-center items-center rounded-full bg-[#FAD0B7]">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

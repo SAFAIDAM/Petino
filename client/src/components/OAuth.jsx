@@ -28,13 +28,13 @@ function OAuth() {
       })
 
       const data = await res.json();
-      console.log(data)
       if (data.user) {
-        dispatch(loginSuccess(data));
-        navigate('/'); // Navigate to desired route after successful login
+        dispatch(loginSuccess(data.user));
+        navigate('/home'); // Navigate to desired route after successful login
       } else {
         console.error('Error creating user or missing user data in response');
       }
+     
     } catch (error) {
       console.log("could not login with google", error);
     }

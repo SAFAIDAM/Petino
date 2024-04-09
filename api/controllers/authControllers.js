@@ -6,7 +6,6 @@ import * as jose from 'jose'
 
 
 export const isValidEmail = (email) => {
-  // Regular expression pattern for email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return emailRegex.test(email);
@@ -15,7 +14,7 @@ export const isValidEmail = (email) => {
 export const signup = async (req, res) => {
   try {
 
-    const { fullName, username, email, password, termsAndServices, verified } = req.body;
+    const { fullName, username, email, password, termsAndServices } = req.body;
     if (!password || password.length < 8) {
       return res.status(400).json({ error: "Password should be at least 8 characters long" });
     }
@@ -40,8 +39,7 @@ export const signup = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      termsAndServices,
-      verified
+      termsAndServices
     })
 
     await newUser.save();
@@ -50,7 +48,7 @@ export const signup = async (req, res) => {
   } catch (error) {
 
     console.log("error in signup controller", error.message);
-    toast.error(error.message || "Internal server error");
+    toast.error(error.message || "Internal server error error in signup controller");
     res.status(500).json({ error: "internal server error" });
 
   }
@@ -65,7 +63,12 @@ export const login = async (req, res) => {
       return res.status(400).json({ error: "user not found Invalid email or password" })
     }
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-    const jwt = await new jose.SignJWT({ id: user._id }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+
+    const jwt = await new jose.SignJWT({
+      id: user._id,
+      role: user.role
+    }).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
+
     res.cookie("tokenjose", jwt, {
       httOnly: true,
     })
@@ -85,7 +88,7 @@ export const google = async (req, res, next) => {
       const existingPhoto = user.profilePicture;
 
       user.username = req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 10) + 2, // Use a function for safer username generation
-      user.profilePicture = existingPhoto;
+        user.profilePicture = existingPhoto;
       user.googleId = req.body.googleId;
       await user.save();
 
@@ -96,6 +99,7 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
+
       res.status(200).json({ user, message: "User found and JWT token generated" });
     } else {
       const newUser = await User({
@@ -113,7 +117,10 @@ export const google = async (req, res, next) => {
         httOnly: true,
         expires: expiryDate
       });
+      console.log(newUser)
       res.status(200).json({ user: newUser, message: "New user created and JWT token generated" });
+      console.log(newUser)
+
     }
   } catch (error) {
     console.log("error in google controller", error.message);

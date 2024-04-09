@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
+  role: {
+    type: String,
+    enum: ["admin", "user"], 
+    default: "user" 
+  },
   fullName: {
     type: String,
   },
@@ -18,9 +23,36 @@ const userSchema = mongoose.Schema({
     type: String,
     minlength: 6
   },
+  bio:
+  {
+    type: String,
+    maxLength: 400,
+  
+  },
+  experience:
+  {
+    type: String,
+    maxLength: 400,
+
+  },
+  instagramLink:
+  {
+    type: String,
+
+  },
+  facebookLink:
+  {
+    type: String,
+
+  },
+  optionalLink:
+  {
+    type: String,
+
+  },
   profilePicture: {
     type: String,
-    default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+    default: "https://i.pinimg.com/564x/ce/a6/e4/cea6e4ee204372b16113f3b9487f1d46.jpg"
   },
   termsAndServices: {
     type: Boolean,

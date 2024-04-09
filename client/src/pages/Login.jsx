@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { loginStart, loginSuccess, loginError } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
+import { ClipLoader } from "react-spinners";
 
 function Login() {
   const [formData, setFormData] = useState({ termsAndServices: false });
@@ -50,8 +51,11 @@ function Login() {
         throw new Error(data.error || "Internal server error");
       }
       // localStorage.setItem("token", data.jwt);
-      dispatch(loginSuccess(data))
-      navigate('/')
+      dispatch(loginSuccess(data.user))
+      if (data.user.role === "admin") {
+        navigate('/admin')
+      }else{
+      navigate('/home')}
     } catch (error) {
       // Display error message from backend using React Hot Toast
       toast.error(error.message || "Internal server error", {
@@ -166,7 +170,7 @@ function Login() {
               type="submit"
               className="flex items-center justify-center gap-3 mb-2 btn-gradient-2"
             >
-              {loading ? "logging in..." : "let's go"}
+              {loading ?  <ClipLoader color="#ffff" size={15} /> : "let's go"}
               <svg
                 className="mt-1"
                 xmlns="http://www.w3.org/2000/svg"

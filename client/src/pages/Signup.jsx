@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import catSignup from "../assets/cat-img.png";
 import or from "../assets/or-img.svg";
-import google from "../assets/Google Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../api/controllers/authControllers";
 import OAuth from "../components/OAuth";
+import { ClipLoader } from "react-spinners";
+
 
 
 function Signup() {
@@ -81,7 +82,6 @@ function Signup() {
         throw new Error(data.error || "Internal server error");
       }
 
-      console.log(data);
       navigate('/login')
     } catch (error) {
       toast.error(error.message || "Internal server error", {
@@ -89,11 +89,11 @@ function Signup() {
       });
     }
   };
-  const handleClick = () => {
-    setIsAnimating(true);
-    onClick && onClick(); // Call passed onClick function if available
-    setTimeout(() => setIsAnimating(false), 1000); // Reset animation after 1s
-  };
+  // const handleClick = () => {
+  //   setIsAnimating(true);
+  //   onClick && onClick(); // Call passed onClick function if available
+  //   setTimeout(() => setIsAnimating(false), 1000); // Reset animation after 1s
+  // };
 
   return (
     <div className="flex items-center justify-between h-[100vh]">
@@ -256,7 +256,7 @@ function Signup() {
           <div className="flex justify-center mt-4 mb-3">
             <button disabled={loading} type="submit" className="button-border btn-gradient-2">
             {loading ? (
-              'creating...'
+              <ClipLoader color="#ffff" size={15} />
               ) : (
                 "Create your own space"
               )}

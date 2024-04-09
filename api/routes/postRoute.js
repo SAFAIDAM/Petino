@@ -29,10 +29,9 @@ router.post("/like/:id", userAuth, likePost);
 router.post("/like-comment/:id/:rid?", userAuth, likePostComment); // like-cmt/idOfComment Or like-cmt//idOfComment/idOfReply (if reply exist)
 router.post("/reply-comment/:id", userAuth, replyPostComment);
 
-// update post
-
 
 //delete post
 router.delete("/:id", userAuth, deletePost);
+
 
 export default router;
