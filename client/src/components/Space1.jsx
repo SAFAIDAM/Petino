@@ -48,7 +48,7 @@ const Space1= () => {
             </svg>
             <input
               type="text"
-              placeholder="Search by username"
+              placeholder="Search "
               className="py-2 pl-10 pr-4 border rounded-full "
               
             />
