@@ -17,6 +17,13 @@ import AdminBlog from "./pages/AdminBlog";
 import AdminRecords from "./pages/AdminRecords";
 import EditeRecord from "./components/EditeRecord";
 import AdminUsers from "./pages/AdminUsers";
+import Rescue from "./pages/Rescue";
+import RescueCreateP from "./pages/RescueCreateP";
+import RescueUpdateP from "./pages/RescueUpdateP";
+import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import { toast } from "react-toastify";
+
 function App() {
   
 
@@ -25,17 +32,18 @@ function App() {
       {/** header components */}
       <Routes>
         <Route element={<PrivateRoute />}>
+          
           <Route path="/home" element={<Home />} />
-        </Route>
-        <Route path="/signup" element={<Signup />} />
+          </Route>
+          <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErorrPage404 />} />
-        <Route path="/Terms" element={<Terms termsdata={termsdata} />} />
-        <Route path="/login" element={<Login />} />
+          <Route path="/Terms" element={<Terms termsdata={termsdata} />} />
+          <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/public" element={<Public />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} /> 
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/publicuser/:id" element={<PublicUser />} />
@@ -55,10 +63,27 @@ function App() {
         <Route element={<ProtectAdmin />}>
           <Route exact path="/admin/update/:id" element={<EditeRecord />} />
         </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/rescue" element={<Rescue/> } />
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/rescue-create-post" element={<RescueCreateP />} /> 
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/rescue-update-post/:id" element={<RescueUpdateP/>} />  
+        </Route>
         
+          
+          
+          
+
       </Routes>
       <Toaster />
       
+
     </BrowserRouter>
   );
 }

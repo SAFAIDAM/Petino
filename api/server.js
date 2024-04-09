@@ -8,16 +8,20 @@ import rescuepostRoute from "./routes/rescuepostRoute.js"
 import connectMongoDB from "./db/connectMongoDB.js"
 import Cors from 'cors'
 
-const app = express()
+import cors from "cors"
+
+const app = express();
+
 
 dotenv.config()
 const PORT = process.env.PORT
 
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
 app.use(Cors())
 
-app.use("/api/auth", authRoute)
+app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/rescuepost", rescuepostRoute);

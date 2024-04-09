@@ -18,7 +18,6 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-
 import { app } from "../firbase";
 import {
   updateUserStart,

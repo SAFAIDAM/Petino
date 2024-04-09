@@ -1,7 +1,7 @@
 import React from 'react'
 import google from "../assets/Google Logo.svg";
 import {GoogleAuthProvider, signInWithPopup, getAuth} from 'firebase/auth'
-import { app } from '../firbase'
+import { app } from "../firbase.js"
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
