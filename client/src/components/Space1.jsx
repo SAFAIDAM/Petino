@@ -17,7 +17,7 @@ const Space1= () => {
 
     return (
         <>
-            <div className="md:flex justify-center gap-[35rem] items-center md:mx-8 max-w-[1200px] lg:mx-auto lg:px-8 mb-10">
+            <div className="md:flex justify-center gap-[35rem] items-center md:mx-8 lg:mx-auto lg:px-8 mb-10">
                 {/* input and Left arrow */}
                 <div className="items-center justify-center gap-6 md:flex ">
             <ArrowPutton />
