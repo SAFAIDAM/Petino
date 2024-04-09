@@ -89,3 +89,7 @@ body{
   border-radius: 30px !important;
   font-family:  "Lato", sans-serif;
 }
+
+.swal-popup {
+  border-radius: 30px; 
+}

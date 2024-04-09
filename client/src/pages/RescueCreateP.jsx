@@ -15,7 +15,8 @@ import {
   uploadBytesResumable,
   listAll,
 } from "firebase/storage";
-
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 const RescueCreateP = () => {
   const [Name, setName] = useState("");
@@ -82,6 +83,7 @@ const RescueCreateP = () => {
 
   return (
     <>
+      <Navbar />
       <ToastContainer />
       <div className="shadow rounded-lg w-full sm:w-[450px] md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
@@ -153,13 +155,14 @@ const RescueCreateP = () => {
             ></progress>
             <button
               type="submit"
-              className="px-3 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 lg:ml-4 mt-4 lg:mt-0"
+              className="px-3 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 lg:ml-4 mt-4 lg:mt-0 mb-16 lg:mb-0"
             >
               Create post
             </button>
           </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

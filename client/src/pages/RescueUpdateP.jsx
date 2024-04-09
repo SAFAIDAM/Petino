@@ -8,12 +8,9 @@ import axios from "axios";
 import "firebase/storage";
 import { app } from "../firebase.js";
 import { imageDb } from "../firebase.js";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
-
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 const RescueUpdateP = () => {
   const { id } = useParams();
@@ -92,6 +89,7 @@ const RescueUpdateP = () => {
 
   return (
     <>
+      <Navbar />
       <div className="shadow rounded-lg w-full md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
         <ToastContainer />
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
@@ -133,7 +131,7 @@ const RescueUpdateP = () => {
               value={Pet_personality}
             />
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-5">
             <div>
               <label className="flex gap-5 px-4 py-2 rounded-full border-2 border-[#ed9c63] bg-[#ed9c63] text-white cursor-pointer ">
                 <img src={downloadW} alt="telecharger" className="flex " />
@@ -141,7 +139,11 @@ const RescueUpdateP = () => {
                 <input type="file" onChange={handleChange} className="hidden" />
               </label>
               {selectedImage && (
-                <img src={selectedImage} alt="selected" className="w-32 h-32 mt-4" />
+                <img
+                  src={selectedImage}
+                  alt="selected"
+                  className="w-32 h-32 mt-4"
+                />
               )}
               {url && !selectedImage && (
                 <img src={url} alt="uploaded" className="w-40 h-35 mt-4" />
@@ -149,13 +151,14 @@ const RescueUpdateP = () => {
             </div>
             <button
               type="submit"
-              className="px-4 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 mb-40"
+              className="px-4 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 lg:ml-4 mt-4 lg:mt-0 mb-16 lg:mb-0"
             >
               Save changes
             </button>
           </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

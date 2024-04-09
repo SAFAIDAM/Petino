@@ -43,7 +43,8 @@ const Adoptable = () => {
       confirmButtonText: 'Yes, delete it!',
       customClass: {
         confirmButton: 'swal-confirm-button',
-        cancelButton: 'swal-cancel-button'
+        cancelButton: 'swal-cancel-button',
+        popup: 'swal-popup'
       }
     });
 
