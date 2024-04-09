@@ -9,11 +9,19 @@ import connectMongoDB from "./db/connectMongoDB.js"
 import serviceRoutes from "./routes/serviceRoutes.js";
 import Cors from 'cors'
 import postRoute from "./routes/postRoute.js"
+import path from "path"
 
 import cors from "cors"
 
+const __dirname = path.resolve();
+
 const app = express();
 
+app.use(express.static(path.join(__dirname, '/client/dist')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+})
 
 dotenv.config()
 const PORT = process.env.PORT

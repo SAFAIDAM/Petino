@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "dev": "nodemon api/server.js"
+    "dev": "nodemon api/server.js",
+    "build":  "npm install && npm unstall --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
