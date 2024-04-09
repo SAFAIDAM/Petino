@@ -84,7 +84,7 @@ const RescueCreateP = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-[55rem] mt-36 p-3 px-8 py-12 mx-auto bg-white rounded-md shadow">
+      <div className="max-w-[55rem] mt-36 p-3 px-8 py-12 mx-auto mb-36 bg-white rounded-[30px] shadow">
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
           Create Post
         </h2>
@@ -138,6 +138,19 @@ const RescueCreateP = () => {
                   <img src={downloadW} alt="telecharger" className="flex " />
                   Upload Image
                 </button>
+                <p className="self-center mt-4 mb-3 text-sm text-center">
+                      {ImageError ? (
+                        <span className="text-red-500">{ImageError}</span>
+                      ) : imagePercent > 0 && imagePercent < 100 ? (
+                        <span className="text-[#EA7F48]">{`Uploading: ${imagePercent} %`}</span>
+                      ) : imagePercent === 100 ? (
+                        <span className="text-center text-[#85D466]">
+                          Image uploaded successfully
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </p>
                 <input
                   type="file"
                   ref={fileRef}
@@ -147,11 +160,6 @@ const RescueCreateP = () => {
                 />
               </div>
             </div>
-            <progress
-              value={imagePercent}
-              max="100"
-              className="w-full mt-4 lg:w-48 lg:mt-0"
-            ></progress>
             <button
               type="submit"
               className="px-3 py-2 rounded-full border-2 border-[#8fa1f7] bg-[#8fa1f7] text-white hover:bg-blue-200 lg:ml-4 mt-4 lg:mt-0 mb-16 lg:mb-0"

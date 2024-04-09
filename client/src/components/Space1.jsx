@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CiSearch } from "react-icons/ci";
 import { IoAdd } from "react-icons/io5";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -18,14 +17,14 @@ const Space1= () => {
 
     return (
         <>
-            <div className="md:flex justify-between items-center md:mx-8 max-w-[1200px] lg:mx-auto lg:px-8 mb-10">
+            <div className="md:flex justify-center gap-[35rem] items-center md:mx-8 max-w-[1200px] lg:mx-auto lg:px-8 mb-10">
                 {/* input and Left arrow */}
                 <div className="items-center justify-center gap-6 md:flex ">
             <ArrowPutton />
             <div className="relative flex items-center justify-center rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute text-gray-500 transform -translate-y-1/2 left-[70px] md:left-3 top-1/2"
+              className="absolute text-gray-500 transform -translate-y-1/2 left-[83px] md:left-3 top-1/2"
               viewBox="0 0 24 24"
               width={20}
               height={20}

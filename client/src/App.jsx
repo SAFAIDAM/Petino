@@ -33,16 +33,9 @@ function App() {
     <BrowserRouter>
       {/** header components */}
       <Routes>
-        <Route element={<PrivateRoute />}>
-          
-        <Route path="/Services" element={<Services />} />
-          </Route>
+        
           <Route element={<PrivateRoute />}>
-          <Route path="/createService" element={<CreateService />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
-          
-          
+        
           <Route path="/home" element={<Home />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
@@ -94,7 +87,13 @@ function App() {
           <Route path="/rescue-update-post/:id" element={<RescueUpdateP/>} />  
         </Route>
         
+        <Route element={<PrivateRoute />}>
           
+          <Route path="/Services" element={<Services />} />
+            </Route>
+            <Route element={<PrivateRoute />}>
+            <Route path="/createService" element={<CreateService />} />
+            </Route>
           
           
 

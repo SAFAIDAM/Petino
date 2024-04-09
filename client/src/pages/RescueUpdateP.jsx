@@ -89,7 +89,7 @@ const RescueUpdateP = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-[55rem] mt-36 p-3 px-8 py-12 mx-auto bg-white rounded-md shadow">
+      <div className="max-w-[55rem] mt-36 mb-36 p-3 px-8 py-12 mx-auto bg-white rounded-[30px] shadow">
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
           Edit Post
         </h2>
