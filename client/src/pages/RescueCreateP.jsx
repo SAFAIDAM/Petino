@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../App.css";
 import downloadW from "../assets/downloadW.svg";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { app } from "../firbase.js";
@@ -11,7 +11,9 @@ import {
   getDownloadURL,
   getStorage,
   ref,
+  uploadBytes,
   uploadBytesResumable,
+  listAll,
 } from "firebase/storage";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -82,8 +84,7 @@ const RescueCreateP = () => {
   return (
     <>
       <Navbar />
-      <ToastContainer />
-      <div className="shadow rounded-lg w-full sm:w-[450px] md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
+      <div className="max-w-[55rem] mt-36 p-3 px-8 py-12 mx-auto bg-white rounded-md shadow">
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
           Create Post
         </h2>
@@ -92,7 +93,7 @@ const RescueCreateP = () => {
             <h4 className="font-semibold text-lg text-[#6e6e6e] mb-2">Name</h4>
             <input
               type="text"
-              placeholder="Simba"
+              placeholder="Pet name"
               className="px-4 py-3 rounded-lg border-2 border-lime-600 w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setName(e.target.value)}
               value={Name}
@@ -102,7 +103,7 @@ const RescueCreateP = () => {
             <h4 className="font-semibold text-lg text-[#6e6e6e] mb-2">Age</h4>
             <input
               type="text"
-              placeholder="2 ans"
+              placeholder="years"
               className="px-4 py-3 rounded-lg border-2 border-[#e06c2e] w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setAge(e.target.value)}
               value={Age}
@@ -117,7 +118,7 @@ const RescueCreateP = () => {
             </p>
             <input
               type="text"
-              placeholder="Simba, a playful and curious cat, is looking for a dynamic home to explore and play with affection."
+              placeholder="enter here a discription of your pets"
               className="px-4 py-3 rounded-lg border-2 border-[#e06c2e] w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setPet_personality(e.target.value)}
               value={Pet_personality}

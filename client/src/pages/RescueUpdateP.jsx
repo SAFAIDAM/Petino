@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../App.css";
 import downloadW from "../assets/downloadW.svg";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "firebase/storage";
@@ -89,8 +89,7 @@ const RescueUpdateP = () => {
   return (
     <>
       <Navbar />
-      <div className="shadow rounded-lg w-full md:w-[768px] lg:w-[912px] xl:w-[1220px] 2xl:w-[1536px] bg-white mx-auto mt-16 px-8 py-12">
-        <ToastContainer />
+      <div className="max-w-[55rem] mt-36 p-3 px-8 py-12 mx-auto bg-white rounded-md shadow">
         <h2 className="text-center font-semibold text-2xl text-[#6e6e6e] pt-9">
           Edit Post
         </h2>

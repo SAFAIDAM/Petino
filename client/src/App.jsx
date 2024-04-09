@@ -21,10 +21,10 @@ import Rescue from "./pages/Rescue";
 import RescueCreateP from "./pages/RescueCreateP";
 import RescueUpdateP from "./pages/RescueUpdateP";
 import "react-toastify/dist/ReactToastify.css";
-// import { ToastContainer } from "react-toastify";
-// import { toast } from "react-toastify";
+import Services from "./pages/services"
 import Posts from "./pages/Posts";
 import CreatePost from "./pages/CreatePost"
+import CreateService from "./pages/CreateService";
 
 function App() {
   
@@ -34,6 +34,14 @@ function App() {
       {/** header components */}
       <Routes>
         <Route element={<PrivateRoute />}>
+          
+        <Route path="/Services" element={<Services />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+          <Route path="/createService" element={<CreateService />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+          
           
           <Route path="/home" element={<Home />} />
           </Route>

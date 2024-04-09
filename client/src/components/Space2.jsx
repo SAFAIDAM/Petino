@@ -7,7 +7,7 @@ import ArrowPutton from "./ArrowPutton";
 
 
 
-const Space = () => {
+const Space2= () => {
 
     const [filteredPost, setFilteredPost] = useState(false)
 
@@ -20,7 +20,7 @@ const Space = () => {
         <>
             <div className="md:flex justify-between items-center md:mx-8 max-w-[1200px] lg:mx-auto lg:px-8 mb-10">
                 {/* input and Left arrow */}
-                <div className="items-center justify-center gap-6 md:flex md:ml-40">
+                <div className="items-center justify-center gap-6 md:flex ">
             <ArrowPutton />
             <div className="relative flex items-center justify-center rounded-full">
             <svg
@@ -62,7 +62,7 @@ const Space = () => {
                     <Link to="/createPost">
                         <button className="bg-[#8FA1F7] flex gap-2 py-3 px-8 rounded-[30px] text-white">
                             <IoAdd size={25} />
-                            Start creating your posts
+                           Add your own Service
                         </button>
                     </Link>
                 </div>
@@ -88,4 +88,4 @@ const Space = () => {
     )
 }
 
-export default Space
+export default Space2

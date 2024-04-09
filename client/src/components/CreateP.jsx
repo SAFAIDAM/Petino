@@ -3,7 +3,7 @@ import Footer from "../components/Footer.jsx"
 import { useDispatch } from 'react-redux';
 import { createPostSuccess } from '../redux/post/postSlice';
 import axios from 'axios';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineUpload } from "react-icons/hi";
 import {

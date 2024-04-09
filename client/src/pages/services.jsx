@@ -1,18 +1,16 @@
 import Footer from "../components/Footer";
-import Space from "../components/Space1";
 import Navbar from "../components/Navbar";
-import RenderPosts from "../components/RenderPosts";
+import Posts from "./ServicePost";
 import "../components/style.css";
 
-const Posts = () => {
+const services = () => {
   return (
     <>
       <Navbar />
-      <Space />
-      <RenderPosts />
+      <Posts />
       <Footer />
     </>
   );
 };
 
-export default Posts;
+export default services;

@@ -6,6 +6,7 @@ import authRoute from "./routes/authRoute.js"
 import adminRoute from "./routes/adminRoute.js"
 import rescuepostRoute from "./routes/rescuepostRoute.js"
 import connectMongoDB from "./db/connectMongoDB.js"
+import serviceRoutes from "./routes/serviceRoutes.js";
 import Cors from 'cors'
 import postRoute from "./routes/postRoute.js"
 
@@ -27,6 +28,7 @@ app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/rescuepost", rescuepostRoute);
 app.use("/api/posts", postRoute)
+app.use("/api/services", serviceRoutes);
 
 
 app.use((err, req, res, next) => {

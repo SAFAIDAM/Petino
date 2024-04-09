@@ -5,7 +5,7 @@ import Donation from "../components/Donation.jsx";
 import PostSection from "../components/PostSection.jsx";
 import Adoptable from "../components/Adoptable.jsx";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import Navbar from "../components/Navbar.jsx";
 import  Footer from "../components/Footer.jsx" ;
 
@@ -14,15 +14,18 @@ import  Footer from "../components/Footer.jsx" ;
 const Rescue = () => {
   
   return (
-    <>  
+    <div>  
         <Navbar />
+        <div className="mt-36">
         <Achievement />     
         <PostSection />   
         <Adoptable />         
         <Donation />
-        <ToastContainer />
+        <Toaster />
         <Footer />
-    </>
+        </div>
+        
+    </div>
   );
 };
 
