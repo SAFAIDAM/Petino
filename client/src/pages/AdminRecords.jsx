@@ -202,7 +202,7 @@ function AdminRecords() {
           )}
         </div>
       </div>
-      <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
+      <div className="md:flex justify-center h-[2px] bg-[#bcbcbc] mt-36"></div>
       <Footer />
     </div>
   );

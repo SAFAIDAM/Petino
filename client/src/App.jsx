@@ -1,6 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/Home2";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
 import { Toaster } from "react-hot-toast";
@@ -26,7 +25,6 @@ import Posts from "./pages/Posts";
 import CreatePost from "./pages/CreatePost";
 import CreateService from "./pages/CreateService";
 import Home1 from "./pages/Home1";
-import Home2 from "./pages/Home2";
 import About from "./pages/About";
 import Header from "./components/Header";
 import HeaderAbout from "./components/headerAbout";
@@ -55,9 +53,6 @@ function App() {
           }
         />
 
-        <Route element={<PrivateRoute />}>
-          <Route path="/home" element={<Home2 />} />
-        </Route>
         <Route path="/signup" element={<Signup />} />
 
         <Route path="*" element={<ErorrPage404 />} />

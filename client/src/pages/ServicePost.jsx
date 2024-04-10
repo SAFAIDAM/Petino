@@ -236,12 +236,16 @@ function Posts() {
             <div className="flex items-center justify-between mr-4">
               <div className="flex items-center gap-4 mx-4">
                 {/* User profile picture */}
+                
                 {service.userProfileImage ? (
+                  <Link to={`/publicuser/${service.userId}`}>
                   <img
                     className="w-[50px] h-[50px] rounded-full"
                     src={service.userProfileImage}
                     alt="user picture"
                   />
+                  
+                  </Link>
                   
                   
                 ) : (
@@ -251,7 +255,10 @@ function Posts() {
                     alt="default user picture"
                   />
                 )}
-                <p>{service.username}</p>
+                 <Link to={`/publicuser/${service.userId}`}>
+                 <p>{service.username}</p>
+                 </Link>
+                
               </div>
               {/* Time elapsed since posting */}
               <span className="text-[15px] text-[#A6A6A6]">
