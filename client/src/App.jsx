@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home2";
 import Login from "./pages/Login";
 import Terms from "./pages/Terms";
 import { Toaster } from "react-hot-toast";
@@ -21,29 +21,49 @@ import Rescue from "./pages/Rescue";
 import RescueCreateP from "./pages/RescueCreateP";
 import RescueUpdateP from "./pages/RescueUpdateP";
 import "react-toastify/dist/ReactToastify.css";
-import Services from "./pages/services"
+import Services from "./pages/services";
 import Posts from "./pages/Posts";
-import CreatePost from "./pages/CreatePost"
+import CreatePost from "./pages/CreatePost";
 import CreateService from "./pages/CreateService";
+import Home1 from "./pages/Home1";
+import Home2 from "./pages/Home2";
+import About from "./pages/About";
+import Header from "./components/Header";
+import HeaderAbout from "./components/headerAbout";
 
 function App() {
-  
-
   return (
     <BrowserRouter>
       {/** header components */}
       <Routes>
-        
-          <Route element={<PrivateRoute />}>
-        
-          <Route path="/home" element={<Home />} />
-          </Route>
-          <Route path="/signup" element={<Signup />} />
-          
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <Home1 />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <HeaderAbout />
+              <About />
+            </>
+          }
+        />
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/home" element={<Home2 />} />
+        </Route>
+        <Route path="/signup" element={<Signup />} />
+
         <Route path="*" element={<ErorrPage404 />} />
 
-          <Route path="/Terms" element={<Terms termsdata={termsdata} />} />
-          <Route path="/login" element={<Login />} />
+        <Route path="/Terms" element={<Terms termsdata={termsdata} />} />
+        <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/public" element={<Public />} />
         </Route>
@@ -76,34 +96,27 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route path="/rescue" element={<Rescue/> } />
+          <Route path="/rescue" element={<Rescue />} />
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route path="/rescue-create-post" element={<RescueCreateP />} /> 
+          <Route path="/rescue-create-post" element={<RescueCreateP />} />
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route path="/rescue-update-post/:id" element={<RescueUpdateP/>} />  
+          <Route path="/rescue-update-post/:id" element={<RescueUpdateP />} />
         </Route>
-        
+
         <Route element={<PrivateRoute />}>
-          
           <Route path="/Services" element={<Services />} />
-            </Route>
-            <Route element={<PrivateRoute />}>
-            <Route path="/createService" element={<CreateService />} />
-            </Route>
-          
-          
-
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/createService" element={<CreateService />} />
+        </Route>
       </Routes>
       <Toaster />
-      
-
     </BrowserRouter>
   );
 }
-
 
 export default App;

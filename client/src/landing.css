@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Gluten', cursive;
+
+}
+
+
+  
+.custom-card {
+    width: 100%;
+    max-width: 100% ;
+    height: 100%;
+    border-radius: 39px;
+    background-color: #E3DDF5;
+    color: white;
+    padding: 20px;
+  }
+
+
+
+p,li{
+  font-family: "Lato", sans-serif;
+}
+
+
+.btn1{
+    background-color: #8FA1F7;
+        width: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 40px;
+    border-color: red;
+    border-width: 1px;
+    color: white;
+}
+
+.btn2{
+    background-color: #84D368;
+    width: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 40px;
+    border-color: red;
+    border-width: 1px;
+    color: white;
+
+}
+.btn3 {
+  background-color: #E06C2E;
+  padding: 10px 40px;
+  border-radius: 40px;
+  color: white;
+  height: 100%;
+}
+
+
+.btn-gradient-2 {
+  background: linear-gradient(#8FA1F7, #8FA1F7) padding-box,
+              linear-gradient(to right, #ea7f48, blue) border-box;
+              
+
+  border-radius: 50em;
+  border: 4px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.btn-gradient-3 {
+  background: linear-gradient(#84D368, #84D368) padding-box,
+              linear-gradient(to right, #ea7f48, blue) border-box;
+              
+
+  border-radius: 50em;
+  border: 4px solid transparent;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}

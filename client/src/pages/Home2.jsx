@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home2() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home2;
 // const [isLoading, setIsLoading] = useState(true);
 //   const params = useParams();
 //   const [user, setUser] = useState({});

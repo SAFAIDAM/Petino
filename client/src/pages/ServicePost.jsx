@@ -242,6 +242,8 @@ function Posts() {
                     src={service.userProfileImage}
                     alt="user picture"
                   />
+                  
+                  
                 ) : (
                   <img
                     className="w-[50px] h-[50px] rounded-full"
@@ -285,7 +287,7 @@ function Posts() {
 
             <div className="mx-4 mt-3 mb-3 relative rounded-[15px]">
               <img
-                className="h-80 max-sm:h-48 w-full rounded-[15px]"
+                className="h-[20rem] max-sm:h-48 w-full rounded-[15px]"
                 src={service.imageURL}
                 alt="post image"
               />
