@@ -47,19 +47,6 @@ const Adoptable = () => {
         cancelButton: "swal-cancel-button",
       },
     });
-
-    // if (confirmDelete){
-    //   try {
-    //     await axios.delete(
-    //       `http://localhost:8000/api/rescuepost/delete/${postId}`
-    //     );
-    //     setPosts(posts.filter(post => post._id !== postId));
-    //     toast.success("Post deleted successfully !");
-    //   } catch (error) {
-    //     console.error('Error deleting post: ' , error);
-    //     toast.error("Failed to delete post .");
-    //   }
-    // }
     if (confirmDelete.isConfirmed) {
       try {
         await axios.delete(
@@ -88,11 +75,11 @@ const Adoptable = () => {
   };
 
   const handleAdopt = (post) => {
-    const email = "petinooplatform@gmail.com"; // Replace with the email address to send the adoption request to
-    const subject = `Adopting ${post.Name}`; // Subject of the email
-    const body = ""; // You can pre-fill the body of the email if needed
+    const email = "petinooplatform@gmail.com"; 
+    const subject = `Adopting ${post.Name}`; 
+    const body = ""; 
 
-    // Construct the Gmail compose URL with email address, subject, and body
+   
     const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;

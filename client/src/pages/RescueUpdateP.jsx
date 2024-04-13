@@ -99,7 +99,7 @@ const RescueUpdateP = () => {
             <input
               type="text"
               placeholder="Simba"
-              className="px-4 py-3 rounded-lg border-2 border-lime-600 w-full bg-white text-[#6e6e6e]"
+              className="px-4 py-3 rounded-[20px] border-2 border-[#65A30D] w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setName(e.target.value)}
               value={Name}
             />
@@ -109,7 +109,7 @@ const RescueUpdateP = () => {
             <input
               type="text"
               placeholder="2 ans"
-              className="px-4 py-3 rounded-lg border-2 border-[#e06c2e] w-full bg-white text-[#6e6e6e]"
+              className="px-4 py-3 rounded-[20px] border-2 border-[#ED9C63] w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setAge(e.target.value)}
               value={Age}
             />
@@ -121,10 +121,11 @@ const RescueUpdateP = () => {
             <p className="font-semibold text-sm text-[#a6a6a6] mb-2">
               Enter less than 3000 letters
             </p>
-            <input
+            <textarea
+            rows={3}
               type="text"
               placeholder="Simba, a playful and curious cat, is looking for a dynamic home to explore and play with affection."
-              className="px-4 py-3 rounded-lg border-2 border-[#e06c2e] w-full bg-white text-[#6e6e6e]"
+              className="px-4 py-3 rounded-[20px] border-2 border-[#e06c2e] w-full bg-white text-[#6e6e6e]"
               onChange={(e) => setPet_personality(e.target.value)}
               value={Pet_personality}
             />

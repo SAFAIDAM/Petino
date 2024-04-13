@@ -276,9 +276,9 @@ service firebase.storage {
                   />
 
                   <div>
-                    <h1 className="mb-1 text-xl font-bold text-center ">
+                    <p className="mb-1 text-xl font-bold text-center ">
                       {currentUser.username}
-                    </h1>
+                    </p>
                     <p className="text-xs text-center text-[#989897] mb-3">
                       upload your own picture here <br /> (the image chould be
                       less then 2MB)

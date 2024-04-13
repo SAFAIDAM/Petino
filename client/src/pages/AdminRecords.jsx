@@ -104,15 +104,15 @@ function AdminRecords() {
               onChange={handleSearchChange}
             />
           </div>
-          <div>
-            <h1 className="mt-8 heading-signup">View Records</h1>
-          </div>
+          
           <Link to="/admin/create">
             <button className="flex mr-auto ml-auto mt-8 md:mb-0 mb-2 justify-center items-center min-w-36 gap-2 p-3 rounded-full text-sm text-white text-center transition-[3s] bg-[#85D466] hover:transition-[3s] hover:bg-[#c8c4c2]">
               Create record
             </button>
           </Link>
-        </div>
+          <div>
+            <h1 className="mt-8 heading-signup">View Records</h1>
+          </div>        </div>
 
         <div className="overflow-x-auto shadow-md mr-11 ml-11 sm:rounded-lg mt-11">
           {loading ? ( // Render loading indicator if data is still loading

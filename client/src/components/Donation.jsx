@@ -12,7 +12,7 @@ const Donation = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex items-center justify-center h-screen">
       <div className="w-full md:w-[570px] lg:w-11/12 xl:w-11/12">
         <h1 className="heading-signup text-center font-semibold text-[37px] text-black mt-16">
           Donations
@@ -42,17 +42,17 @@ const Donation = () => {
       </div>
       <Popup open={popupOpen} onClose={() => setpopupOpen(false)}>
         <div className="overlay" onClick={() => setpopupOpen(false)}></div>
-        <div className="popup bg-white border border-gray-300 p-4 flex flex-col items-center justify-center mx-32">
+        <div className="rounded-[20px] md:w-[900px] w-[330px] relative flex flex-col items-center justify-center p-4 mx-32 bg-white border border-gray-300 popup md:right-0 right-[100px]">
           <img
             src={petinoo}
             alt="petino"
-            className="block mx-auto w-[200px] h-[150px]"
+            className="block mx-auto w-[100px] md:w-[200px] md:h-[150px]"
           />
-          <p>
+          <p className='text-[13px] md:text-xl'>
             Thank you for donating to Petino's pets! Your contribution will
             help make a difference in the lives of our rescued animals. <br />
-            This is our IBAN : <b>FR12 3456 7890 1234 5678 9012 345</b> <br />
-            And our BIC : <b>ABCDEFGHXXX</b>
+            This is our IBAN : <b>MA60386754435913732234543864</b> <br />
+            And our BIC : <b>OEDNMO5ZXXX.HRSWREKAXXX.YMSOOMT7XXX</b>
           </p>
         </div>
       </Popup>
