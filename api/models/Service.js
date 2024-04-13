@@ -16,15 +16,15 @@ const serviceSchema = new mongoose.Schema({
   datePosted: { type: Date, default: Date.now },
   startDate: Date,
   dueDate: Date,
-  userId: {    type: Schema.Types.ObjectId , ref: "User" },
+  userId: { type: Schema.Types.ObjectId , ref: "User" },
   userProfileImage: {
     type: String,
-    required: false // Adjust as per your requirements
+    required: false 
   },
   username:String,
-  rating: { type: Number, default: 0 }, // Individual rating of the service
-  ratingsCount: { type: Number, default: 0 }, // Count of total ratings
-  averageRating: { type: Number, default: 0 }, // Average rating of the service
+  rating: { type: Number, default: 0 }, 
+  ratingsCount: { type: Number, default: 0 }, 
+  averageRating: { type: Number, default: 0 }, 
   statut:String,
   responsibility:Boolean,
 });

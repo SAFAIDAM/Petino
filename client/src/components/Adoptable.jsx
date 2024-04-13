@@ -35,11 +35,10 @@ const Adoptable = () => {
     //   "Are you sure you want to delete this post?"
     // );
     const confirmDelete = await Swal.fire({
-      title: "Are you sure?",
-      text: "You will not be able to recover this post!",
+      text: "Are you sure you want to delete this post!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#8FA1F7",
+      confirmButtonColor: "#85D466",
       cancelButtonColor: "#E06C2E",
       confirmButtonText: "Yes, delete it!",
       customClass: {

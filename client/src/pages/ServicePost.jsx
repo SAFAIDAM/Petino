@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import CreateP from "../components/CreateServicee";
 import EditModal from "./EditModal";
 import { LiaStarSolid } from "react-icons/lia";
-import postImage from "../assets/catImageOne.png";
 import deleteIcon from "../assets/delete.svg";
 import editIcon from "../assets/edite.svg";
 import RateService from "../components/RateService"; // Import the RateService component
 import { Link } from "react-router-dom";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
-import { FaArrowLeft } from "react-icons/fa6";
-import { CiSearch } from "react-icons/ci";
-import { FaTrash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify"; // Import toast and ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
-import imgDefault from "../assets/imgDefault.png";
 import ArrowPutton from "../components/ArrowPutton";
 
 function Posts() {
@@ -31,6 +24,7 @@ function Posts() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+  
     fetchData();
   }, []);
 
@@ -131,6 +125,7 @@ function Posts() {
     : [];
 
   useEffect(() => {
+    
     if (currentUser && currentUser.profilePicture) {
       setIsLoading(false);
     }
@@ -145,6 +140,7 @@ function Posts() {
     )}&body=${encodeURIComponent(body)}`;
     window.open(gmailUrl);
   };
+  
   return (
     <div>
       <ToastContainer />
@@ -249,11 +245,12 @@ function Posts() {
                   
                   
                 ) : (
-                  <img
-                    className="w-[50px] h-[50px] rounded-full"
-                    src={imgDefault}
-                    alt="default user picture"
-                  />
+                  ""
+                  // <img
+                  //   className="w-[50px] h-[50px] rounded-full"
+                  //   src={imgDefault}
+                  //   alt="default user picture"
+                  // />
                 )}
                  <Link to={`/publicuser/${service.userId}`}>
                  <p>{service.username}</p>
