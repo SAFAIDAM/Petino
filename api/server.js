@@ -7,20 +7,20 @@ import adminRoute from "./routes/adminRoute.js"
 import rescuepostRoute from "./routes/rescuepostRoute.js"
 import connectMongoDB from "./db/connectMongoDB.js"
 import serviceRoutes from "./routes/serviceRoutes.js";
-import Cors from 'cors'
 import postRoute from "./routes/postRoute.js"
-
-import cors from "cors"
-
+import path from 'path'
 
 const app = express();
+
 dotenv.config()
 const PORT = process.env.PORT
 
-app.use(cors())
+const __dirname = path.resolve();
+
+
 app.use(express.json())
 app.use(cookieParser());
-app.use(Cors())
+
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
@@ -28,6 +28,12 @@ app.use("/api/admin", adminRoute);
 app.use("/api/rescuepost", rescuepostRoute);
 app.use("/api/posts", postRoute)
 app.use("/api/services", serviceRoutes);
+
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+})
 
 
 app.use((err, req, res, next) => {
