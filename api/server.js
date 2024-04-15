@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
 
 
 
-app.listen(3000, () => {
+app.listen(8000, () => {
   connectMongoDB();
-  console.log("Server listening on " + PORT)
+  console.log("Server listening on " + 8000)
 })
