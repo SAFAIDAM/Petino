@@ -23,7 +23,7 @@ function Navbar() {
     const { currentUser } = useSelector(state => state.user);
 
     return (
-        <div className="flex items-center justify-between w-11/12 mx-auto mb-6 mt-11">
+        <div className="flex sticky top-7 z-[4000] items-center justify-between w-11/12 mx-auto mb-6 mt-11">
             {/* Logo */}
             <div className="pl-8">
                 <img src={logo} alt="Petinoo Logo" />

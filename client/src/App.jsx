@@ -51,6 +51,8 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/Blog" element={<Posts />} />
+          <Route path="/Blog/deletePost/:postId" element={<Posts />} />
+          <Route path="/Blog/updatePost/:postId" element={<Posts />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/createPost" element={<CreatePost />} />
