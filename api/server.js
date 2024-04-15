@@ -30,10 +30,10 @@ app.use("/api/posts", postRoute)
 app.use("/api/services", serviceRoutes);
 
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/dist/index.html"))
-})
+// app.use(express.static(path.join(__dirname, "/client/dist")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+// })
 
 app.get('/' , (req, res) => {
   res.send({ message : "waa hatid igada" })
