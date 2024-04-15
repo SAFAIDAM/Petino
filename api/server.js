@@ -13,7 +13,7 @@ import path from 'path'
 const app = express();
 
 dotenv.config()
-const PORT = process.env.PORT
+// const PORT = process.env.PORT
 
 const __dirname = path.resolve();
 
@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
 
 
 
-app.listen(PORT, () => {
+app.listen(8000, () => {
   connectMongoDB();
   console.log("Server listening on " + PORT)
 })
