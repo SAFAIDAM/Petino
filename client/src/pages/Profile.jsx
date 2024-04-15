@@ -335,9 +335,12 @@ service firebase.storage {
                       See public view
                     </button>
                   </Link>
+                  <Link to="/Blog">
                   <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
                     Go to Home
                   </button>
+                  </Link>
+                 
                 </div>
               </div>
               <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>

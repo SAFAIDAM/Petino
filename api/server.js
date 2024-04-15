@@ -35,6 +35,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
 })
 
+app.get('/' , (req, res) => {
+  res.send({ message : "waa hatid igada" })
+})
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

@@ -226,7 +226,7 @@ function Posts() {
         {error && <p>Error: {error}</p>}
         {filteredServices.map((service) => (
           <div
-            className="custom-shadow rounded-[25px] w-[320px] md:w-full py-6 px-2 mx-auto bg-white "
+            className="shadow-lg rounded-[25px] w-[320px] md:w-full py-6 px-2 mx-auto bg-white "
             key={service._id}
           >
             <div className="flex items-center justify-between mr-4">
