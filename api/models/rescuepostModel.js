@@ -16,7 +16,6 @@ const rescuepostSchema =  new mongoose.Schema({
     Pet_personality: {
         type: String,
         required: true,
-        maxlength: 100
     }, 
 
     imageURL: {
