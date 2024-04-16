@@ -11,6 +11,7 @@ import { IoAdd } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify"; // Import toast and ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import ArrowPutton from "../components/ArrowPutton";
+import catimage from '../assets/service-deafult.png'
 
 function Posts() {
   const [services, setServices] = useState([]);
@@ -123,6 +124,7 @@ function Posts() {
           : true;
       })
     : [];
+    const noPostsAvailable = filteredServices.length === 0 && !!categoryFilter;
 
   useEffect(() => {
     
@@ -220,11 +222,18 @@ function Posts() {
           </select>
         </div>
       </div>
+      {noPostsAvailable && (
+          <div className="flex items-center justify-center mt-7 ml-auto mr-auto md:w-[300px] w-[200px] text-center">
+            <img src={catimage} alt="" />
+          </div>
+        )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 md:mx-8 gap-[50px] w-11/12 lg:mx-8 xl:mx-auto xl:px-8 mb-[130px] relative w-screen-sm mx-auto">
         {isLoading && <p>Loading services...</p>}
         {error && <p>Error: {error}</p>}
+       
         {filteredServices.map((service) => (
+          
           <div
             className="shadow-lg rounded-[25px] w-[320px] md:w-full py-6 px-2 mx-auto bg-white "
             key={service._id}
@@ -291,11 +300,11 @@ function Posts() {
 
             <div className="mx-4 mt-3 mb-3 relative rounded-[15px]">
               <img
-                className="h-[20rem] max-sm:h-48 w-full rounded-[15px]"
+                className="h-80 max-sm:h-48 w-full rounded-[15px]"
                 src={service.imageURL}
                 alt="post image"
               />
-              <div className="absolute px-6 py-1 text-sm bg-white border border-black rounded-full top-4 right-3">
+              <div className="absolute px-6 py-1 text-sm bg-white border rounded-full top-4 right-3 shadow-md">
                 <h4 className="font-extrabold text-black">
                   {service.category}
                 </h4>
@@ -309,13 +318,11 @@ function Posts() {
                   {new Date(service.startDate).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "short",
-                    year: "numeric",
                   })}
                   -
                   {new Date(service.dueDate).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "short",
-                    year: "numeric",
                   })}
                 </p>
                 <h6 className="font-bold">{service.rangePrice} MAD</h6>
@@ -363,6 +370,7 @@ function Posts() {
               </div>
             </div>
           </div>
+
         ))}
         {editedService && (
           <div>

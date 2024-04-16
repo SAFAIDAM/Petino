@@ -28,6 +28,7 @@ import Home1 from "./pages/Home1";
 import About from "./pages/About";
 import Header from "./components/Header";
 import HeaderAbout from "./components/headerAbout";
+import AdminServices from "./pages/AdminServices";
 
 function App() {
   return (
@@ -89,6 +90,10 @@ function App() {
         <Route element={<ProtectAdmin />}>
           <Route exact path="/admin/update/:id" element={<EditeRecord />} />
         </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route exact path="/admin/services" element={<AdminServices />} />
+        </Route>
+
 
         <Route element={<PrivateRoute />}>
           <Route path="/rescue" element={<Rescue />} />

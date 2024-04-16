@@ -9,7 +9,7 @@ import connectMongoDB from "./db/connectMongoDB.js"
 import serviceRoutes from "./routes/serviceRoutes.js";
 import postRoute from "./routes/postRoute.js"
 import path from 'path'
-
+import cors from "cors"
 
 const app = express();
 
@@ -18,6 +18,7 @@ dotenv.config()
 
 const __dirname = path.resolve();
 
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
 

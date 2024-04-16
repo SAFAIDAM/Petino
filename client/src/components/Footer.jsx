@@ -14,7 +14,7 @@ function Footer() {
             <Link to="/Terms">
               <span className="text-[#D34A01] hover:underline">
                 {" "}
-                Tirms & Services
+                Terms & Services
               </span>{" "}
             </Link>
           </p>
