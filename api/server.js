@@ -10,13 +10,13 @@ import serviceRoutes from "./routes/serviceRoutes.js";
 import postRoute from "./routes/postRoute.js"
 import path from 'path'
 
+
 const app = express();
 
 dotenv.config()
 // const PORT = process.env.PORT
 
 const __dirname = path.resolve();
-
 
 app.use(express.json())
 app.use(cookieParser());
