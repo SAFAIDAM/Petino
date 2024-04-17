@@ -121,7 +121,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
         setServices((prevServices) => [...prevServices, formData]);
         setShowCreateForm(false);
         toast.success("Service created successfully!");
-        window.location.href = "/Services";
+        window.location.href = "/Services"; v  -+
       }
       setServiceStatus(formData.statut);
     } catch (error) {
