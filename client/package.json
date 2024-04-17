@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^2.2.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "auth-thirdparty": "file:..",
     "axios": "^1.6.8",
     "firebase": "^10.10.0",
     "flowbite": "^2.3.0",

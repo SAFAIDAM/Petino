@@ -65,9 +65,11 @@ function Public() {
                     </button>
                   </Link>
 
-                  <button className="flex md:mb-0 mb-2 justify-center items-center min-w-36 gap-2 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
-                    Go to own posts
+                  <Link to="/Blog">
+                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
+                    Go to Home
                   </button>
+                  </Link>
                 </div>
               </div>
               <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
@@ -105,16 +107,7 @@ function Public() {
                         </h1>
                         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
                           <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                            category
-                          </p>
-                          <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                            category
-                          </p>
-                          <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                            cate
-                          </p>
-                          <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                            cat
+                            grooming
                           </p>
                         </div>
                       </div>
