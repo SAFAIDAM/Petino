@@ -32,6 +32,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
         console.error("Failed to create service:", error);
       });
   }
+
   useEffect(() => {
     if (currentUser) {
       setCurrentUserLoaded(true);
@@ -120,6 +121,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
         setServices((prevServices) => [...prevServices, formData]);
         setShowCreateForm(false);
         toast.success("Service created successfully!");
+        window.location.href = "/Services";
       }
       setServiceStatus(formData.statut);
     } catch (error) {
@@ -392,7 +394,6 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
           )}
           <button
             type="submit"
-            onClick={handleCreateService}
             className="py-3 font-bold text-white bg-blue-400 w-max hover:bg-blue-400 px-9 rounded-3xl"
           >
             {initialData ? "Update" : "Create"} Service
