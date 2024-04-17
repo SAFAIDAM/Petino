@@ -67,7 +67,7 @@ function AdminRecords() {
   return (
     <div className="">
       <AdminHeader />
-      <div className="ml-auto mr-auto mb-36">
+      <div className="ml-auto mr-auto mb-36 pb-36">
         <div className="items-center justify-between max-w-6xl p-3 text-center md:flex mt-11">
           <div className="items-center justify-center md:ml-40 md:flex gap-11">
             <ArrowPutton />

@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import '../landing.css';
 import etoil from '../assets/etoil.png';
-import etoil1 from '../assets/etoil1.png';
 import up from '../assets/up.png';
-import team from '../assets/team.png';
 import teamsafa from '../assets/teamsafa.png'
 import teamhassna from '../assets/teamhassna.png'
+import teamyouness from '../assets/teamyouness.png'
+import teamanwar from '../assets/teamanwar.png'
+
 function About() {
   const scrollToTop = () => {
     window.scrollTo({
@@ -89,14 +90,14 @@ function About() {
           </div>
 
           <div className='text-center'>
-            <img src={team} className='mx-auto pb-7' alt="" />
+            <img src={teamyouness} className='mx-auto pb-7' alt="" />
             <h5 className='text-2xl font-bold'>BAANISE Youness</h5>
             <p className='text-2xl'>FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
           </div>
 
           <div className='text-center'>
-            <img src={team} className='mx-auto pb-7' alt="" />
+            <img src={teamanwar} className='mx-auto pb-7' alt="" />
             <h5 className='text-2xl font-bold'>BOUIKHEF Anwar</h5>
             <p className='text-2xl' >FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
@@ -110,7 +111,7 @@ function About() {
       </div>
 
   
-        <div className='fixed right-0 flex justify-end bottom-10' onClick={scrollToTop}> 
+        <div className='fixed right-0 flex justify-end bottom-10 w-[60px] mr-4' onClick={scrollToTop}> 
           <button> <img src={up} alt="" /></button>
         </div>
       </div>

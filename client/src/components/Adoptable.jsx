@@ -92,7 +92,7 @@ const Adoptable = () => {
         {posts.map((post, index) => (
           <div
             key={index}
-            className="grid-1 shadow rounded-[30px]  w-[390px]  md: h-[550px]   lg:h-[530px]  bg-white "
+            className="grid-1 shadow rounded-[30px]  w-[399px]  md:h-[580px]   lg:h-[570px]  bg-white "
           >
             {post.imageURL && (
               <img
@@ -125,12 +125,13 @@ const Adoptable = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="font-bold flex text-[#EA8B48]">
-                    Pet personality:{" "}
-                    <div className="ml-3 text-base font-normal text-black">
+                  <span className="font-bold text-md flex text-[#EA8B48]">
+                    Personality:{" "}
+                   
+                  </span>
+                  <div className="ml-3 text-base font-normal text-black">
                       {post.Pet_personality}
                     </div>
-                  </span>
                 </div>
               </div>
 

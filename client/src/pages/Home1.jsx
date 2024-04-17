@@ -81,7 +81,7 @@ function Home1() {
           <h1 className='w-11/12 text-4xl font-bold text-center'>Where your pet is our priority </h1>
           <img className='w-screen' src={pets} alt="" />
           <Link to='/signup'> 
-          <button className='btn1 mt-7'>Find Hosts Now</button>
+          <button className='md:btn1 btn-gradient-3 mt-7'>Find Hosts Now</button>
            </Link>
           
           <h4 className='text-xl text-gray-600 mt-7'>Furry love sanctuary</h4>
@@ -143,7 +143,7 @@ function Home1() {
 
       {/* Card 2 content */}
 
-    <div className="border-4 border-orange-600 custom-card">
+    <div className="border-4 border-[#EA8B48] custom-card">
       <div className="flex items-center py-7 ">
         <h4 className="text-3xl font-bold text-black max-lg:text-2xl">Pet sitting</h4>
         <img className="ml-4 max-lg:ml-1" src={sitting} alt="" />

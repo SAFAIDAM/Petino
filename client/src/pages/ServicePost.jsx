@@ -8,7 +8,7 @@ import editIcon from "../assets/edite.svg";
 import RateService from "../components/RateService"; // Import the RateService component
 import { Link } from "react-router-dom";
 import { IoAdd } from "react-icons/io5";
-import { toast, ToastContainer } from "react-toastify"; // Import toast and ToastContainer
+import { toast } from "react-hot-toast"; // Import toast and ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import ArrowPutton from "../components/ArrowPutton";
 import catimage from '../assets/service-deafult.png'
@@ -145,7 +145,7 @@ function Posts() {
   
   return (
     <div>
-      <ToastContainer />
+      
 
       <div className="items-center justify-between w-11/12 mb-6 md:flex md:mx-8 lg:mx-auto lg:px-8">
         {/* input and Left arrow */}
@@ -300,11 +300,11 @@ function Posts() {
 
             <div className="mx-4 mt-3 mb-3 relative rounded-[15px]">
               <img
-                className="h-80 max-sm:h-48 w-full rounded-[15px]"
+                className="h-[270px] max-sm:h-48 w-full rounded-[15px]"
                 src={service.imageURL}
                 alt="post image"
               />
-              <div className="absolute px-6 py-1 text-sm bg-white border rounded-full top-4 right-3 shadow-md">
+              <div className="absolute px-6 py-1 text-sm bg-white border rounded-full shadow-md top-4 right-3">
                 <h4 className="font-extrabold text-black">
                   {service.category}
                 </h4>

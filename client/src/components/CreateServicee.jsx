@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app as firebaseApp } from "../firbase";
 import { useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ArrowPutton from "./ArrowPutton";
 
 function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
   const [currentUserLoaded, setCurrentUserLoaded] = useState(false);
@@ -19,15 +20,15 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   function handleCreateService() {
-    // Perform service creation logic, for example, making an API call
+  
     axios
       .post("http://localhost:8000/api/services", formData)
       .then((response) => {
-        // Once service is created successfully, navigate to the services page
+    
         window.location.href = "/Services";
       })
       .catch((error) => {
-        // Handle error if service creation fails
+    
         console.error("Failed to create service:", error);
       });
   }
@@ -44,7 +45,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
   }, [currentUser]);
 
   useEffect(() => {
-    setShowNavbarFooter(!initialData); // Show Navbar and Footer only when in "create" mode
+    setShowNavbarFooter(!initialData); 
   }, [initialData]);
 
   const storage = getStorage(firebaseApp);
@@ -75,7 +76,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
       }));
     } catch (error) {
       console.error("Error uploading image:", error);
-      addToast("Error uploading image. Please try again.", {
+      toast("Error uploading image. Please try again.", {
         appearance: "error",
       }); // Show error toast
     }
@@ -130,15 +131,14 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
   return (
     <>
       {showNavbarFooter && <Navbar />} {/* Render the Navbar component */}
-      <ToastContainer />
       {!initialData && (
         <div className="flex items-center mt-[30px] gap-5 mx-8 max-w-11/12 lg:mx-auto lg:px-8">
-          <Link to="/Services">
-            <div className="cursor-pointer shadow-[0_4px_4px_0_#dbdbdb] w-[45px] h-[45px] flex justify-center items-center rounded-full bg-[#FAD0B7] md:w-[50px] md:h-[50px]">
-              <FaArrowLeft color="#E06C2E" size={22} />
+         <div className="flex items-center justify-center gap-2 ml-10">
+            <ArrowPutton />
+            <div>
             </div>
-          </Link>
-          <h1 className="text-[22px] md:text-[25px] font-[400]">
+          </div>
+          <h1 className="text-[20px] font-semibold text-[#6E6E6E] ">
             Create your Service post
           </h1>
         </div>
@@ -340,7 +340,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
               <div className="absolute bottom-[-18px] right-0 max-sm:hidden">
                 <label
                   htmlFor="image"
-                  className="relative flex items-center px-6 py-3 font-medium text-white bg-orange-400 rounded-3xl cursor-pointer hover:bg-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500"
+                  className="relative flex items-center px-6 py-3 font-medium text-white bg-orange-400 cursor-pointer rounded-3xl hover:bg-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500"
                 >
                   <FaCloudUploadAlt className="mr-2" /> {/* Icon component */}
                   <span className="">Choose a file</span>
