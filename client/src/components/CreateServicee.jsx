@@ -186,10 +186,48 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
               onChange={handleChange}
               className="mt-3 w-full border border-[#ED9C63] focus:outline-0 h-[50px] rounded-[16px] bg-[#F5F5F5] px-2 mb-5"
             >
-              <option value="">Select category</option>
-              <option value="Hosting">Hosting</option>
-              <option value="Grooming">Grooming</option>
-              <option value="Other">Other</option>
+             
+            <option className="text-center" value="">
+              All
+            </option>
+            <option className="text-center" value="Hosting">
+              Hosting
+            </option>
+            <option className="text-center" value="Grooming">
+              Grooming
+            </option>
+            <option className="text-center" value="Pet-sitting">
+              Pet-sitting
+            </option>
+
+            <option className="text-center" value="Walking">
+              Walking pets
+            </option>
+            <option className="text-center" value="Veterinary">
+              Veterinary
+            </option>
+            <option className="text-center" value="Daycare">
+              Daycare
+            </option>
+            <option className="text-center" value="Training">
+              Training
+            </option>
+            <option className="text-center" value="Food">
+              Food
+            </option>
+            <option className="text-center" value="Cleanup">
+            Pet Accessories
+            </option>
+            <option className="text-center" value="Supplies">
+              Supplies
+            </option>
+
+            <option className="text-center" value="Spa">
+              Spa
+            </option>
+            <option className="text-center" value="Other">
+              Other
+            </option>
             </select>
           </div>
           <div>
@@ -313,7 +351,7 @@ function Meme({ setServices, setShowCreateForm, initialData, updateService }) {
                 placeholder="100"
                 className="w-full border border-[#ED9C63] focus:outline-0 h-[50px] rounded-[16px] bg-[#F5F5F5] px-2 mb-5"
               />
-              <span className="absolute right-2 top-1 text-[#6E6E6E] text-sm">
+              <span className="absolute right-2 top-1 text-[#6E6E6E] text-[10px]">
                 MAD
               </span>
             </div>

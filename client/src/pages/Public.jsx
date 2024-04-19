@@ -21,7 +21,7 @@ function Public() {
         {/* div that wrraps the all page*/}
         {/* menu container */}
 
-      <Menu/>
+        <Menu />
 
         <h1 className="flex items-center justify-center mt-10 mb-4 text-lg font-bold heading">
           Public profile view
@@ -45,7 +45,7 @@ function Public() {
                     <h1 className="text-2xl font-bold text-center md:text-start md:mt-9 ">
                       {currentUser.username}
                     </h1>
-                  
+
                     <a
                       target="_blank"
                       onClick={(e) => {
@@ -66,9 +66,9 @@ function Public() {
                   </Link>
 
                   <Link to="/Blog">
-                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
-                    Go to Home
-                  </button>
+                    <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
+                      Go to Home
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -92,7 +92,7 @@ function Public() {
                         Experiences
                       </h1>
                       <p className="md:w-[400px] text-sm p-4 text-center rounded-md ">
-                      {currentUser.experience || `No experience provided`}
+                        {currentUser.experience || `No experience provided`}
                       </p>
                     </div>
                   </div>
@@ -102,13 +102,19 @@ function Public() {
                   <div className="flex flex-col justify-center gap-4 text-center md:text-left p-9">
                     <div>
                       <div>
-                        <h1 className="mb-2 text-xl font-bold heading-signup ">
+                        <h1 className="mb-2 text-xl font-bold heading-signup">
                           Categories
                         </h1>
                         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-                          <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                            grooming
-                          </p>
+                          {currentUser.categories &&
+                            currentUser.categories.map((category, index) => (
+                              <p
+                                key={index}
+                                className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis"
+                              >
+                                {category}
+                              </p>
+                            ))}
                         </div>
                       </div>
                     </div>
@@ -144,12 +150,10 @@ function Public() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href={currentUser.instagramLink}
-                        >
+                        <a target="_blank" href={currentUser.instagramLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                          {currentUser.instagramLink || "https://www.examplehereyourlink.com"}
+                            {currentUser.instagramLink ||
+                              "https://www.examplehereyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -176,12 +180,10 @@ function Public() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href={currentUser.facebookLink}
-                        >
+                        <a target="_blank" href={currentUser.facebookLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                          {currentUser.facebookLink || "https://www.examplehereyourlink.com"}
+                            {currentUser.facebookLink ||
+                              "https://www.examplehereyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -207,12 +209,10 @@ function Public() {
                             strokeLinecap="round"
                           />
                         </svg>
-                        <a
-                          target="_blank"
-                          href={currentUser.optionalLink}
-                        >
+                        <a target="_blank" href={currentUser.optionalLink}>
                           <p className="md:w-[380px] mb-1 text-xs p-2 rounded-md  w-[190px] truncate hover:underline hover:text-[#EA7F48]">
-                          {currentUser.optionalLink || "https://www.examplehereyourlink.com"}
+                            {currentUser.optionalLink ||
+                              "https://www.examplehereyourlink.com"}
                           </p>
                         </a>
                       </div>
@@ -226,7 +226,7 @@ function Public() {
         )}
       </div>
       <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -63,7 +63,8 @@ export const updateUser = async (req, res, next) => {
         experience: req.body.experience,
         instagramLink: req.body.instagramLink,
         facebookLink: req.body.facebookLink,
-        optionalLink: req.body.optionalLink
+        optionalLink: req.body.optionalLink,
+        categories: req.body.categories
       },
       { new: true }
     );

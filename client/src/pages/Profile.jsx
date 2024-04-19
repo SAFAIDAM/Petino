@@ -80,9 +80,7 @@ function Profile() {
   const handlelogout = async () => {
     try {
       signOut(auth)
-        .then(() => {
-        
-        })
+        .then(() => {})
         .catch((error) => {
           console.log(error);
         });
@@ -94,11 +92,36 @@ function Profile() {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value, type } = e.target;
+
+    if (id === "categories" && type === "select-multiple") {
+      const selectedOptions = Array.from(e.target.selectedOptions).map(
+        (option) => option.value
+      );
+      setFormData({
+        ...formData,
+        [id]: selectedOptions,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedCategories = [
+      ...currentUser.categories, // Old categories
+      ...formData.categories,   // New categories
+    ];
+    
+    const updatedData = {
+      ...formData,
+      categories: updatedCategories,
+    };
+
     try {
       dispatch(updateUserStart());
 
@@ -107,7 +130,7 @@ function Profile() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedData),
       });
       const data = await res.json();
       if (data.success === false) {
@@ -134,8 +157,8 @@ function Profile() {
           <div className="flex items-center justify-center gap-2">
             <ArrowPutton />
             <div>
-            <Link to='/home'>
-              <img className="md:hidden black" src={logo} alt="" />
+              <Link to="/home">
+                <img className="md:hidden black" src={logo} alt="" />
               </Link>
             </div>
           </div>
@@ -336,11 +359,10 @@ service firebase.storage {
                     </button>
                   </Link>
                   <Link to="/Blog">
-                  <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
-                    Go to Home
-                  </button>
+                    <button className="flex md:mb-0 mb-2 justify-center items-center gap-2 min-w-36 p-3 rounded-full text-sm text-[#EA7F48] text-center transition duration-300 ease-in-out delay-150 border border-[#EA7F48] ">
+                      Go to Home
+                    </button>
                   </Link>
-                 
                 </div>
               </div>
               <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
@@ -424,6 +446,34 @@ service firebase.storage {
                   </div>
                   <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                   <div>
+                    <div className="p-9">
+                      <h1 className="mb-2 text-xl font-bold heading-signup">
+                        Categories
+                      </h1>
+                      <p className="text-[10px] text-[#989897] mb-1">
+                        Add your categories here
+                      </p>
+                      <select
+                        id="categories"
+                        onChange={handleChange}
+                        value={formData.categories || []}
+                        multiple
+                        className="md:w-[380px] mb-1 text-sm p-2 rounded-md border border-[#bcbcbc] text-center w-[190px]"
+                      >
+                        <option value="Hosting">Hosting</option>
+                        <option value="Grooming">Grooming</option>
+                        <option value="Pet-sitting">Pet-sitting</option>
+                        <option value="Walking">Walking</option>
+                        <option value="Veterinary">Veterinary</option>
+                        <option value="Daycare">Daycare</option>
+                        <option value="Training">Training</option>
+                        <option value="Food">Food</option>
+                        <option value="Cleanup">Cleanup</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Spa">Spa</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
                     <div className="flex flex-col items-center text-center md:text-left p-9">
                       <div className="md:mb-36">
                         <h1 className="text-xl font-bold heading-signup">
@@ -548,7 +598,7 @@ service firebase.storage {
         )}
       </div>
       <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

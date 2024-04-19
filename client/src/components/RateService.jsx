@@ -1,51 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'; // Import star icons
+import React, { useState, useEffect } from "react";
+import { LiaStarSolid } from "react-icons/lia";
 
-function RateService({ serviceId }) {
-  const [averageRating, setAverageRating] = useState(0);
-  const [userRating, setUserRating] = useState(0);
+function RateService({ serviceId, initialRating, onUpdateRating }) {
+  const [totalRating, setTotalRating] = useState(initialRating || 0);
+  const [hasRated, setHasRated] = useState(
+    localStorage.getItem(`hasRated_${serviceId}`) === "true"
+  );
 
   useEffect(() => {
-    fetchAverageRating();
-  }, []);
-
-  const fetchAverageRating = async () => {
-    try {
-      const response = await axios.get(`/api/services/${serviceId}/averageRating`);
-      setAverageRating(response.data.averageRating);
-    } catch (error) {
-      console.error('Error fetching average rating:', error);
+    const storedRating = localStorage.getItem(`serviceRating_${serviceId}`);
+    if (storedRating) {
+      setTotalRating(parseInt(storedRating, 10));
     }
-  };
+  }, [serviceId]);
 
-  const handleRateService = async (rating) => {
-    try {
-      const userId = ''; // You need to implement authentication to get the userId
-      await axios.put(`/api/services/${serviceId}/rating`, { userId, rating });
-      fetchAverageRating();
-      setUserRating(rating);
-    } catch (error) {
-      console.error('Error rating service:', error);
+  const handleRateService = async () => {
+    if (!hasRated) {
+      const newRating = totalRating + 1;
+      setTotalRating(newRating);
+      localStorage.setItem(`serviceRating_${serviceId}`, newRating);
+      onUpdateRating(serviceId, newRating);
+      setHasRated(true);
+      localStorage.setItem(`hasRated_${serviceId}`, "true");
     }
-  };
-
-  // Function to render star icons
-  const renderStars = () => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= userRating) {
-        stars.push(<AiFillStar key={i} onClick={() => handleRateService(i)} />);
-      } else {
-        stars.push(<AiOutlineStar key={i} onClick={() => handleRateService(i)} />);
-      }
-    }
-    return stars;
   };
 
   return (
-    <div className=''>
-      <p className='flex'>Your Rating: {renderStars()}</p>
+    <div>
+      <p className="flex justify-end" onClick={handleRateService}>
+        <LiaStarSolid className="items-center" size={25} />
+        {totalRating}
+      </p>
     </div>
   );
 }

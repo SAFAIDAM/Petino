@@ -19,6 +19,10 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  categories: [{
+    type: String,
+    enum: ["Hosting", "Grooming", "Pet-sitting", "Walking", "Veterinary", "Daycare", "Training", "Food", "Cleanup", "Supplies", "Spa", "Other"]
+  }],
   password: {
     type: String,
     minlength: 6

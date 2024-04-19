@@ -104,27 +104,22 @@ function PublicUser() {
                     <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                     <div>
                       <div className="flex flex-col justify-center gap-6 text-center md:text-left p-9">
-                        <div>
-                          <div>
-                            <h1 className="mb-2 text-xl font-bold heading-signup ">
-                              Categories
-                            </h1>
-                            <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-                              <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                                category
+                      <div>
+                        <h1 className="mb-2 text-xl font-bold heading-signup">
+                          Categories
+                        </h1>
+                        <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                          {user.categories &&
+                            user.categories.map((category, index) => (
+                              <p
+                                key={index}
+                                className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis"
+                              >
+                                {category}
                               </p>
-                              <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                                category
-                              </p>
-                              <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                                cate
-                              </p>
-                              <p className="bg-[#FFD4BB] text-sm text-center rounded-full pt-1 pb-1 text-[#E06C2E] text-ellipsis">
-                                cat
-                              </p>
-                            </div>
-                          </div>
+                            ))}
                         </div>
+                      </div>
                         <div>
                           <h1 className="mb-2 text-xl font-bold heading-signup">
                             Social links

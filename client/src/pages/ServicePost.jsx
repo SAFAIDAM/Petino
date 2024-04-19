@@ -11,7 +11,7 @@ import { IoAdd } from "react-icons/io5";
 import { toast } from "react-hot-toast"; // Import toast and ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import ArrowPutton from "../components/ArrowPutton";
-import catimage from '../assets/service-deafult.png'
+import catimage from "../assets/service-deafult.png";
 
 function Posts() {
   const [services, setServices] = useState([]);
@@ -23,9 +23,10 @@ function Posts() {
   const [service] = useState({});
   const [filteredPost, setFilteredPost] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  const [searchQuery, setSearchQuery] = useState('');
+  
 
   useEffect(() => {
-  
     fetchData();
   }, []);
 
@@ -39,7 +40,18 @@ function Posts() {
       setIsLoading(false);
     }
   };
+  
+ 
 
+  const onUpdateRating = (serviceId, newRating) => {
+    const updatedServices = services.map((service) => {
+      if (service._id === serviceId) {
+        return { ...service, rating: newRating };
+      }
+      return service;
+    });
+    setServices(updatedServices);
+  };
   // Function to format time elapsed
   const formatTimeElapsed = (dateString) => {
     const date = new Date(dateString);
@@ -114,24 +126,36 @@ function Posts() {
   const handleChange = (e) => {
     const { value } = e.target;
     console.log("Selected Category:", value);
+    setSearchQuery(e.target.value);
     setCategoryFilter(value);
   };
 
   const filteredServices = Array.isArray(services)
-    ? services.filter((service) => {
-        return categoryFilter
-          ? service.category.toLowerCase() === categoryFilter.toLowerCase()
-          : true;
-      })
-    : [];
-    const noPostsAvailable = filteredServices.length === 0 && !!categoryFilter;
+  ? services.filter((service) => {
+      const isCategoryMatch = categoryFilter
+        ? service.category.toLowerCase() === categoryFilter.toLowerCase()
+        : true;
+
+      const isUsernameMatch = searchQuery
+        ? service.username.toLowerCase().includes(searchQuery.toLowerCase())
+        : true;
+
+      return isCategoryMatch || isUsernameMatch;
+    })
+  : [];
+
+  
+  const noPostsAvailable = filteredServices.length === 0 && !!categoryFilter;
+
+  
 
   useEffect(() => {
-    
     if (currentUser && currentUser.profilePicture) {
       setIsLoading(false);
     }
   }, [currentUser]);
+  
+  
 
   const handlemail = (service) => {
     const email = service.email;
@@ -142,16 +166,14 @@ function Posts() {
     )}&body=${encodeURIComponent(body)}`;
     window.open(gmailUrl);
   };
-  
+
   return (
     <div>
-      
-
       <div className="items-center justify-between w-11/12 mb-6 md:flex md:mx-8 lg:mx-auto lg:px-8">
         {/* input and Left arrow */}
         <div className="items-center justify-center gap-6 md:flex">
           <ArrowPutton />
-            <div className="relative flex items-center justify-center rounded-full">
+          <div className="relative flex items-center justify-center rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="absolute text-gray-500 transform -translate-y-1/2 left-[70px] md:left-3 top-1/2"
@@ -178,11 +200,12 @@ function Posts() {
             <input
               type="text"
               placeholder="Search"
-              className="py-2 pl-10 pr-4 border rounded-full "
-              
+              className="py-2 pl-10 pr-4 border rounded-full"
+              value={searchQuery}
+          onChange={handleChange}
             />
           </div>
-          </div>
+        </div>
 
         <br className="md:hidden" />
 
@@ -208,6 +231,9 @@ function Posts() {
             className="flex items-center py-2 px-4 rounded-[30px] border text-[#E06C2E] border-[#E06C2E]"
           >
             <option className="text-center" value="">
+            Filter
+            </option>
+            <option className="text-center" value="">
               All
             </option>
             <option className="text-center" value="Hosting">
@@ -216,6 +242,35 @@ function Posts() {
             <option className="text-center" value="Grooming">
               Grooming
             </option>
+            <option className="text-center" value="Pet-sitting">
+              Pet-sitting
+            </option>
+
+            <option className="text-center" value="Walking">
+              Walking pets
+            </option>
+            <option className="text-center" value="Veterinary">
+              Veterinary
+            </option>
+            <option className="text-center" value="Daycare">
+              Daycare
+            </option>
+            <option className="text-center" value="Training">
+              Training
+            </option>
+            <option className="text-center" value="Food">
+              Food
+            </option>
+            <option className="text-center" value="Cleanup">
+            Pet Accessories
+            </option>
+            <option className="text-center" value="Supplies">
+              Supplies
+            </option>
+
+            <option className="text-center" value="Spa">
+              Spa
+            </option>
             <option className="text-center" value="Other">
               Other
             </option>
@@ -223,17 +278,16 @@ function Posts() {
         </div>
       </div>
       {noPostsAvailable && (
-          <div className="flex items-center justify-center mt-7 ml-auto mr-auto md:w-[300px] w-[200px] text-center">
-            <img src={catimage} alt="" />
-          </div>
-        )}
+        <div className="flex items-center justify-center mt-7 ml-auto mr-auto md:w-[300px] w-[200px] text-center">
+          <img src={catimage} alt="" />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 md:mx-8 gap-[50px] w-11/12 lg:mx-8 xl:mx-auto xl:px-8 mb-[130px] relative w-screen-sm mx-auto">
         {isLoading && <p>Loading services...</p>}
         {error && <p>Error: {error}</p>}
-       
+
         {filteredServices.map((service) => (
-          
           <div
             className="shadow-lg rounded-[25px] w-[320px] md:w-full py-6 px-2 mx-auto bg-white "
             key={service._id}
@@ -241,18 +295,15 @@ function Posts() {
             <div className="flex items-center justify-between mr-4">
               <div className="flex items-center gap-4 mx-4">
                 {/* User profile picture */}
-                
+
                 {service.userProfileImage ? (
                   <Link to={`/publicuser/${service.userId}`}>
-                  <img
-                    className="w-[50px] h-[50px] rounded-full"
-                    src={service.userProfileImage}
-                    alt="user picture"
-                  />
-                  
+                    <img
+                      className="w-[50px] h-[50px] rounded-full"
+                      src={service.userProfileImage}
+                      alt="user picture"
+                    />
                   </Link>
-                  
-                  
                 ) : (
                   ""
                   // <img
@@ -261,10 +312,9 @@ function Posts() {
                   //   alt="default user picture"
                   // />
                 )}
-                 <Link to={`/publicuser/${service.userId}`}>
-                 <p>{service.username}</p>
-                 </Link>
-                
+                <Link to={`/publicuser/${service.userId}`}>
+                  <p>{service.username}</p>
+                </Link>
               </div>
               {/* Time elapsed since posting */}
               <span className="text-[15px] text-[#A6A6A6]">
@@ -290,7 +340,7 @@ function Posts() {
               )}
               {service.description.length > 100 && (
                 <button
-                  className="font-extrabold"
+                  className="text-[#D34A01]"
                   onClick={() => toggleDescription(service._id)}
                 >
                   {service.showFullDescription ? "Show Less" : "Show More"}
@@ -335,11 +385,11 @@ function Posts() {
                 </button>
               </div>
               <div className="flex flex-col gap-4">
-                <p className="flex justify-end">
-                  <LiaStarSolid className="items-center" size={25} />
-                  {parseFloat(service.rating).toFixed(2)}{" "}
-                </p>
-                <RateService serviceId={service._id} />
+                <RateService
+                  serviceId={service._id}
+                  initialRating={service.rating}
+                  onUpdateRating={onUpdateRating}
+                />
 
                 <button
                   className={`rounded-3xl py-1 px-3 ${
@@ -370,7 +420,6 @@ function Posts() {
               </div>
             </div>
           </div>
-
         ))}
         {editedService && (
           <div>

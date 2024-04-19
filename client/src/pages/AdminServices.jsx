@@ -37,33 +37,29 @@ function AdminServices() {
   };
   
 
-  // Function to handle starting service edit
   
-
-  // Function to handle canceling edit
   const cancelEdit = () => {
-    // Reset the service state to null
+   
     setService(null);
   };
 
-  // Function to handle submitting edited service data
+ 
   const handleSubmit = () => {
-    // Logic to handle submitting edited service data
+
     console.log('Submitting edited service data:', service);
-    // Reset the service state to null
+ 
     setService(null);
   };
 
-  // Function to handle form input changes
   const handleChange = (e) => {
-    // Update the service state with the new input value
+  
     setService({
       ...service,
       [e.target.name]: e.target.value
     });
   };
 
-  // Render the form if service state is not null
+
   if (service) {
     return (
       <div>
@@ -82,7 +78,7 @@ function AdminServices() {
     );
   }
 
-  // Render the service table if service state is null
+
   return (
     <div className="">
       <AdminHeader />
@@ -143,7 +139,7 @@ function AdminServices() {
                 >
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <img
-                      className="w-20 h-20 "
+                      className="rounded-[10px]"
                       src={service.imageURL}
                       alt="Service Image"
                     />
@@ -164,7 +160,7 @@ function AdminServices() {
                   <td className="px-6 py-4">{service.statut}</td> {/* Add status column */}
                   <td className="px-6 py-4">
                     <button
-                      className="px-4 py-2 mr-2 bg-red-500 text-white rounded hover:bg-red-600"
+                      className="px-4 py-2 mr-2 text-white bg-red-500 rounded hover:bg-red-600"
                       onClick={() => handleDelete(service._id)}
                     >
                       Delete
