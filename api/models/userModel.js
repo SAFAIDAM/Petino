@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
   },
   categories: [{
     type: String,
-    enum: ["Hosting", "Grooming", "Pet-sitting", "Walking", "Veterinary", "Daycare", "Training", "Food", "Cleanup", "Supplies", "Spa", "Other"]
+    enum: ["Hosting", "Grooming", "Pet-sitting", "Walking", "Veterinary", "Daycare", "Training", "Food", "Cleanup", "Supplies", "Spa", "No category yet"]
   }],
   password: {
     type: String,

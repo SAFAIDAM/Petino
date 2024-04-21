@@ -112,16 +112,6 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedCategories = [
-      ...currentUser.categories, // Old categories
-      ...formData.categories,   // New categories
-    ];
-    
-    const updatedData = {
-      ...formData,
-      categories: updatedCategories,
-    };
-
     try {
       dispatch(updateUserStart());
 
@@ -130,7 +120,7 @@ function Profile() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(formData),
       });
       const data = await res.json();
       if (data.success === false) {
@@ -471,7 +461,7 @@ service firebase.storage {
                         <option value="Cleanup">Cleanup</option>
                         <option value="Supplies">Supplies</option>
                         <option value="Spa">Spa</option>
-                        <option value="Other">Other</option>
+                        <option value="Other">No category yet</option>
                       </select>
                     </div>
                     <div className="flex flex-col items-center text-center md:text-left p-9">
