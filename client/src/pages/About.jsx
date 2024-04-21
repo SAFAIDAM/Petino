@@ -78,8 +78,9 @@ function About() {
           <div className='text-center'>
             <img src={teamsafa} className='mx-auto pb-7' alt="" /> {/* Center the image horizontally */}
             <h5 className='text-2xl font-bold '>IDAM HAMED safa</h5>
-            <p className='text-2xl'>FULL-STACK <br /> Project manager</p>
-            <p className='text-2xl'>Developer</p>
+            <p className='text-2xl'>FULL-STACK <br />Developer</p>
+            <p className='text-2xl'>Project Manager</p>
+            <p className='text-2xl'>UI/UX Designer</p>
           </div>
 
           <div className='text-center'>
@@ -87,6 +88,7 @@ function About() {
             <h5 className='text-2xl font-bold'>HAGAG hassna</h5>
             <p className='text-2xl'>FULL-STACK </p>
             <p className='text-2xl'>Developer</p>
+            <p className='text-2xl'>Content creator</p>
           </div>
 
           <div className='text-center'>
@@ -94,6 +96,7 @@ function About() {
             <h5 className='text-2xl font-bold'>BAANISE Youness</h5>
             <p className='text-2xl'>FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
+            <p className='text-2xl'>Video maker</p>
           </div>
 
           <div className='text-center'>
@@ -101,6 +104,7 @@ function About() {
             <h5 className='text-2xl font-bold'>BOUIKHEF Anwar</h5>
             <p className='text-2xl' >FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
+            <p className='text-2xl'>Video maker</p>
           </div>
         </div>
       </div>
