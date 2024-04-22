@@ -7,7 +7,7 @@ const PostSection = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-4 mt-5 text-center">
-        <h1 className="mt-10 text-3xl font-semibold text-black heading-signup">
+        <h1 className="mt-10 font-semibold text-black md:text-3xl heading-signup">
           Adoptable pets
         </h1>
         {currentUser.role === "admin" ? (

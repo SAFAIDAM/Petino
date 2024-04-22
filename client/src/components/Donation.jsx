@@ -14,7 +14,7 @@ const Donation = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full md:w-[570px] lg:w-11/12 xl:w-11/12">
-        <h1 className="heading-signup text-center font-semibold text-[37px] text-black mt-16">
+        <h1 className="mt-16 font-semibold text-center text-black md:text-3xl heading-signup">
           Donations
         </h1>
         <div className="shadow rounded-lg mx-auto mt-5 p-5 bg-white md:w-[570px] md:h-[450px]">

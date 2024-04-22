@@ -12,6 +12,7 @@ function PublicUser() {
   const params = useParams();
   const [user, setUser] = useState({});
   const [isUserFetched, setIsUserFetched] = useState(false);
+  
   const handlemail = () => {
     const email = user.email; 
     const subject = `hey ${user.username}`; 

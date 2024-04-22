@@ -29,6 +29,7 @@ import About from "./pages/About";
 import Header from "./components/Header";
 import HeaderAbout from "./components/headerAbout";
 import AdminServices from "./pages/AdminServices";
+import EditPost from "./pages/UpdatePost";
 
 function App() {
   return (
@@ -68,9 +69,11 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/Blog" element={<Posts />} />
+          <Route path="/Blog/deletePost/:postId" element={<Posts />} />
+          <Route path="/Blog/updatePost/:postId" element={<EditPost />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/blog/createPost" element={<CreatePost />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/publicuser/:id" element={<PublicUser />} />
@@ -80,6 +83,7 @@ function App() {
         </Route>
         <Route element={<ProtectAdmin />}>
           <Route exact path="/admin/blogs" element={<AdminBlog />} />
+          <Route path="/admin/blogs/deletePost/:postId" element={<AdminBlog />} />
         </Route>
         <Route element={<ProtectAdmin />}>
           <Route exact path="/admin/create" element={<CreateRecord />} />

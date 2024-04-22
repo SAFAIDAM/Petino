@@ -125,11 +125,11 @@ const Adoptable = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="font-bold text-md flex text-[#EA8B48]">
+                  <span className="font-bold text-md flex text-[#EA8B48] ">
                     Personality:{" "}
                    
                   </span>
-                  <div className="ml-3 text-base font-normal text-black">
+                  <div className="w-4/5 ml-3 text-base font-normal text-black">
                       {post.Pet_personality}
                     </div>
                 </div>

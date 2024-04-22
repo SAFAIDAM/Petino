@@ -159,7 +159,7 @@ function Posts() {
 
   const handlemail = (service) => {
     const email = service.email;
-    const subject = `hey`;
+    const subject = `Asking for ${service.category} service`;
     const body = "";
     const gmailUrl = `https:mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(
       subject
@@ -375,9 +375,10 @@ function Posts() {
                     month: "short",
                   })}
                 </p>
-                <h6 className="font-bold">{service.rangePrice} MAD</h6>
+                
+                <h6 className="font-bold">{service.rangePrice} MAD <span className="font-semibold text-slate-400">{service.category}</span> </h6> 
                 <button
-                  className="px-3 py-2 mt-2 text-white bg-orange-400 rounded-3xl "
+                  className="py-2 mt-2 text-white bg-orange-400 px-3c rounded-3xl max-w-24"
                   target="_blank"
                   onClick={() => handlemail(service)}
                 >

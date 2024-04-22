@@ -1,37 +1,34 @@
 import express from 'express'
-import { createPost, getPosts, getPost, getUserPost, getComments, likePost, likePostComment, commentPost, replyPostComment, deletePost, updatePost } from "../controllers/postController.js";
+import { createBlog, getBlogs, getBlog, getUserBlog, getCommentsBlog, likeBlog, commentBlog, deleteBlog, updateBlog } from "../controllers/postController.js";
 import userAuth from "../middleware/authMiddleware.js"
 
 
 const router = express.Router();
 
 //create post
-router.post('/create-post', userAuth, createPost);
+router.post('/create-post', userAuth, createBlog);
 
 // get posts
-router.get("/all", userAuth, getPosts);
-router.get("/:id", userAuth, getPost);
+router.get("/blog", userAuth, getBlogs);
+router.get("/:id", userAuth, getBlog);
 
 
-router.get("/get-user-post/:id", userAuth, getUserPost);
+router.get("/get-user-post/:id", userAuth, getUserBlog);
 
 // updatePost
-router.put("/update-post/:id", userAuth, updatePost);
+router.put("/update-post/:id", userAuth, updateBlog);
 
 // get comments
-router.get("/comments/:postId", getComments);
+router.get("/comments/:postId", getCommentsBlog);
 
 // post a comment
-router.post("/comment/:id", userAuth, commentPost); 
+router.post("/comment/:id", userAuth, commentBlog); 
 
 //like and comment on posts
-router.post("/like/:id", userAuth, likePost);
-router.post("/like-comment/:id/:rid?", userAuth, likePostComment); // like-cmt/idOfComment Or like-cmt//idOfComment/idOfReply (if reply exist)
-router.post("/reply-comment/:id", userAuth, replyPostComment);
-
+router.post("/like/:id", userAuth, likeBlog);
 
 //delete post
-router.delete("/:id", userAuth, deletePost);
+router.delete("/:id", userAuth, deleteBlog);
 
 
 export default router;

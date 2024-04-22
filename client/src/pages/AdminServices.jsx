@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 function AdminServices() {
   const [services, setServices] = useState([]);
   const [service, setService] = useState(null); // State to store the service being edited
@@ -20,21 +21,27 @@ function AdminServices() {
 
   // Function to handle service deletion
   const handleDelete = (id) => {
-    // Make API call to delete service with given id
-    axios
-      .delete(`http://localhost:8000/api/services/${id}`)
-      .then(() => {
-        // Update services state by removing the deleted service
-        setServices(services.filter((service) => service._id !== id));
-        // Show success toast notification
-        toast.success('Service deleted successfully.');
-      })
-      .catch((err) => {
-        console.log(err);
-        // Show error toast notification if deletion fails
-        toast.error('Failed to delete service. Please try again.');
-      });
+    // Display confirmation popup
+    const isConfirmed = window.confirm('Are you sure you want to delete this service?');
+  
+    if (isConfirmed) {
+      // Make API call to delete service with given id
+      axios
+        .delete(`http://localhost:8000/api/services/${id}`)
+        .then(() => {
+          // Update services state by removing the deleted service
+          setServices(services.filter((service) => service._id !== id));
+          // Show success toast notification
+          toast.success('Service deleted successfully.');
+        })
+        .catch((err) => {
+          console.log(err);
+          // Show error toast notification if deletion fails
+          toast.error('Failed to delete service. Please try again.');
+        });
+    }
   };
+  
   
 
   

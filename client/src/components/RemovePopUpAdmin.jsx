@@ -1,11 +1,9 @@
-import attention from "../assets/attantion.svg"
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../redux/post/postSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 
-const RemovePopUp = ({ onRemove, postId }) => {
+const RemovePopUpAdmin = ({ onRemove, postId }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -14,14 +12,14 @@ const RemovePopUp = ({ onRemove, postId }) => {
         try {
             await dispatch(deletePost(postId));
             onRemove();
-            navigate('/Blog')
+            navigate('/admin/blogs')
         } catch (error) {
             console.error('Error deleting post:', error);
         }
     };
 
     const directTo = () => {
-        navigate('/blog')
+        navigate('/admin/blogs')
     }
 
 
@@ -42,7 +40,7 @@ const RemovePopUp = ({ onRemove, postId }) => {
                     </svg>
                         <p className="mb-3 text-center text-[#6E6E6E] font-semibold max-w-[270px]">Are you sure you wan to delete this post</p>
                         <div className="flex items-center justify-between w-full px-2">
-                            <Link to="/Blog"><button onClick={onRemove} className="bg-[#FDC6C6] text-[#C10606] px-4 py-[5px] rounded-[20px]">Cancel</button></Link>
+                            <Link to="/admin/blogs"><button onClick={onRemove} className="bg-[#FDC6C6] text-[#C10606] px-4 py-[5px] rounded-[20px]">Cancel</button></Link>
                             <button onClick={handleDelete} className="bg-[#85D466] text-white px-4 py-[5px] rounded-[25px]">Yes! Delete</button>
                         </div>
                     </div>
@@ -53,4 +51,4 @@ const RemovePopUp = ({ onRemove, postId }) => {
     )
 }
 
-export default RemovePopUp
+export default RemovePopUpAdmin;
