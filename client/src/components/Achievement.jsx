@@ -8,7 +8,7 @@ import ArrowPutton from "./ArrowPutton";
 const Achievement = () => {
   return (
     <div className="container mx-auto">
-      <div className="mt-[-100px] ml-36">
+      <div className="mt-[-80px] ml-24">
       <ArrowPutton />
       </div>
       

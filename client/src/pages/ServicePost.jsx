@@ -171,7 +171,7 @@ function Posts() {
     <div>
       <div className="items-center justify-between w-11/12 mb-6 md:flex md:mx-8 lg:mx-auto lg:px-8">
         {/* input and Left arrow */}
-        <div className="items-center justify-center gap-6 md:flex">
+        <div className="items-center justify-center gap-4 md:flex mt-10">
           <ArrowPutton />
           <div className="relative flex items-center justify-center rounded-full">
             <svg
