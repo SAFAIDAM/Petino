@@ -23,8 +23,7 @@ function Posts() {
   const [service] = useState({});
   const [filteredPost, setFilteredPost] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  const [searchQuery, setSearchQuery] = useState('');
-  
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -40,8 +39,6 @@ function Posts() {
       setIsLoading(false);
     }
   };
-  
- 
 
   const onUpdateRating = (serviceId, newRating) => {
     const updatedServices = services.map((service) => {
@@ -131,31 +128,26 @@ function Posts() {
   };
 
   const filteredServices = Array.isArray(services)
-  ? services.filter((service) => {
-      const isCategoryMatch = categoryFilter
-        ? service.category.toLowerCase() === categoryFilter.toLowerCase()
-        : true;
+    ? services.filter((service) => {
+        const isCategoryMatch = categoryFilter
+          ? service.category.toLowerCase() === categoryFilter.toLowerCase()
+          : true;
 
-      const isUsernameMatch = searchQuery
-        ? service.username.toLowerCase().includes(searchQuery.toLowerCase())
-        : true;
+        const isUsernameMatch = searchQuery
+          ? service.username.toLowerCase().includes(searchQuery.toLowerCase())
+          : true;
 
-      return isCategoryMatch || isUsernameMatch;
-    })
-  : [];
+        return isCategoryMatch || isUsernameMatch;
+      })
+    : [];
 
-  
   const noPostsAvailable = filteredServices.length === 0 && !!categoryFilter;
-
-  
 
   useEffect(() => {
     if (currentUser && currentUser.profilePicture) {
       setIsLoading(false);
     }
   }, [currentUser]);
-  
-  
 
   const handlemail = (service) => {
     const email = service.email;
@@ -195,14 +187,14 @@ function Posts() {
                 stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinejoin="round"
-              />
+              />y
             </svg>
             <input
               type="text"
               placeholder="Search"
               className="py-2 pl-10 pr-4 border rounded-full"
               value={searchQuery}
-          onChange={handleChange}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -231,7 +223,7 @@ function Posts() {
             className="flex items-center py-2 px-4 rounded-[30px] border text-[#E06C2E] border-[#E06C2E]"
           >
             <option className="text-center" value="">
-            Filter
+              Filter
             </option>
             <option className="text-center" value="">
               All
@@ -262,7 +254,7 @@ function Posts() {
               Food
             </option>
             <option className="text-center" value="Cleanup">
-            Pet Accessories
+              Pet Accessories
             </option>
             <option className="text-center" value="Supplies">
               Supplies
@@ -375,8 +367,13 @@ function Posts() {
                     month: "short",
                   })}
                 </p>
-                
-                <h6 className="font-bold">{service.rangePrice} MAD <span className="font-semibold text-slate-400">{service.category}</span> </h6> 
+
+                <h6 className="font-bold">
+                  {service.rangePrice} MAD{" "}
+                  <span className="font-semibold text-slate-400">
+                    {service.category}
+                  </span>{" "}
+                </h6>
                 <button
                   className="py-2 mt-2 text-white bg-orange-400 px-3c rounded-3xl max-w-24"
                   target="_blank"

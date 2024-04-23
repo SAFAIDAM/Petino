@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { postComment } from "../redux/post/postSlice";
 import noPost from "../assets/empty-space.png";
 import { fetchUserPosts } from "../redux/post/postSlice";
-import Logo from "../assets/logo.svg"
+import { ClipLoader } from "react-spinners";
 import { likePost, unlikePost } from "../redux/post/postSlice";
 
 
@@ -98,9 +98,9 @@ const RenderPosts = () => {
     }
 
     if (status === 'loading') {
-        return <div className="w-full h-[400px] flex justify-center items-center">
-            <img src={Logo} className="w-[150px] h-[120px]" alt="petino logo" />
-        </div>;
+        return  <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#D34A01" size={50} />
+      </div>
     }
 
     if (status === 'failed') {
@@ -215,7 +215,7 @@ const RenderPosts = () => {
                                     Comments
                                 </div>
                                 <div className="flex justify-between items-center custom-shadow bg-[#f1f1f1] p-2 sticky z-auto top-[84%] mt-[-20px]">
-                                    <div className="flex justify-between items-center gap-1">
+                                    <div className="flex items-center justify-between gap-1">
                                         <img className="w-[30px] h-[30px] rounded-full" src={currentUser.profilePicture} alt="user picture" />
                                         <input
                                             type="text"
@@ -234,7 +234,7 @@ const RenderPosts = () => {
                                 </div>
                                 {post.comments.map((comment, index) => (
                                     <div key={index}>
-                                        <div className="flex items-center justify-between ml-2 mb-4">
+                                        <div className="flex items-center justify-between mb-4 ml-2">
                                             <div className="flex items-center gap-2">
                                                 <img className="w-[35px] self-start h-[35px] rounded-full border" src={currentUser.profilePicture} alt="user picture" />
                                                 <div className="">
