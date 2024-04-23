@@ -21,6 +21,7 @@ import { useEffect } from 'react';
 import { likePost, unlikePost } from "../redux/post/postSlice";
 import AdminHeader from '../components/AdminHeader'
 import ArrowPutton from '../components/ArrowPutton'
+import { ClipLoader } from "react-spinners";
 
 function AdminBlog() {
   
@@ -106,12 +107,11 @@ function AdminBlog() {
   }
 
 
-
   if (status === 'loading') {
-      return <div className="w-full h-[400px] flex justify-center items-center">
-          <img src={Logo} className="w-[150px] h-[120px]" alt="petino logo" />
-      </div>;
-  }
+    return  <div className="flex items-center justify-center h-screen">
+    <ClipLoader color="#D34A01" size={50} />
+  </div>
+}
 
   if (status === 'failed') {
       return <div>Error: {error}</div>;
@@ -195,7 +195,7 @@ function AdminBlog() {
                 <div className="relative align-top custom-shadow bg-white rounded-[25px] w-[320px] md:w-full mx-auto" key={post._id}>
                     {/* Profile && Date */}
                     <div className="flex items-center justify-between mx-4 mt-5">
-                        <Link to={`/publicuser/${currentUser._id}`}>
+                        <Link to={`/publicuser/${post.userId._id}`}>
                             <div className="flex items-center justify-between gap-2">
                                 <img className="w-[45px] h-[45px] rounded-full" src={post.userId.profilePicture} alt="user picture" />
                                 <span className="text-[15px] md:text-[17px] font-[500]">{post.userId.username}</span>
@@ -250,7 +250,7 @@ function AdminBlog() {
                             Comments
                         </div>
                         <div className="flex justify-between items-center custom-shadow bg-[#f1f1f1] p-2 sticky z-auto top-[84%] mt-[-20px]">
-                            <div className="flex justify-between items-center gap-1">
+                            <div className="flex items-center justify-between gap-1">
                                 <img className="w-[30px] h-[30px] rounded-full" src={currentUser.profilePicture} alt="user picture" />
                                 <input
                                     type="text"
@@ -269,7 +269,7 @@ function AdminBlog() {
                         </div>
                         {post.comments.map((comment, index) => (
                             <div key={index}>
-                                <div className="flex items-center justify-between ml-2 mb-4">
+                                <div className="flex items-center justify-between mb-4 ml-2">
                                     <div className="flex items-center gap-2">
                                         <img className="w-[35px] self-start h-[35px] rounded-full border" src={currentUser.profilePicture} alt="user picture" />
                                         <div className="">

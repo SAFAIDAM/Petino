@@ -153,7 +153,7 @@ const RenderPosts = () => {
                            {/* Profile && Date */}
                             {console.log("data", post)}
                             <div className="flex items-center justify-between mx-4 mt-5">
-                                <Link to={`/publicuser/${currentUser._id}`}>
+                                <Link to={`/publicuser/${post.userId._id}`}>
                                     <div className="flex items-center justify-between gap-2">
                                         <img className="w-[45px] h-[45px] rounded-full" src={post.userId.profilePicture} alt="user picture" />
                                         <span className="text-[15px] md:text-[17px] font-[500]">{post.userId.username}</span>
