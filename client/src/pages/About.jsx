@@ -81,6 +81,9 @@ function About() {
             <p className='text-2xl'>FULL-STACK <br />Developer</p>
             <p className='text-2xl'>Project Manager</p>
             <p className='text-2xl'>UI/UX Designer</p>
+            <a href="https://github.com/SAFAIDAM" target='_blank'>
+            <p className='text-2xl hover:underline hover:text-[#EA7F48]'>GITHUB</p>
+            </a>
           </div>
 
           <div className='text-center'>
@@ -89,6 +92,9 @@ function About() {
             <p className='text-2xl'>FULL-STACK </p>
             <p className='text-2xl'>Developer</p>
             <p className='text-2xl'>Content creator</p>
+            <a href="https://github.com/hassnaHa47" target='_blank'>
+            <p className='text-2xl hover:underline hover:text-[#EA7F48]'>GITHUB</p>
+            </a>
           </div>
 
           <div className='text-center'>
@@ -97,6 +103,9 @@ function About() {
             <p className='text-2xl'>FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
             <p className='text-2xl'>Video maker</p>
+            <a href="https://github.com/younesbaanise" target='_blank'>
+            <p className='text-2xl hover:underline hover:text-[#EA7F48]'>GITHUB</p>
+            </a>
           </div>
 
           <div className='text-center'>
@@ -105,6 +114,9 @@ function About() {
             <p className='text-2xl' >FULL-STACK</p>
             <p className='text-2xl'>Developer</p>
             <p className='text-2xl'>Video maker</p>
+            <a href="https://github.com/777Anwar" target='_blank'>
+            <p className='text-2xl hover:underline hover:text-[#EA7F48]'>GITHUB</p>
+            </a>
           </div>
         </div>
       </div>
