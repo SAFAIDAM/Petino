@@ -5,47 +5,47 @@ import connectMongoDB from "../db/connectMongoDB.js";
 
 export const createPost = async (req, res) => {
   try {
-    const { Name, Age, Pet_personality, imageURL } =  req.body;
+    const { Name, Age, Pet_personality, imageURL } = req.body;
     // const imageURL = req.file ? req.file.path: '';
     await Rescuepost.create({ Name, Age, Pet_personality, imageURL });
-    res.status(201).json({ message: 'Post created succesfully'});
-  
+    res.status(201).json({ message: 'Post created succesfully' });
+
   } catch (error) {
     console.log("Error creating post:", error);
-    res.status(500).json({message:"Internal server error"});
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
 
 
-export const getPosts = async  (req, res) => {
+export const getPosts = async (req, res) => {
   try {
-    
+    console.log('fkdsjfdsj')
     const posts = await Rescuepost.find().select('Name Age Pet_personality imageURL');
-    res.status(201).json({posts});  
-   
+    res.status(201).json({ posts });
+
   } catch (error) {
     console.error("Error fetching posts:", error);
-    res.status(500).json({message:"Internal server error"});
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
 
 
 
-export const getPostById = async  ({ params }, res) => {
+export const getPostById = async ({ params }, res) => {
   try {
     const { id } = params;
     const post = await Rescuepost.findOne({ _id: id }).select('Name Age Pet_personality imageURL');
-    
+
     if (post) {
-      res.status(200).json({post});
+      res.status(200).json({ post });
     } else {
-      res.status(404).json({message: "Post not found"});
+      res.status(404).json({ message: "Post not found" });
     }
   } catch (error) {
     console.error("Error fetching post by ID:", error);
-    res.status(500).json({message: "Server Error"})
+    res.status(500).json({ message: "Server Error" })
   }
 }
 
@@ -90,11 +90,11 @@ export const editPostById = async (req, res) => {
 
 export const deletePostById = async (req, res) => {
   try {
-    const {id} = req.params ;
+    const { id } = req.params;
     const deletedPost = await Rescuepost.findByIdAndDelete(id);
-    
+
     if (deletedPost) {
-      res.status(201).json({ message: 'Post deleted', deletedPost});
+      res.status(201).json({ message: 'Post deleted', deletedPost });
     } else {
       res.status(404).json({ message: 'Post not found' });
     }
