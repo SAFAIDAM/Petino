@@ -4,7 +4,7 @@ import { protectRoute } from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
-router.get(("/"), req, res => {
+router.get(("/"), (req, res) => {
   res.json({
     message: "Welcome to the API"
   })

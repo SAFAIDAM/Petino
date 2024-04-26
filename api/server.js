@@ -22,6 +22,12 @@ app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
 
+app.get(("/"), (req, res) => {
+  res.json({
+    message: "Welcome to the API"
+  })
+})
+
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
@@ -31,10 +37,10 @@ app.use("/api/posts", postRoute)
 app.use("/api/services", serviceRoutes);
 
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/dist/index.html"))
-})
+// app.use(express.static(path.join(__dirname, "/client/dist")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+// })
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
