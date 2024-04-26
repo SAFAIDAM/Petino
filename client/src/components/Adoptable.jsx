@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
-import adoptableone from "../assets/adoptableone.svg";
 import editBtn from "../assets/editBtn.svg";
 import deleteBtn from "../assets/deleteBtn.svg";
 import axios from "axios";
@@ -74,11 +73,10 @@ const Adoptable = () => {
   };
 
   const handleAdopt = (post) => {
-    const email = "petinooplatform@gmail.com"; 
-    const subject = `Adopting ${post.Name}`; 
-    const body = ""; 
+    const email = "petinooplatform@gmail.com";
+    const subject = `Adopting ${post.Name}`;
+    const body = "";
 
-   
     const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
@@ -127,11 +125,10 @@ const Adoptable = () => {
                 <div>
                   <span className="font-bold text-md flex text-[#EA8B48] ">
                     Personality:{" "}
-                   
                   </span>
                   <div className="w-4/5 ml-3 text-base font-normal text-black">
-                      {post.Pet_personality}
-                    </div>
+                    {post.Pet_personality}
+                  </div>
                 </div>
               </div>
 
