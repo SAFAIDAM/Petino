@@ -114,7 +114,7 @@ function Navbar() {
         <div
           className={
             menu
-              ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md absolute top-10 left-2 z-50"
+              ? "text-[#898484] rounded-[10px] text-[18px] p-4 bg-white shadow-md top-10 absolute md:right-[150px] right-[19px] z-50"
               : "hidden"
           }
         >

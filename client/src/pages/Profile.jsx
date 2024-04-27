@@ -436,14 +436,16 @@ service firebase.storage {
                   </div>
                   <div className="md:flex justify-center h-[2px] bg-[#bcbcbc]"></div>
                   <div>
-                    <div className="p-9">
-                      <h1 className="mb-2 text-xl font-bold heading-signup">
+                  <div className="flex flex-col items-center text-center md:text-left p-9">
+                      <div className="">
+                        <h1 className="text-xl font-bold heading-signup">
                         Categories
-                      </h1>
-                      <p className="text-[10px] text-[#989897] mb-1">
+                        </h1>
+                        <p className="text-[10px] text-[#989897] mb-1">
                         Add your categories here
-                      </p>
-                      <select
+                        </p>
+                        <div className="flex items-center justify-center gap-3">
+                        <select
                         id="categories"
                         onChange={handleChange}
                         value={formData.categories || []}
@@ -463,6 +465,10 @@ service firebase.storage {
                         <option value="Spa">Spa</option>
                         <option value="Other">No category yet</option>
                       </select>
+                          
+                        </div>
+                        <div></div>
+                      </div>
                     </div>
                     <div className="flex flex-col items-center text-center md:text-left p-9">
                       <div className="md:mb-36">

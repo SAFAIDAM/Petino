@@ -25,7 +25,7 @@ const Space1 = () => {
         {/* Create Btn */}
       </div>
 
-      <div className="md:flex justify-between items-center md:mx-8 w-11/12 lg:mx-auto lg:px-8 mb-10">
+      <div className="items-center justify-between w-11/12 mb-10 md:flex md:mx-8 lg:mx-auto lg:px-8">
         {/* input and Left arrow */}
         <div className="flex items-center justify-center md:gap-4">
           {/* Circle */}
@@ -50,15 +50,16 @@ const Space1 = () => {
                             }}
                         />
                     </div> */}
+       
           <div className="relative flex items-center justify-center rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute text-gray-500 transform -translate-y-1/2 left-[83px] md:left-3 top-1/2"
+              className="absolute text-gray-500 transform -translate-y-1/2 left-[10%] md:left-3 top-1/2"
               viewBox="0 0 24 24"
-              width={20}
-              height={20}
-              color={"#000000"}
-              fill={"none"}
+              width="20"
+              height="20"
+              color="#000000"
+              fill="none"
             >
               <path
                 d="M17.5 17.5L22 22"
@@ -75,9 +76,9 @@ const Space1 = () => {
               />
             </svg>
             <input
-              type="text"
+              type="search"
               placeholder="Search "
-              className="py-2 pl-10 pr-4 border rounded-full "
+              className="w-full py-2 pr-4 border rounded-full pl-14 md:w-64"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {

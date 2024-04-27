@@ -131,7 +131,6 @@ const RenderPosts = () => {
         }
     };
 
-    console.log(postsData)
 
 
     return (
@@ -149,7 +148,7 @@ const RenderPosts = () => {
                 
                 {postsData.data.length > 0 ? (
                     postsData.data.map((post) => (
-                        <div className="relative align-top custom-shadow bg-white rounded-[25px] w-[320px] md:w-full mx-auto" key={post._id}>
+                        <div className="relative align-top shadow-md bg-white rounded-[25px] w-[320px] md:w-full mx-auto" key={post._id}>
                            {/* Profile && Date */}
                             {console.log("data", post)}
                             <div className="flex items-center justify-between mx-4 mt-5">
