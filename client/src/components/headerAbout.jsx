@@ -19,7 +19,7 @@ function Header() {
     {/* Button on the right */}
     <div className='relative md:flex'>
     <Link to='/signup'>
-    <button className='btn3 '>Continue</button>
+    <button className='btn3'>Continue</button>
     </Link>
       
       <img className='absolute top-7 left-3/4' src={vector} alt="" />
