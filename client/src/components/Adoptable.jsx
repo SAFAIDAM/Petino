@@ -19,7 +19,6 @@ const Adoptable = () => {
         const response = await axios.get(
           "http://localhost:8000/api/rescuepost/get"
         );
-        console.log(response.data);
         setPosts(response.data.posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
